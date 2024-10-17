@@ -4,41 +4,47 @@
 }
 
 html, body {
-    background-image: url("/img/river_day.gif");
     height: 100%;
     margin: 0;
     font-family: "Pixelify Sans", sans-serif;
-    
+    background-image: url("/img/river_day.gif");
     background-size: cover;
     background-position: center;
-    /* background-color: #0c1e5ea7; */
 }
 
 h1 {
-    /* color: white; */
-    color: var(--naranja);
-    font-size: 3.5rem;
-    text-shadow: 3px 3px 5px #000000;
-    /* text-shadow: 5px 5px 5px #FF6F1E; */
+    font-size: 5rem;
+    background: linear-gradient(90deg, #FF6F1E, #FFD700); /* Orange to Yellow */
+    background-size: 200% 100%; /* Double the background size for animation */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -webkit-text-fill-color: transparent; /* Make the text transparent */
+    animation: gradientAnimation 3s ease infinite; /* Animation properties */
 }
 
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%; /* Start position */
+    }
+    100% {
+        background-position: 100% 50%; /* End position */
+    }
+}
 
 .navbar {
     height: 10%;
     width: 100%;
     margin: 0 auto;
-    /* background-color: var(--naranja); Light background for navbar */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(to bottom, rgba(50, 50, 50, 1) 0%, rgba(50, 50, 50, 0) 100%);
 }
 
 .navbar-content {
     width: 80%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 }
 
 .logo {
@@ -51,12 +57,12 @@ h1 {
 .nav-links a {
     font-size: 1.2rem;
     text-decoration: none;
-    color: white;
+    color: rgb(179, 179, 179);
     font-weight: 500;
     transition-duration: 400ms;
 }
 .nav-links a:hover {
-    color: black; /* Change color on hover */
+    color: white; /* Change color on hover */
 }
 
 video {
@@ -90,11 +96,7 @@ video {
     width: 45%;
     padding: 30px;
     text-shadow: 3px 3px 5px #000000;
-    /* background-color: #2996d9c8;
-    border: 5px solid #b1e950;
-    background-color: var(--azul);
-    border: 5px solid var(--naranja);
-    border-radius: 1rem; */
+
 }
 
 button {
@@ -103,8 +105,12 @@ button {
     background-color: #FF6F1E;
     border: none;
     border-radius: 1rem;
-    padding: 10px;
+    padding: 1rem;
     cursor: pointer;
-    width: 100px;
+    width: 10rem;
+    margin-top: 100px; /* Adjust this value for desired spacing above the button */
+}
 
+.container-text-element {
+    margin-bottom: 50px;
 }
