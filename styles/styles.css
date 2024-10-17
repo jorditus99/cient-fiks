@@ -13,12 +13,8 @@ html, body {
 }
 
 h1 {
-    font-size: 5rem;
-    background: linear-gradient(90deg, #FF6F1E, #FFD700); /* Orange to Yellow */
-    background-size: 200% 100%; /* Double the background size for animation */
-    -webkit-background-clip: text; /* Clip the background to the text */
-    -webkit-text-fill-color: transparent; /* Make the text transparent */
-    animation: gradientAnimation 3s ease infinite; /* Animation properties */
+    font-size: 4rem;
+    color: var(--naranja)
 }
 
 @keyframes gradientAnimation {
