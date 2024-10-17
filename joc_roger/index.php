@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div>
+        <img src="../img/img_roger/fons_roger.png" alt="img_fons" id="">
+    </div>
 </body>
 </html>
