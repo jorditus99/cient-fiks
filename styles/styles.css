@@ -1,0 +1,110 @@
+:root {
+    --naranja: #FF6F1E;
+    --azul: #2996d9;
+}
+
+html, body {
+    background-image: url("/img/river_day.gif");
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    
+    background-size: cover;
+    background-position: center;
+    /* background-color: #0c1e5ea7; */
+}
+
+h1 {
+    /* color: white; */
+    color: var(--naranja);
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 5px #000000;
+    /* text-shadow: 5px 5px 5px #FF6F1E; */
+}
+
+
+.navbar {
+    height: 10%;
+    width: 100%;
+    margin: 0 auto;
+    /* background-color: var(--naranja); Light background for navbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem 0;
+}
+
+.navbar-content {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+}
+.nav-links {
+    display: flex;
+    gap: 5rem;
+}
+.nav-links a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition-duration: 400ms;
+}
+.nav-links a:hover {
+    color: black; /* Change color on hover */
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+}
+
+.container-text {
+    color: white;
+    /* color: var(--naranja); */
+    font-size: 1.3rem;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: block;
+    line-height: 1.5;
+    text-align: center;
+    width: 45%;
+    padding: 30px;
+    text-shadow: 3px 3px 5px #000000;
+    /* background-color: #2996d9c8;
+    border: 5px solid #b1e950;
+    background-color: var(--azul);
+    border: 5px solid var(--naranja);
+    border-radius: 1rem; */
+}
+
+button {
+    /* background-color: white; */
+    color: white;
+    background-color: #FF6F1E;
+    border: none;
+    border-radius: 1rem;
+    padding: 10px;
+    cursor: pointer;
+    width: 100px;
+
+}
