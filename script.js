@@ -26,3 +26,8 @@ btns.forEach((slidebutton, i) => {
     updateSlide(i);
   });
 });
+
+//SLIDE AUTOMÁTICO
+setInterval(() => {
+    nextSlide();
+  }, 4000); // Change slide every 4 seconds
