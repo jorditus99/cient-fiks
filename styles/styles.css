@@ -17,15 +17,6 @@ h1 {
     color: var(--naranja)
 }
 
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%; /* Start position */
-    }
-    100% {
-        background-position: 100% 50%; /* End position */
-    }
-}
-
 .navbar {
     height: 10%;
     width: 100%;
@@ -93,6 +84,11 @@ video {
     padding: 30px;
     text-shadow: 3px 3px 5px #000000;
 
+    
+}
+
+.container-text-description {
+    margin-bottom: 4rem;
 }
 
 button {
@@ -109,4 +105,98 @@ button {
 
 .container-text-element {
     margin-bottom: 50px;
+}
+
+
+/*SLIDER DE IMÁGENES*/
+.intro-container {
+    width: 80%;
+    height: 650px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.intro-container a:hover {
+    color: blue;
+}
+
+.intro-description {
+    flex: 1;
+    max-width: 80%;
+}
+
+.img-slider {
+    flex: 2;
+    position: relative;
+    width: 80%;
+    height: 500px;
+    margin: 20px auto;
+
+}
+
+.img-slider .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.img-slider .slide.active {
+    opacity: 1;
+}
+
+.img-slider .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.img-slider .navigation {
+    position: absolute;
+    display: flex;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.img-slider .navigation .slidebutton {
+    background: rgba(165, 165, 165, 0.5);
+    width: 25px;
+    height: 3px;
+    margin: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.img-slider .navigation .slidebutton.active {
+    background: white;
+}
+
+@media screen and (max-width:950px) {
+  
+  .intro-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    height: 800px;
+  }
+
+  
+  .intro-container {
+    gap: 0;
+  }
+
+  
+  .img-slider {
+    flex-shrink: 0;
+    min-width: 300px;
+    width: 80%;
+  }
 }
