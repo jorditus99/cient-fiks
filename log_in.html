@@ -21,14 +21,14 @@
 .container-log-in {
     display: flex;
     flex-direction: column;
-    height: 70%;
+    height: 85%;
     background-color: rgba(255, 255, 255, 0.78); /* Fondo blanco con 78% de opacidad */
-    width: 40%;
+    width: 37%;
     border-radius: 20px;
 }
 
 .container-title-log-in {
-    height: 25%;
+    height: 20%;
     text-align: center;
 
 }
@@ -52,7 +52,7 @@
     display: flex;
     flex-direction: column;
     width: 75%;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 55%;
     
 }
@@ -63,15 +63,29 @@
     flex-direction: column;
     width: 70%;
     align-items: center;
-    margin-top: 10%;
+    justify-content: space-around;
 
 }
 
+.continer-buttons-top {
+    width: 100%;
+    justify-content: space-around;
+}
+
 input {
-    height: 40%;
+    height: 30%;
     border-radius: 8px;
     border-color: #CCCCCC;
     
+}
+
+.regis-button {
+    background-color: #06629E;
+}
+
+.big-button {
+    width: 100%;
+    background-color: #06629E;
 }
 
 </style>
@@ -107,9 +121,9 @@ input {
                     <div class="container-buttons">
                         <div class="continer-buttons-top">
                             <button type="submit">Entrar</button>
-                            <button>Registrarse</button>
+                            <button class="regis-button">Registrarse</button>
                         </div>
-                        <button>Jugar sin Iniciar Sesión</button>
+                        <button class="big-button">Jugar sin Iniciar Sesión</button>
                     </div>
 
                 </form>
