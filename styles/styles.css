@@ -107,6 +107,51 @@ button {
     margin-top: 100px; /* Adjust this value for desired spacing above the button */
 }
 
-.container-text-element {
-    margin-bottom: 50px;
+.registro{
+    height: 592px;
+    width: 662px;
+    border-radius: 36px;
+    background-color: white;
+}
+
+.registro h1 {
+    text-align: center; /* Centrar el texto del título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    margin-top: 1px;
+}
+
+
+#formulario {
+    display: flex;
+    flex-direction: column; /* Colocar los elementos uno debajo del otro */
+    max-width: 400px; /* Ancho máximo para el contenedor */
+    margin: auto; /* Centrar el contenedor */
+}
+
+#formulario label {
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el campo de entrada */
+}
+
+#formulario input {
+    margin-bottom: 32px; /* Espacio entre los campos de entrada */
+    padding: 10px; /* Espaciado interno en los campos */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#formulario button {
+    padding: 10px; /* Espaciado interno en el botón */
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+}
+
+#formulario button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+}
+
+.div_registro{
+    margin-top: 1px;
 }
