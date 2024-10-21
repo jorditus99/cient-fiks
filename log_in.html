@@ -12,7 +12,7 @@
 
 <style>
     .master-container-log-in {
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,8 +22,9 @@
     display: flex;
     flex-direction: column;
     height: 70%;
-    background-color: wheat;
+    background-color: rgba(255, 255, 255, 0.78); /* Fondo blanco con 78% de opacidad */
     width: 40%;
+    border-radius: 20px;
 }
 
 .container-title-log-in {
@@ -50,7 +51,9 @@
 .continer-inputs {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 75%;
+    justify-content: space-between;
+    height: 55%;
     
 }
 
@@ -58,9 +61,19 @@
 .container-buttons {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
     align-items: center;
+    margin-top: 10%;
+
 }
+
+input {
+    height: 40%;
+    border-radius: 8px;
+    border-color: #CCCCCC;
+    
+}
+
 </style>
 
 <body>
@@ -88,12 +101,10 @@
             <div class="container-form">
                 <form action="tu_proceso_de_login.php" method="post" class="form-log-in">
                     <div class="continer-inputs">
-                        <label for="nombre"></label>
                         <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
-                        <label for="password"></label>
                         <input type="password" id="password" name="password" placeholder="Contraseña" required>
                     </div>
-                    <div class="continer-buttons">
+                    <div class="container-buttons">
                         <div class="continer-buttons-top">
                             <button type="submit">Entrar</button>
                             <button>Registrarse</button>
@@ -107,7 +118,7 @@
         </div>
     </div>
 
-    <p>esto es un texto de prueba</p>
+   
 
 
 </body>
