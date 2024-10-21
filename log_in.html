@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Anna i el misteri de les tres fonts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css">
+</head>
+
+<style>
+    .master-container-log-in {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-log-in {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    background-color: wheat;
+    width: 40%;
+}
+
+.container-title-log-in {
+    height: 25%;
+    text-align: center;
+
+}
+
+.container-form {
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 5%;
+}
+
+.form-log-in {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.continer-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+
+.container-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+</style>
+
+<body>
+
+    <div class="hero">
+
+
+        <div class="navbar">
+            <div class="navbar-content">
+                <div class="nav-links">
+                    <a href="index.html">Historia</a>
+                    <a href="juegos.html">Jocs</a>
+                    <a href="ranquing.html">Rànquing</a>
+                    <a href="equipo.html">Equip</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="master-container-log-in">
+        <div class="container-log-in">
+            <div class="container-title-log-in">
+                <h1>Iniciar Sesión</h1>
+            </div>
+            <div class="container-form">
+                <form action="tu_proceso_de_login.php" method="post" class="form-log-in">
+                    <div class="continer-inputs">
+                        <label for="nombre"></label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
+                        <label for="password"></label>
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    </div>
+                    <div class="continer-buttons">
+                        <div class="continer-buttons-top">
+                            <button type="submit">Entrar</button>
+                            <button>Registrarse</button>
+                        </div>
+                        <button>Jugar sin Iniciar Sesión</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <p>esto es un texto de prueba</p>
+
+
+</body>
+
+</html>
