@@ -12,8 +12,6 @@
   <body>
 
     <div class="hero">
-
-  
       <div class="navbar">
         <div class="navbar-content">
           <div class="nav-links">
@@ -23,70 +21,33 @@
               <a href="equipo.html">Equip</a>
           </div>
         </div>
-      </div>
-
-      <div>
-        <article>
-          <img src="img_credits/erfan1.jpg">
-          <img src="img_credits/jordi.png">
-        </article>
-      </div>
+      </div> 
     </div>
+    <div class="fotos_nostres">
+      <img class="foto" src="img_credits/erfan1.jpg">
+      <img class="foto" src="img_credits/natalai2.png">
+      <img class="foto" src="img_credits/jordi.png">
+      <img class="foto" src="img_credits/roger6.png">
+      <img class="foto" src="img_credits/virginia4.png">
+  </div>
     <style>
 
-      article {
-        position: relative;
-        width: 250px;
-        transition: all .3s ease;
+      .foto {
+
+        height: 275px;
+        width: 275px;
+        margin: 30px;
+       
       }
 
-      article img:first-child {
-        box-shadow: 0 60px 60px -60px rgba(0,30,255,0.5);
-        border-radius: 4px;
-        width: 100%;
+      .fotos_nostres {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
       }
+      
 
-      article img:last-child {
-        position: absolute;
-        width: 200px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        transform: translateY(25%);
-        transition: .3s ease;
-        opacity: 0;
-      }
-
-      article:hover{
-        transform: 
-        perspective(250px)
-        rotateX('10deg')
-        translateY(-5%)
-        translateZ(0);
-      }
-
-      article::before{
-        content: '';
-        position: absolute;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-        background-image: 
-        linear-gradient(
-          to bottom,
-        transparent 10%,
-        rgba(0,0,0,0.5) 50%, 
-        rgba(0,0,0,)95%
-        );
-        opacity: 0;
-        transition: all .3s ease;
-      }
-
-      article:hover::before{
-        opacity: 1;
-        transform: translateY(10%);
-      }
 
     </style>
 
