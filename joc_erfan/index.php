@@ -6,12 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-        <?php 
-        
-        
-        
-        ?>
-    </h1>
+    <div class="fons">
+        <img src="img/img_erfan/fons_erfan.png">
+    </div>
 </body>
 </html>
