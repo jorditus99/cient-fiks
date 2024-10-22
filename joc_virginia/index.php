@@ -9,9 +9,7 @@
     <title>Anna i el misteri de les tres fonts</title>
 </head>
 <body>
-    <div class="hero">
-        
-    </div>
+    
     
 </body>
 </html>
