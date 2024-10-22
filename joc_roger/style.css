@@ -1,0 +1,24 @@
+.image-container {
+    width: 100%; /* Amplada total */
+    height: 500px; /* Alçada desitjada */
+    overflow: hidden; /* Oculta l'excés d'imatge */
+    position: relative; /* Necessari per al posicionament absolut */
+}
+
+.image-container img {
+    width: 2000px; /* Amplada de la imatge */
+    height: 100%; /* Alçada ajustada al contenidor */
+    position: relative;
+    top: 0;
+    left: 0;
+    animation: moure 10s linear infinite;
+}
+
+@keyframes moure {
+    0% {
+        transform: translateX(0); /* Posició inicial */
+    }
+    100% {
+        transform: translateX(200px); /* Posició final */
+    }
+  }
