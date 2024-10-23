@@ -25,12 +25,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 3rem;
         flex-wrap: wrap;
       }
 
       .intro-container a:hover {
-        color: blue;
+        cursor: pointer;
       }
 
       .intro-description {
@@ -139,10 +138,6 @@
           height: 800px; /* Adjust height for smaller screens */
         }
 
-        .intro-container {
-          gap: 0;
-        }
-
         .img-slider {
           flex-shrink: 0;
           min-width: 300px;
@@ -202,11 +197,12 @@
 
 
     <div class="intro-container">
-      <div class="img-slider">
 
-        <button class="nav-button left-button">
-          <img src="img/left-arrow.png" alt="previous">
-        </button>
+      <a class="nav-button left-button">
+        <img src="img/left_arrow.png" alt="previous">
+      </a>
+
+      <div class="img-slider">
         
         <!-- First Slide -->
         <div class="slide active">
@@ -232,12 +228,9 @@
         <div class="slide">
           <img src="img/juego3.jpg" alt="joc 3">
           <div class="slide-content">
-
-
             <h2>Netejant el fons del Delta del Llobregat</h2>
             <p>El Delta del Llobregat està ple de brossa i deixalles. Ajuda a l'Anna a netejar l'aigua!</p>
             <a href="#" class="button">Jugar!</a>
-
           </div>
         </div>
 
@@ -260,10 +253,6 @@
           </div>
         </div>
 
-        <button class="nav-button right-button">
-          <img src="img/right-arrow.png" alt="next">
-        </button>
-
         <!-- Navigation -->
         <div class="navigation">
           <div class="slidebutton active"></div>
@@ -274,6 +263,10 @@
         </div>
 
       </div>
+
+      <a class="nav-button right-button">
+        <img src="img/right_arrow.png" alt="next">
+      </a>
     </div>
    
 
