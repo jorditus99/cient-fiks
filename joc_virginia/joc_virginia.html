@@ -17,20 +17,93 @@
         align-items: center;
         width: 100%;
         height: 100%;
-
     }
 
-    .foto_fondo{
+    .contenedor_foto_fondo{
         width: 70%;
-        height: 85%
+        height: 85%;
+        position: relative;
     }
+
+    .foto_fondo {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    .contenedor_seabin {
+        position: absolute;
+        height: auto;
+        width: auto;
+        top: 82%;
+    }
+
+    .seabin {
+        height: 40%;
+        width: 40%;
+    }
+
+    .columnas {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        z-index: 3;
+    }
+
+    .contenedor_fish {
+        height: 100%;
+        width: auto;
+
+    }
+
+    .fish{
+        height: 100%;
+        width: 100%;
+    }
+
 </style>
 
 <body>
 
     <div class="fondo_juego">
-        <img src="../img/img_virginia/afua.webp"
-            alt="" class="foto_fondo">
+        <div class="contenedor_foto_fondo">
+            <img src="../img/img_virginia/afua.webp"
+            alt="" class="foto_fondo" >
+            <div class="contenedor_seabin">
+                <img src="../img/img_virginia/seabin_adaptado.png" alt="" class="seabin">
+            </div>
+            <div class="columnas">
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+                <div class="contenedor_fish">
+                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
+                </div>
+            </div>
+            
+    
+        </div>
+        
+
+        
     </div>
 
 
