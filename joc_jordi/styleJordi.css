@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    
+    background-size: cover;
+    background-position: center;
+}
+
+.general{
+    max-width: 100%;
+    max-height: 100%;
+    background-image: url("/img/river_day.gif");
+}
