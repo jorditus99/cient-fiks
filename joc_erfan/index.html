@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div id="fons" class="fons">
+        <div>
+
+        <!-- Elements estatis (punts, vides)-->
+        <img class="imatge_joc" src="/img/img_erfan/fons_erfan.png" >
+        <p class="titol_punts">Punts :</p>
+        <p class="punts">0</p>
+        <img class="vida" src="/img/vida.png">
+        </div>
+
+        <!-- Elements dinàmics del joc (gotes)  -->
+
+        <button onclick="crear_gota()">Crear gota</button>
+
+
+
+
+    </div>
+    <style>
+        .fons {
+
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            
+        }
+
+        .imatge_joc {
+
+            size: 100%;
+            border-radius: 1rem;
+            
+        }
+
+        html,body {
+            
+            height: 100%;
+            margin: 0;
+            font-family: "Pixelify Sans", sans-serif;
+            background-image: url("/img/river_day.gif");
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .titol_punts {
+
+            position: absolute;
+            top: 60px; 
+            left: 350px; 
+            color: white; 
+            font-size: 2rem; 
+        }
+
+        .punts {
+            position: absolute;
+            top: 60px; 
+            left: 460px; 
+            color: white; 
+            font-size: 2rem; 
+        }
+
+        .vida {
+
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 90px;
+            left: 1380px;
+        }
+
+        .gota {
+
+            position: absolute;
+
+        }
+
+    </style>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El laberint de clavegueres</title>
+</head>
+<body>
+    <div id="background">
+        <!-- <img class="imatge_joc" src="/img/img_natalia/grass_bg.png" > -->
+        <table>
+
+        </table>
+
+        <button id = 'one' type="button" name="Click to Play" onClick = 'loadPage();'>Click to Play</button>
+    </div>
+    <style>
+
+        html,body {
+            height: 100%;
+            margin: 0;
+            font-family: "Pixelify Sans", sans-serif;
+            background-image: url("/img/river_night.gif");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .fons {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            
+        }
+
+        .imatge_joc {
+            size: 100%;
+            border-radius: 1rem;
+            
+        }
+
+        
+        /* #################################################### */
+
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            width: auto;
+            height: auto;
+            border-spacing: 0px;
+            border-collapse: initial;
+            position: absolute;
+        }
+
+        div#background {
+            position: none;
+        }
+
+        tr {
+            border: none;
+        }
+        /*table element styles*/
+        td {
+            width: 25px;
+            height: 35px;
+            margin: 0px;
+            border: none;
+            padding: 0px;
+        }
+
+        #win {
+            background-color: rgb(163, 255, 183);
+            color:rgb(163, 255, 183);
+        }
+
+        .wall {
+            color:rgb(40, 25, 94);
+            background-color: rgb(40, 25, 94);
+        }
+
+        .freespace {
+            color:rgb(41, 128, 87);
+            background-color: rgb(41, 128, 87);
+        }
+
+        #start {
+            color:rgb(247, 255, 176);
+            background-color: rgb(247, 255, 176);
+        }
+
+    </style>
+
+
+    <script>
+
+        let maze = [
+            `#########################################`, //index 2
+            `_.......................#...............#`,
+            `#####################...#...#############`,
+            `#...#.......#.......#...#...#...........#`,
+            `#...#...#...#...#...#...#...#...#####...#`,
+            `#.......#.......#.......#.......#...#...#`,
+            `#...#########...#############...#...#####`,
+            `#...........................#.......#...#`,
+            `#######..#####..#########...#...#...#...#`,
+            `#..........#............#...#...#.......#`,
+            `#...#####..##########...#...#...#########`,
+            `#...#...............#.......#...........#`,
+            `#...#############...#...#...#####...#...#`,
+            `#...#....#......#.......#.......#...#...#`,
+            `#...###..#..#....#...#########...#####..#`,
+            `#..........#....#...........#.......#...#`,
+            `########..####...####..###########...#..#`,
+            `#...............#.......#.......#.......#`,
+            `#...#############...#...#...#...#####...#`,
+            `#...................#.......#..........!#`,
+            `#########################################`
+        ];
+
+        // GLOBAL VARIABLES
+        let currentLevel = maze;
+        let body = document.querySelector('body');
+        let tableDiv = document.getElementById('background');
+        let table = document.querySelector('table');
+
+
+        // DRAWING OF MAZE
+        let loadPage = () => {
+            let mover = document.createElement('div');
+            const drawMaze = (maze) => {
+                tableDiv.appendChild(mover);
+
+                mover.style.left = '10px';
+                mover.style.top = '50px';
+                mover.setAttribute('id', 'player');
+                mover.textContent = '@';
+
+                for (let i = 0; i < currentLevel.length; i++) {
+                    let row = document.createElement('tr');
+                    table.appendChild(row);
+
+                    for (let x = 0; x < currentLevel[i].length; x++) {
+                        let tableD = document.createElement('td');
+                        row.appendChild(tableD);
+
+                        tableD.innerHTML = maze[i].charAt(x);
+
+                        switch (maze[i].charAt(x)) {
+                            case '#':
+                                tableD.setAttribute('class', 'wall');
+                                break;
+                            case '.':
+                                tableD.setAttribute('class', 'freespace');
+                                break;
+                            case '_':
+                                tableD.setAttribute('id', 'start');
+                                break;
+                            case '!':
+                                tableD.setAttribute('id', 'win');
+                                break;
+                        }
+                    }
+                }
+            }
+
+            drawMaze(currentLevel);
+        }
+        
+
+    </script>
+
+</body>
+</html>
