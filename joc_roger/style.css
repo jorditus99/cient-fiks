@@ -1,0 +1,22 @@
+.image-container {
+    width: 200%; /* Amplada per encabir dues imatges */
+    height: 500px; /* Alçada desitjada */
+    overflow: hidden; /* Oculta l'excés d'imatge */
+    position: relative; /* Necessari per al posicionament absolut */
+    display: flex; /* Per alinear les imatges en línia */
+}
+
+.image-container img {
+    width: 50%; /* Cada imatge ocupa el 50% per quedar duplicades */
+    height: 100%;
+    animation: moure 1s linear infinite; /* Duració ajustada per fer el moviment suau */
+}
+
+@keyframes moure {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
