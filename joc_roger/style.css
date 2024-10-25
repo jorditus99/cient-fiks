@@ -1,24 +1,22 @@
 .image-container {
-    width: 100%; /* Amplada total */
+    width: 200%; /* Amplada per encabir dues imatges */
     height: 500px; /* Alçada desitjada */
     overflow: hidden; /* Oculta l'excés d'imatge */
     position: relative; /* Necessari per al posicionament absolut */
+    display: flex; /* Per alinear les imatges en línia */
 }
 
 .image-container img {
-    width: 2000px; /* Amplada de la imatge */
-    height: 100%; /* Alçada ajustada al contenidor */
-    position: relative;
-    top: 0;
-    left: 0;
-    animation: moure 10s linear infinite;
+    width: 50%; /* Cada imatge ocupa el 50% per quedar duplicades */
+    height: 100%;
+    animation: moure 1s linear infinite; /* Duració ajustada per fer el moviment suau */
 }
 
 @keyframes moure {
-    0% {
-        transform: translateX(0); /* Posició inicial */
+    from {
+        transform: translateX(0);
     }
-    100% {
-        transform: translateX(200px); /* Posició final */
+    to {
+        transform: translateX(-100%);
     }
-  }
+}
