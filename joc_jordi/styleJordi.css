@@ -1,0 +1,27 @@
+html, body {
+    background-image: url(/joc_jordi/img_jordi/river_night\ 3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.master_container {
+    display: flex; /* Flexbox para alinear los divs horizontalmente */
+    justify-content: center; /* Centramos horizontalmente el contenido dentro de master_container */
+    align-items: center; /* Centramos verticalmente los divs */
+    height: 100vh; /* Que ocupe el 100% de la altura de la pantalla */
+    width: 100vw; /* Que ocupe el 100% del ancho de la pantalla */
+    background-color: lightgrey; /* Color de fondo del contenedor principal (opcional) */
+}
+
+/* Estilo para el div container_tub que estará a la izquierda */
+.container_tub {
+    width: 20vw; /* 20% del ancho de la pantalla */
+    height: 100%; /* Ocupa el 100% de la altura del contenedor */
+    background-color: lightgreen; /* Color de fondo opcional */
+}
+
+/* Estilo para el div fondo_juego que estará a la derecha */
+.fondo_juego {
+    width: 70vw; /* 70% del ancho de la pantalla */
+    height: 100%; /* Ocupa el 100% de la altura del contenedor */
+    background-color: lightblue; /* Color de fondo opcional */
+}
