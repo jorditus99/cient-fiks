@@ -6,10 +6,19 @@
     display: flex; /* Per alinear les imatges en línia */
 }
 
-.image-container img {
+.image-container #img_principal {
     width: 50%; /* Cada imatge ocupa el 50% per quedar duplicades */
     height: 100%;
-    animation: moure 1s linear infinite; /* Duració ajustada per fer el moviment suau */
+    animation: moure 10s linear infinite; /* Duració ajustada per fer el moviment suau */
+}
+
+.image-personatge {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100px; 
+    height: auto; 
+    z-index: 10; 
 }
 
 @keyframes moure {
