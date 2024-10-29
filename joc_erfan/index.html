@@ -10,23 +10,20 @@
 </head>
 <body>
     <div id="fons" class="fons">
-        <div>
-
-        <!-- Elements estatics (punts, vides)-->
-        <img class="imatge_joc" src="/img/img_erfan/fons_erfan.png" >
-        <p class="titol_punts">Punts :</p>
-        <p class="punts" id="punts">0</p>
-        <img class="vida" src="/img/vida.png">
+        <div class="container_joc">
+            <img class="imatge_joc" src="/img/img_erfan/fons_erfan.png">
+            <div class="container_elements_top">
+                <p class="titol_punts">Punts :</p>
+                <p class="punts" id="punts">0</p>
+                <div id="container_vides" class="container_vides">
+                </div>
+            </div>
         </div>
-        
-
-        <!-- Elements dinàmics del joc (gotes)  -->
-
-        <!-- <button onclick="crear_gota()">Crear gota</button> -->
-
-
-
-
+    
+    
+    
+    
+    
     </div>
     <style>
         .fons {
@@ -86,6 +83,28 @@
         .gota {
 
             position: absolute;
+
+        }
+
+        .container_elements_top {
+            
+
+            
+
+        }
+
+        .container_vides {
+
+            position: absolute;
+
+        }
+
+        .cor {
+
+            position: absolute;
+            width: 50px;
+            height: 50px;
+
 
         }
 

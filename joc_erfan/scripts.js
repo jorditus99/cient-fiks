@@ -1,4 +1,5 @@
 let gotas = [];
+let vides = [];
 
 function crear_gota () {
 
@@ -40,6 +41,9 @@ fons.appendChild(gota2);
 
 function joc () {
 
+    crear_cor();
+
+
 let positon = 0;
 
 setTimeout(()=> crear_gota(),1000);
@@ -51,13 +55,11 @@ setTimeout(()=> crear_no_potable(),3000);
 setTimeout(()=> crear_gota(),4000);
 
 
-
 let interval = setInterval(() => {
     moure_gota();
+    colisio();
     },100)
 }
-
-
 
 function moure_gota () {
 for ( gota of gotas) {
@@ -66,5 +68,52 @@ position += 5;
 gota.style.top = position + "px";
 }
 }
+
+function colisio () {
+
+    for (let gota of gotas) {
+        let position = parseInt(gota.style.top);
+
+        if (position >= 750) {
+            gota.remove();
+        }
+    }
+    
+}
+
+function sumar_punts () {
+
+
+
+
+}
+
+function perdre_vida () {
+
+
+
+
+}
+
+function crear_cor () {
+
+    let cor = document.createElement('img')   
+    vides.push(cor);
+    cor.className = "cor"
+    cor.src = '/img/vida.png';
+    cor.style.position = "absolute;"
+    let fons = document.getElementById("fons");
+    container_vides.appendChild(cor);
+    console.log("crear cor esta activa")
+
+}
+
+function definir_vides () {
+
+    let vides = 3;
+
+
+}
+
 
 joc();
