@@ -9,9 +9,10 @@
 </head>
 <body>
     <div class="image-container">
-        <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons" id="">
-        <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons" id="">
+        <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
+        <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
         <img src="../img/shark.gif" alt="" class="image-personatge" id="personatge">
+        <div id="obstacles"></div>
     </div>
 </body>
 </html>
