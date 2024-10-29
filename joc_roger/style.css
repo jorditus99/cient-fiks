@@ -29,3 +29,11 @@
         transform: translateX(-100%);
     }
 }
+
+.obstacles{
+
+    position: absolute;
+    width: 100px;
+
+
+}
