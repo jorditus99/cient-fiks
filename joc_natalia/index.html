@@ -114,7 +114,7 @@
 
         let maze = [
             `#.#######################################`, //index 2
-            `#.#........#........#.....#.......#.....#`,
+            `#.#.....?..#........#.....#.......#.....#`,
             `#.####.###.####.#####.###.###.#.#######.#`,
             `#......#.#....#.........#.....#.#.......#`,
             `###.####.###.##.#########.###.###.#######`,
@@ -216,12 +216,12 @@
 
                 // Check collision with walls
                 let collides = false;
-                let walls = document.querySelectorAll('.wall');
+                let impassableTiles = document.querySelectorAll('.wall, .key');
 
-                for (let wall of walls) {
-                    let wallRect = wall.getBoundingClientRect();
-                    if (newPos.left < wallRect.right && newPos.left + pos.width > wallRect.left &&
-                        newPos.top < wallRect.bottom && newPos.top + pos.height > wallRect.top) {
+                for (let tile of impassableTiles) {
+                    let tileRect = tile.getBoundingClientRect();
+                    if (newPos.left < tileRect.right && newPos.left + pos.width > tileRect.left &&
+                        newPos.top < tileRect.bottom && newPos.top + pos.height > tileRect.top) {
                         collides = true;
                         break;
                     }
@@ -232,6 +232,18 @@
                     mover.style.left = newPos.left + 'px';
                     mover.style.top = newPos.top + 'px';
                 }
+
+                // Display alert if player reaches a key
+                let keyTiles = document.querySelectorAll('.key');
+                for (let key of keyTiles) {
+                    let keyRect = key.getBoundingClientRect();
+                    if (newPos.left < keyRect.right && newPos.left + pos.width > keyRect.left &&
+                        newPos.top < keyRect.bottom && newPos.top + pos.height > keyRect.top) {
+                        alert("Has llegado a una llave!");
+                        break;
+                    }
+                }
+                
             });
         }
 
