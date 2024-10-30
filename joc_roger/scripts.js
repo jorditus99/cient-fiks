@@ -1,3 +1,4 @@
+const container_principal = document.getElementById("image_container");
 const obstacles = document.getElementById("obstacles");
 const personatge = document.getElementById("personatge");
 let posicioTop = 0;

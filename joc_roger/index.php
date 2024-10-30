@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="image-container">
+    <div class="image_container" id="container">
         <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
         <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
-        <img src="../img/shark.gif" alt="" class="image-personatge" id="personatge">
+        <img src="../img/shark.gif" alt="" class="image_personatge" id="personatge">
         <div id="obstacles"></div>
     </div>
 </body>
