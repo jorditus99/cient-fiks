@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-image: url('img/river_night.gif');
+}
+#gameArea {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('img/river_night.gif');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fallingObject {
+    position: absolute;
+    /*width: 30px;
+    height: 30px;
+    /*background-color: red;*/
+    border-radius: 50%;
+}
+#basket {
+    position: absolute;
+    bottom: 10px;
+    /*width: 80px;
+    height: 20px;
+    background-color: brown;*/
+    z-index: 3;
+    background-image: url(/img/seabin_adaptado-removebg-preview.png);
+    background-size: cover;
+}
+
+.calse_imagen {
+    width: 20%;
+    height: 20%;
+}
+
+.seabin{
+    width: 7%;
+    height: 13%;
+}
+
+.contenedor_foto_fondo{
+    width: 70%;
+    height: 85%;
+    position: relative;
+}
+
+.foto_fondo {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
