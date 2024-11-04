@@ -1,19 +1,21 @@
 const imatge_fons = document.getElementById("image_container");
 let posicioTop = 0;
+let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
+let vides = [];
 
 // Creació del personatge
 function crear_personatge() {
+    console.log("Personatge creat");
     const personatge = document.createElement('img');
     personatge.src = "../img/shark.gif";
     personatge.alt = "Personatge";
-    personatge.classList.add("image-personatge");
+    personatge.classList.add("imatge_personatge"); // Classe coherent amb el CSS
     personatge.id = "personatge";
     personatge.style.position = "absolute";
     personatge.style.top = posicioTop + "px";
     personatge.style.left = "50px"; // Posició inicial a l'esquerra
     imatge_fons.appendChild(personatge);
 }
-
 // Funció per moure el personatge
 function moure_personatge(event) {
     const personatge = document.getElementById("personatge");
@@ -33,13 +35,13 @@ function moure_personatge(event) {
     }
 }
 
-// Creació de l'obstacle
+// Creació dels obstacles
 function crear_obstacle() {
     const img_petroli = document.createElement('img');
     img_petroli.src = "../img/img_roger/petroli.png";
     img_petroli.alt = "Obstacle petroli";
     img_petroli.style.position = "absolute"; 
-    // img_petroli.style.top = "50px"; 
+    img_petroli.style.top = "100px"; 
     img_petroli.style.left = "200px"; 
     img_petroli.style.width = "100px"; 
 
