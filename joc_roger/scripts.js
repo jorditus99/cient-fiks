@@ -3,10 +3,11 @@ let posicioTop = 0;
 
 // Creació del personatge
 function crear_personatge() {
+    console.log("Personatge creat");
     const personatge = document.createElement('img');
     personatge.src = "../img/shark.gif";
     personatge.alt = "Personatge";
-    personatge.classList.add("image-personatge");
+    personatge.classList.add("imatge_personatge"); // Classe coherent amb el CSS
     personatge.id = "personatge";
     personatge.style.position = "absolute";
     personatge.style.top = posicioTop + "px";
@@ -39,7 +40,7 @@ function crear_obstacle() {
     img_petroli.src = "../img/img_roger/petroli.png";
     img_petroli.alt = "Obstacle petroli";
     img_petroli.style.position = "absolute"; 
-    // img_petroli.style.top = "50px"; 
+    img_petroli.style.top = "100px"; 
     img_petroli.style.left = "200px"; 
     img_petroli.style.width = "100px"; 
 

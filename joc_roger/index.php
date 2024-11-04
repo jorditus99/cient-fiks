@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="image-container" id="image_container">
+    <div class="image_container" id="image_container">
         <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
         <img id="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
     </div>

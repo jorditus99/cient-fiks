@@ -12,13 +12,13 @@
     animation: moure 10s linear infinite; /* Duració ajustada per fer el moviment suau */
 }
 
-.image_personatge {
+.imatge_personatge {
     position: absolute;
     top: 0; 
     left: 0;
-    width: 100px; 
+    width: 100px; /* Ajusta la mida per fer el personatge visible */
     height: auto; 
-    z-index: 10; 
+    z-index: 10; /* Suficient per sobreposar-se a altres elements */
 }
 
 @keyframes moure {
@@ -29,6 +29,7 @@
         transform: translateX(-100%);
     }
 }
+
 
 .obstacles{
 
