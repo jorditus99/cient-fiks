@@ -1,29 +1,42 @@
-    body {
-        margin: 0;
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+}
+body {
         overflow: hidden;
         background-image: url('../img/river_night.gif');
-        height: 100%;
-        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
     #gameArea {
-        position: relative;
-        width: 100vw;
-        height: 100vh;
+        width: 70%;
+        height: 85%;
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-image: url('../img/img_virginia/agua.webp');
+        background-size:cover;
+        position: fixed;         
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
+
 
     .fallingObject {
         position: absolute;
-        width: 10%;
-        height: 13%;
+        width:40px;
+        height: 90px;
         border-radius: 50%;
     }
     #basket {
         position: absolute;
-        bottom: 1px;
+        bottom: 0px;
         width: 8%;
         height: 13%;
         z-index: 3;
@@ -36,14 +49,3 @@
         height: 100%;
     }
 
-    .contenedor_foto_fondo{
-        width: 70%;
-        height: 85%;
-        position: relative;
-    }
-
-    .foto_fondo {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
