@@ -42,3 +42,5 @@ function crearTablero() {
 
 // Llama a la función para crear el tablero
 crearTablero();
+
+
