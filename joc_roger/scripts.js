@@ -1,6 +1,7 @@
 const imatge_fons = document.getElementById("image_container");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
+let vides = [];
 
 // Creació del personatge
 function crear_personatge() {
