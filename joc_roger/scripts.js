@@ -1,5 +1,6 @@
 const imatge_fons = document.getElementById("image_container");
 let posicioTop = 0;
+let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
 
 // Creació del personatge
 function crear_personatge() {
@@ -14,7 +15,6 @@ function crear_personatge() {
     personatge.style.left = "50px"; // Posició inicial a l'esquerra
     imatge_fons.appendChild(personatge);
 }
-
 // Funció per moure el personatge
 function moure_personatge(event) {
     const personatge = document.getElementById("personatge");
@@ -34,7 +34,7 @@ function moure_personatge(event) {
     }
 }
 
-// Creació de l'obstacle
+// Creació dels obstacles
 function crear_obstacle() {
     const img_petroli = document.createElement('img');
     img_petroli.src = "../img/img_roger/petroli.png";
