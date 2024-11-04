@@ -25,6 +25,7 @@ body {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        border-radius: 20px;
     }
 
 
@@ -47,5 +48,13 @@ body {
     .calse_imagen {
         width: 100%;
         height: 100%;
+    }
+
+    #score{
+        position: absolute; 
+        top: 10px; 
+        left: 10px; 
+        color: rgb(240, 142, 22); 
+        font-size: 24px;
     }
 
