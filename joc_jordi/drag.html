@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="dragstyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="master_container" style="display: flex;">
+        <img src="./img_jordi/camion1.png" alt="" style="height: 50px; width: 50px;">
+        <div class="caja" id="caja" draggable="true"></div>
+        <div class="soltar" id="soltar"></div>
+    </div>    
+
+    <SCript>
+
+        // creación d ls diferentes eventos para l q tenemos q arrastrar
+        const caja = document.querySelector('#caja')
+
+        caja.addEventListener('dragstart', e=> {
+            console.log('Drag Start');
+        });
+
+        caja.addEventListener('dragend', e=> {
+            console.log('Drag End');
+        });
+
+        caja.addEventListener('drag', e=> {
+            console.log('Drag');
+        });
+
+
+        // ahora los eventos para donde tenemos que soltar
+        const contenedor = document.querySelector('#soltar');
+        
+        contenedor.addEventListener('dragenter', e=>{
+            console.log('Drag Enter');
+        });
+
+        contenedor.addEventListener('dragleave', e=>{
+            
+            console.log('Drag Leave');
+        });
+
+        contenedor.addEventListener('dragover', e=>{
+            e.preventDefault();
+            console.log('Drag over');
+        });
+
+        contenedor.addEventListener('drop', e=>{
+            console.log('Drop');
+
+            contenedor.appendChild(caja);
+        });
+
+        
+
+
+    </SCript>
+
+</body>
+</html>
