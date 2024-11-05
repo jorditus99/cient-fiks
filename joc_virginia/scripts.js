@@ -5,8 +5,8 @@ const scoreDisplay = document.getElementById('score');
 const lifeContainer = document.getElementById('life')
 
 
-const basketSpeed = 15; // Velocidad de movimiento de la cesta
-const objectSpeed = 2; // Velocidad de caída de los objetos
+const basketSpeed = 30; // Velocidad de movimiento de la cesta
+const objectSpeed = 6; // Velocidad de caída de los objetos
 let basketPosition = gameArea.clientWidth / 2; // Posiciona la cesta en la mitad de gamearea
 let score = 0;
 let life = 3;
@@ -25,8 +25,9 @@ function initializeGame() {
     imprimir_vides();
     basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
     document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
-    gameInterval = setInterval(createFallingObject, 3000); // Crear objetos cada 3 segundos
+    gameInterval = setInterval(createFallingObject, 1000);
 }
+
 
 // Mover la cesta según las teclas presionadas
 function moveBasket(event) {
@@ -121,7 +122,7 @@ function updateScore(imageName) {
         console.log(life);
     }
     scoreDisplay.textContent = 'Puntos: ' + score;
-    
+
 }
 
 // Actualizar el vidas según el tipo de objeto no recogido
@@ -132,7 +133,7 @@ function updateLife(imageName) {
         checkLives();
         console.log(life);
     }
-    
+
 }
 
 function endGame() {
@@ -169,7 +170,7 @@ function crear_cor(num) {
     cor.style.position = "absolute;"
     lifeContainer.appendChild(cor);
     gameArea.appendChild(lifeContainer);
-    
+
 
 }
 
@@ -178,7 +179,7 @@ function imprimir_vides() {
     for (let i = 0; i < 3; i++) {
         crear_cor(i);
     }
-    
+
 }
 
 function perdre_vida() {
@@ -186,8 +187,11 @@ function perdre_vida() {
         let vida = vides.pop();
         let corActiu = document.getElementById(vida.id);
         lifeContainer.removeChild(corActiu);
-    } 
+    }
 }
+
+
+
 
 // Inicializar el juego al cargar
 initializeGame();
