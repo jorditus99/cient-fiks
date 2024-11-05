@@ -22,7 +22,6 @@
         html,body {
             height: 100%; /* Use full viewport height */
             margin: 0; /* Remove default margin */
-            display: flex; /* Enable flexbox */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
             background-image: url("/img/river_night.gif");
@@ -30,11 +29,27 @@
             background-position: center;
         }
 
+        #background {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
         .table-container {
-            display: flex; /* Enable flexbox for the container */
+            height: 90%;
+            width: 70%;
+            margin: 0 auto;
+            display: flex;
             justify-content: center; /* Center the table */
             align-items: center; /* Align items center */
-            border-radius: 20px;
+            border-radius: 1rem;
+            background-color: black;
+        }
+
+        table {
+            margin-top: 50px;
         }
 
         .fons {
@@ -57,11 +72,10 @@
 
         #player {
             position: absolute;
-            width: 1rem;
-            height: 1rem;
-            display: block;
-            background-color: black;
-            color: black;
+            width: 1.2rem;
+            height: 1.6rem;
+            background-color: rgb(31, 221, 255);
+            color: rgb(31, 221, 255);
             z-index: 2;
         }
 
@@ -77,17 +91,14 @@
             position: absolute;
         }
 
-        div#background {
-            position: none;
-        }
-
         tr {
             border: none;
         }
+
         /*table element styles*/
         td {
-            width: 1.7rem;
-            height: 1.7rem;
+            width: 1.9rem;
+            height: 1.9rem;
             margin: 0px;
             border: none;
             padding: 0px;
@@ -125,7 +136,7 @@
     <script>
 
         let maze = [
-            `#.#######################################`, //index 2
+            `#_#######################################`, //index 2
             `#.#.....?..#........#.....#.......#.....#`,
             `#.####....?####.#####.###.###.#.#######.#`,
             `#?....?###....#.........#.....#.#.......#`,
@@ -157,6 +168,7 @@
         let body = document.querySelector('body');
         let tableDiv = document.getElementById('background');
         let table = document.querySelector('table');
+        
 
         // Variable to track if player is on a key tile
         let isOnKeyTile = false;
@@ -173,8 +185,8 @@
             const drawMaze = (maze) => {
                 tableDiv.appendChild(mover);
 
-                mover.style.left = '15.2rem';
-                mover.style.top = '3rem';
+                mover.style.left = '18%';
+                mover.style.top = '15%';
                 mover.setAttribute('id', 'player');
                 mover.textContent = '@';
 
@@ -309,6 +321,7 @@
                     }
                 }
             });
+
         };
 
         loadPage();  // Ensure to call the function to load the page
