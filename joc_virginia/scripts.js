@@ -1,52 +1,82 @@
+
 const gameArea = document.getElementById('gameArea');
 const basket = document.getElementById('basket');
-let basketPosition = gameArea.clientWidth / 2;
-const basketSpeed = 15;
-const objectSpeed = 2; // Velocidad de caída de los objetos
 const scoreDisplay = document.getElementById('score');
+const lifeDisplay = document.getElementById('life')
+
+const basketSpeed = 15; // Velocidad de movimiento de la cesta
+const objectSpeed = 2; // Velocidad de caída de los objetos
+let basketPosition = gameArea.clientWidth / 2; // Posiciona la cesta en la mitad de gamearea
 let score = 0;
+let life = 3;
+let gameInterval;
+
+// Definir imágenes de objetos con nombres descriptivos
 const imagenes = {
     pez: '../img/img_virginia/Pixel-Art-Fish.png',
     lata: '../img/img_virginia/lata.png',
     botella: '../img/img_virginia/plastic.png'
 };
 
-// Posicionar la cesta al inicio
-basket.style.left = basketPosition + 'px';
+// Inicializar el juego
+function initializeGame() {
+    basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
+    document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
+    gameInterval = setInterval(createFallingObject, 3000); // Crear objetos cada 3 segundos
+}
 
-// Función para mover la cesta
-document.addEventListener('keydown', (event) => {
+// Mover la cesta según las teclas presionadas
+function moveBasket(event) {
     if (event.key === 'ArrowLeft') {
         basketPosition = Math.max(0, basketPosition - basketSpeed);
     } else if (event.key === 'ArrowRight') {
         basketPosition = Math.min(gameArea.clientWidth - basket.offsetWidth, basketPosition + basketSpeed);
     }
     basket.style.left = basketPosition + 'px';
-});
+}
 
-// Función para crear objetos en posiciones aleatorias
+// Crear un nuevo objeto en una posición aleatoria
 function createFallingObject() {
     const object = document.createElement('div');
     const img = document.createElement('img');
-    const keys = Object.keys(imagenes); // Obtiene los nombres ["pez", "lata", "botella"]
+
+    // Seleccionar imagen al azar
+    const keys = Object.keys(imagenes);
     const randomKey = keys[Math.floor(Math.random() * keys.length)];
     const randomImage = imagenes[randomKey];
+
+    // Configuración del objeto y agregarlo a la pantalla
     img.src = randomImage;
-    img.classList.add('calse_imagen')
+    img.classList.add('calse_imagen');
     object.classList.add('fallingObject');
     object.style.left = Math.random() * (gameArea.clientWidth - 30) + 'px';
     object.style.top = '0px';
     object.appendChild(img);
     gameArea.appendChild(object);
 
-    // Guardar el índice o ruta de la imagen como un atributo en el objeto
+    // Guardar el nombre de la imagen en el objeto
     object.setAttribute('data-image-name', randomKey);
 
-    // Caída del objeto
+    // Empezar la caída del objeto
+    startFalling(object);
+}
+
+// Iniciar la caída del objeto y verificar la colisión con la cesta
+function startFalling(object) {
     const fallInterval = setInterval(() => {
         const currentTop = parseFloat(object.style.top);
         object.style.top = currentTop + objectSpeed + 'px';
-        // Obtener las posiciones horizontales del objeto y de la cesta
+
+        // Verificar si el objeto toca la cesta o el fondo
+        if (objectReachedBasket(object) || objectReachedBottom(object)) {
+            clearInterval(fallInterval); // Detener la caída del objeto
+        }
+    }, 20);
+}
+
+// Verificar si el objeto toca la cesta
+function objectReachedBasket(object) {
+    const currentTop = parseFloat(object.style.top);
     const objectLeft = parseFloat(object.style.left);
     const objectRight = objectLeft + object.offsetWidth;
     const basketLeft = parseFloat(basket.style.left);
@@ -54,48 +84,75 @@ function createFallingObject() {
 
     // Verificar si el objeto ha alcanzado la altura de la cesta
     if (currentTop >= gameArea.clientHeight - basket.offsetHeight - object.offsetHeight) {
-        // Verificar si el objeto está dentro de los límites de la cesta
         if (objectRight > basketLeft && objectLeft < basketRight) {
             const imageName = object.getAttribute('data-image-name');
-            if (imageName === 'lata' || imageName === 'botella') {
-                score += 10;
-            }
-
-            // Actualizar el contador de puntos en la pantalla
-            scoreDisplay.textContent = 'Puntos: ' + score;
-            console.log("Objeto recogido" + imageName) // Objeto recogido
+            updateScore(imageName);
             object.remove(); // Eliminar el objeto
-            clearInterval(fallInterval); // Detener la caída del objeto
-            return; // Salir de la función para evitar que siga bajando
+            return true;
         }
     }
-
-    // Verificar si el objeto ha alcanzado el fondo del área de juego
-    if (currentTop >= gameArea.clientHeight - object.offsetHeight) {
-        const imageName = object.getAttribute('data-image-name');
-        console.log('Objeto no recogido. Imagen: ' + imageName);
-        object.remove(); // Eliminar el objeto
-        clearInterval(fallInterval); // Detener la caída del objeto
-    }
-
-}, 20);
-
-    // Chequear si el objeto ha llegado al fondo o fue recogido
-    /*if (currentTop > gameArea.clientHeight - basket.offsetHeight - 30) {
-        const objectLeft = parseFloat(object.style.left);
-        const basketLeft = parseFloat(basket.style.left);
-
-        // Verificar si el objeto está dentro de los límites de la cesta
-        if (objectLeft > basketLeft && objectLeft < basketLeft + basket.offsetWidth) {
-            // Recogido
-            alert('¡Objeto recogido!');
-        }
-
-        object.remove(); // Eliminar el objeto después de tocar el fondo o la cesta
-        clearInterval(fallInterval); // Detener la caída del objeto
-    }
-}, 20);*/
+    return false;
 }
 
-// Generar un objeto nuevo cada 1 segundo
-setInterval(createFallingObject, 3000);
+// Verificar si el objeto ha alcanzado el fondo del área de juego
+function objectReachedBottom(object) {
+    const currentTop = parseFloat(object.style.top);
+    if (currentTop >= gameArea.clientHeight - object.offsetHeight) {
+        const imageName = object.getAttribute('data-image-name');
+        updateLife(imageName);
+        console.log('Objeto no recogido. Imagen: ' + imageName);
+        object.remove();
+        return true;
+    }
+    return false;
+}
+
+// Actualizar el puntaje y vidas según el tipo de objeto recogido
+function updateScore(imageName) {
+    if (imageName === 'lata' || imageName === 'botella') {
+        score += 10;
+    } else if (imageName === 'pez') {
+        life = life - 1;
+        checkLives();
+        console.log(life);
+    }
+    scoreDisplay.textContent = 'Puntos: ' + score;
+    lifeDisplay.textContent = 'Vidas: ' + life;
+}
+
+// Actualizar el vidas según el tipo de objeto no recogido
+function updateLife(imageName) {
+    if (imageName === 'lata' || imageName === 'botella') {
+        life = life - 1;
+        checkLives();
+        console.log(life);
+    }
+    lifeDisplay.textContent = 'Vidas: ' + life;
+}
+
+function endGame() {
+    clearInterval(gameInterval); // Detener la creación de objetos
+    basket.style.display = 'none'; // Ocultar la cesta
+    let elements = document.querySelectorAll('.fallingObject');
+    elements.forEach(element => {
+        element.remove();
+    });
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('byeDiv');
+    let byeText = document.createElement("p");
+    byeText.textContent = "No tienes mas vidas, el juego ha terminado";
+    byeText.classList.add('byeText');
+
+    byeDiv.appendChild(byeText);
+    gameArea.appendChild(byeDiv);
+
+}
+
+function checkLives() {
+    if (life <= 0) {
+        endGame();
+    }
+}
+
+// Inicializar el juego al cargar
+initializeGame();
