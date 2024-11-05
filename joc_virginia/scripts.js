@@ -2,7 +2,8 @@
 const gameArea = document.getElementById('gameArea');
 const basket = document.getElementById('basket');
 const scoreDisplay = document.getElementById('score');
-const lifeDisplay = document.getElementById('life')
+const lifeContainer = document.getElementById('life')
+
 
 const basketSpeed = 15; // Velocidad de movimiento de la cesta
 const objectSpeed = 2; // Velocidad de caída de los objetos
@@ -10,6 +11,7 @@ let basketPosition = gameArea.clientWidth / 2; // Posiciona la cesta en la mitad
 let score = 0;
 let life = 3;
 let gameInterval;
+let vides = [];
 
 // Definir imágenes de objetos con nombres descriptivos
 const imagenes = {
@@ -20,6 +22,7 @@ const imagenes = {
 
 // Inicializar el juego
 function initializeGame() {
+    imprimir_vides();
     basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
     document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
     gameInterval = setInterval(createFallingObject, 3000); // Crear objetos cada 3 segundos
@@ -113,21 +116,23 @@ function updateScore(imageName) {
         score += 10;
     } else if (imageName === 'pez') {
         life = life - 1;
+        perdre_vida();
         checkLives();
         console.log(life);
     }
     scoreDisplay.textContent = 'Puntos: ' + score;
-    lifeDisplay.textContent = 'Vidas: ' + life;
+    
 }
 
 // Actualizar el vidas según el tipo de objeto no recogido
 function updateLife(imageName) {
     if (imageName === 'lata' || imageName === 'botella') {
         life = life - 1;
+        perdre_vida();
         checkLives();
         console.log(life);
     }
-    lifeDisplay.textContent = 'Vidas: ' + life;
+    
 }
 
 function endGame() {
@@ -152,6 +157,36 @@ function checkLives() {
     if (life <= 0) {
         endGame();
     }
+}
+
+function crear_cor(num) {
+
+    let cor = document.createElement('img')
+    vides.push(cor);
+    cor.className = "cor";
+    cor.id = num + 1;
+    cor.src = '../img/vida.png';
+    cor.style.position = "absolute;"
+    lifeContainer.appendChild(cor);
+    gameArea.appendChild(lifeContainer);
+    
+
+}
+
+function imprimir_vides() {
+
+    for (let i = 0; i < 3; i++) {
+        crear_cor(i);
+    }
+    
+}
+
+function perdre_vida() {
+    if (vides.length > 0) {
+        let vida = vides.pop();
+        let corActiu = document.getElementById(vida.id);
+        lifeContainer.removeChild(corActiu);
+    } 
 }
 
 // Inicializar el juego al cargar
