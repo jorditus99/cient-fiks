@@ -59,8 +59,11 @@ const nivel1= [
 const tablero = document.getElementById("tablero");
 
 function crearTablero() {
-    nivel1.forEach((elemento) => {
+    nivel1.forEach((elemento, index) => {
         const div = document.createElement('div'); // Crea un nuevo div
+
+        // Asigna un id único al div basado en el índice
+        div.id = `${index}`;
 
         // Si el elemento es una imagen (no está vacío), agrégala al div
         if (elemento !== " ") {
@@ -88,6 +91,12 @@ function crearTablero() {
                 const id = e.dataTransfer.getData('text');
                 const elementoArrastrado = document.getElementById(id).cloneNode(true);
 
+                // Clona los atributos data de la tubería
+                const direcciones = ["izquierda", "derecha", "arriba", "abajo"];
+                direcciones.forEach(direccion => {
+                    elementoArrastrado.setAttribute(`data-${direccion}`, document.getElementById(id).getAttribute(`data-${direccion}`));
+                });
+
                 // Agrega el elemento arrastrado al div
                 div.appendChild(elementoArrastrado);
             });
@@ -97,6 +106,7 @@ function crearTablero() {
         tablero.appendChild(div);
     });
 }
+
 
 // Llama a la función para crear el tablero
 crearTablero();
