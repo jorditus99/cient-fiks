@@ -79,9 +79,16 @@
             z-index: 2;
         }
 
+        .enemy {
+            position: absolute;
+            width: 1.6rem;
+            height: 1.2rem;
+            background-color: rgb(199, 199, 199); /* Color for enemies */
+            z-index: 2;
+        }
+
 
         table {
-            width: 50%;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
@@ -182,9 +189,11 @@
         // DRAWING OF MAZE
         let loadPage = () => {
             let mover = document.createElement('div');
+            let enemy = document.createElement('div');
 
             const drawMaze = (maze) => {
                 tableDiv.appendChild(mover);
+                tableDiv.appendChild(enemy);
 
                 mover.style.left = '18%';
                 mover.style.top = '15%';
