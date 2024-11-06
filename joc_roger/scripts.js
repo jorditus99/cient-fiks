@@ -66,6 +66,34 @@ function moure_obstacle(img_petroli) {
         }
     }, 5);
 }
+function detectar_colisio() {
+    const personatge = document.getElementById("personatge");
+    const obstacle = imatge_fons.querySelector('img[alt="Obstacle petroli"]');
+
+    if (!personatge || !obstacle) {
+        console.log("Personatge o obstacle no trobat");
+        return;
+    }
+
+    const rectPersonatge = personatge.getBoundingClientRect();
+    const rectObstacle = obstacle.getBoundingClientRect();
+
+    // console.log("Personatge:", rectPersonatge, "Obstacle:", rectObstacle);
+
+    // Comprovem si es solapen
+    if (
+        rectPersonatge.top < rectObstacle.bottom &&
+        rectPersonatge.bottom > rectObstacle.top &&
+        rectPersonatge.left < rectObstacle.right &&
+        rectPersonatge.right > rectObstacle.left
+    ) {
+        alert("T'has xocat");
+    }
+}
+
+// Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
+setInterval(detectar_colisio, 10);
+
 // Inicialització
 crear_personatge();
 crear_obstacle();
