@@ -3,30 +3,49 @@
 const fuente = document.getElementById("fuente");
 const cole = document.getElementById("cole");
 const camion1 = document.getElementById("camion1");
-const valvula_inicial = document.getElementById("")
-const valvula_final = document.getElementById("")
+const valvula_inicial = document.getElementById("valvula_inicial")
+const valvula_final = document.getElementById("valvula_final")
 
-const recta_horizontal = document.getElementById("")
-const recta_vertical = document.getElementById("")
-const curva_arriba_drcha = document.getElementById("")
-const curva_abajo_drcha = document.getElementById("")
-const curva_iz_abajo = document.getElementById("")
-const curva_iz_arriba = document.getElementById("")
+const recta_horizontal = document.getElementById("recta_horizontal")
+const recta_vertical = document.getElementById("recta_vertical")
+const curva_arriba_drcha = document.getElementById("curva_arriba_drcha")
+const curva_abajo_drcha = document.getElementById("curva_abajo_drcha")
+const curva_iz_abajo = document.getElementById("curva_iz_abajo")
+const curva_iz_arriba = document.getElementById("curva_iz_arriba")
 
 // array para las cosas dragables
-const tubos= []
+const tubos= [
+    recta_horizontal, recta_vertical, curva_abajo_drcha,
+    curva_arriba_drcha, curva_iz_abajo, curva_iz_arriba
+];
 
 
+function dragables(tubos) {
+    tubos.forEach(tubo => {
+        tubo.setAttribute("draggable", "true");
 
+        tubo.addEventListener('dragstart', e => {
+            console.log('Drag Start');
+            e.dataTransfer.setData('text', e.target.id);
+        });
 
+        tubo.addEventListener('dragend', e => {
+            console.log('Drag End');
+        });
 
+        tubo.addEventListener('drag', e => {
+            console.log('Drag');
+        });
+    });
+}
 
+dragables(tubos);
 
 
 // establecer las posiciones de cada nivel
 const nivel1= [
     
-    fuente, valvula1, " ", " ", " ", " ", " ",
+    fuente, valvula_inicial, " ", " ", " ", " ", " ",
     " ", " ", " ", camion1, " ", " ", camion1,
     " ", " ", " ", " ", " ", " ", cole,
     " ", " ", " ", " ", " ", " ", " ",
