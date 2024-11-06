@@ -2,11 +2,21 @@
 // Las constantes de las imagenes
 const fuente = document.getElementById("fuente");
 const cole = document.getElementById("cole");
-const valvula1 = document.getElementById("valvula1");
-const camion1 = document.getElementById("camion1")
+const camion1 = document.getElementById("camion1");
+const valvula_inicial = document.getElementById("")
+const valvula_final = document.getElementById("")
+
+const recta_horizontal = document.getElementById("")
+const recta_vertical = document.getElementById("")
+const curva_arriba_drcha = document.getElementById("")
+const curva_abajo_drcha = document.getElementById("")
+const curva_iz_abajo = document.getElementById("")
+const curva_iz_arriba = document.getElementById("")
+
+// array para las cosas dragables
+const tubos= []
 
 
-// tubos
 
 
 
