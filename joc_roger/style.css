@@ -1,3 +1,24 @@
+html,body {
+            
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    background-image: url("../img/river_day.gif");
+    background-size: cover;
+    background-position: center;
+
+}
+
+.fons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+
 .image_container {
     width: 200%; /* Amplada per encabir dues imatges */
     height: 500px; /* Alçada desitjada */

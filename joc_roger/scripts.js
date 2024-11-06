@@ -1,7 +1,8 @@
 const imatge_fons = document.getElementById("image_container");
+let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
-let velocitat = 10;
+let velocitat = 1;
 let vides = [];
 
 // Creació del personatge
@@ -66,9 +67,63 @@ function moure_obstacle(img_petroli) {
         }
     }, 5);
 }
+function detectar_colisio() {
+    const personatge = document.getElementById("personatge");
+    const obstacle = imatge_fons.querySelector('img[alt="Obstacle petroli"]');
+
+    if (!personatge || !obstacle) {
+        console.log("Personatge o obstacle no trobat");
+        return;
+    }
+
+    //Treiem el tamany de l'obstacle i del nostre personatge
+    const rectPersonatge = personatge.getBoundingClientRect();
+    const rectObstacle = obstacle.getBoundingClientRect();
+
+    // console.log("Personatge:", rectPersonatge, "Obstacle:", rectObstacle);
+
+    // Comprovem si es solapen
+    if (
+        rectPersonatge.top < rectObstacle.bottom &&
+        rectPersonatge.bottom > rectObstacle.top &&
+        rectPersonatge.left < rectObstacle.right &&
+        rectPersonatge.right > rectObstacle.left
+    ) {
+        pantalla_perdre();
+    }
+}
+
+
+function pantalla_perdre() {
+    alert("T'has xocat");
+}
+
+function crear_cor () {
+
+    let cor = document.createElement('img')   
+    vides.push(cor);
+    cor.className = "cor"
+    cor.src = '/img/vida.png';
+    cor.style.position = "absolute;"
+    container_vides.appendChild(cor);
+    console.log("crear cor esta activa")
+
+}
+
+function definir_vides () {
+
+    let vides = 3;
+
+
+}
+
+// Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
+setInterval(detectar_colisio, 10);
+
 // Inicialització
 crear_personatge();
 crear_obstacle();
+
 
 // Escolta de l'esdeveniment keydown
 document.addEventListener('keydown', moure_personatge);
