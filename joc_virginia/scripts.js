@@ -5,8 +5,10 @@ const scoreDisplay = document.getElementById('score');
 const lifeContainer = document.getElementById('life')
 
 
-const basketSpeed = 30; // Velocidad de movimiento de la cesta
-const objectSpeed = 6; // Velocidad de caída de los objetos
+const basketSpeed = 20; // Velocidad de movimiento de la cesta
+const objectSpeed = 5; // Velocidad de caída de los objetos
+let fallSpeedMultiplier = 1;
+let spawnInterval = 3000;
 let basketPosition = gameArea.clientWidth / 2; // Posiciona la cesta en la mitad de gamearea
 let score = 0;
 let life = 3;
@@ -25,7 +27,8 @@ function initializeGame() {
     imprimir_vides();
     basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
     document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
-    gameInterval = setInterval(createFallingObject, 1000);
+    startGameInterval();
+    
 }
 
 
@@ -37,6 +40,10 @@ function moveBasket(event) {
         basketPosition = Math.min(gameArea.clientWidth - basket.offsetWidth, basketPosition + basketSpeed);
     }
     basket.style.left = basketPosition + 'px';
+}
+
+function startGameInterval() {
+    gameInterval = setInterval(createFallingObject, spawnInterval);
 }
 
 // Crear un nuevo objeto en una posición aleatoria
@@ -123,6 +130,21 @@ function updateScore(imageName) {
     }
     scoreDisplay.textContent = 'Puntos: ' + score;
 
+    if (score % 50 === 0) {
+        increaseFallSpeed();
+        decreaseSpawnInterval();
+    }
+
+}
+
+function increaseFallSpeed() {
+    fallSpeedMultiplier += 0.5; // Incrementar el multiplicador para hacer que los objetos caigan más rápido
+}
+
+function decreaseSpawnInterval() {
+    spawnInterval = Math.max(1000, spawnInterval - 500); // Reducir el intervalo hasta un mínimo de 1000 ms
+    clearInterval(gameInterval); // Detener el intervalo actual
+    startGameInterval(); // Reiniciar con el nuevo intervalo reducido
 }
 
 // Actualizar el vidas según el tipo de objeto no recogido
