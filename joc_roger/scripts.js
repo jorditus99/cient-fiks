@@ -2,8 +2,35 @@ const imatge_fons = document.getElementById("image_container");
 let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
-let velocitat = 1;
+let velocitat = 10;
 let vides = [];
+
+function moure_img_principal() {
+    const imatges = document.querySelectorAll(".img_principal");
+    let posicioX = 0;
+
+    console.log("Moure imatge principal");
+
+    imatges.forEach((img, index) => {
+        img.style.position = "absolute";
+        img.style.left = posicioX + "px";
+        posicioX += img.width; // Posicionar la segona imatge just després de la primera
+    });
+
+    const moviment = setInterval(() => {
+        imatges.forEach((img) => {
+            let posicioActual = parseInt(img.style.left, 10);
+            posicioActual -= velocitat;
+            img.style.left = posicioActual + "px";
+
+            // Quan la imatge surt de la pantalla, la retornem al costat de l'altra
+            if (posicioActual <= -img.width) {
+                img.style.left = window.innerWidth + "px";
+            }
+        });
+    }, 10);
+}
+
 
 // Creació del personatge
 function crear_personatge() {
@@ -65,7 +92,7 @@ function moure_obstacle(img_petroli) {
         if (posicioX < -img_petroli.width) {
             posicioX = window.innerWidth;
         }
-    }, 5);
+    }, 10);
 }
 function detectar_colisio() {
     const personatge = document.getElementById("personatge");
@@ -121,6 +148,7 @@ function definir_vides () {
 setInterval(detectar_colisio, 10);
 
 // Inicialització
+moure_img_principal();
 crear_personatge();
 crear_obstacle();
 
