@@ -20,21 +20,20 @@ html,body {
 
 
 .image_container {
-    width: 200%; /* Amplada per encabir dues imatges */
-    height: 500px; /* Alçada desitjada */
-    overflow: hidden; /* Oculta l'excés d'imatge */
-    position: relative; /* Necessari per al posicionament absolut */
-    display: flex; /* Per alinear les imatges en línia */
+    width: 100%; /* Amplada del contenidor */
+    height: 500px;
+    overflow: hidden;
+    position: relative;
 }
 
-.image_container #img_principal {
-    width: 50%; /* Cada imatge ocupa el 50% per quedar duplicades */
+.img_principal {
+    width: 100%; /* Amplada completa per ocupar tot el contenidor */
     height: 100%;
-    animation: moure 10s linear infinite; /* Duració ajustada per fer el moviment suau */
+    position: absolute; /* Posició absoluta per moure-la amb `left` */
 }
 
 .imatge_personatge {
-    position: absolute;
+    position: absolute; 
     top: 0; 
     left: 0;
     width: 100px; /* Ajusta la mida per fer el personatge visible */
@@ -56,6 +55,52 @@ html,body {
 
     position: absolute;
     width: 100px;
+
+
+}
+.titol_punts {
+
+    position: absolute;
+    top: 60px; 
+    left: 350px; 
+    color: white; 
+    font-size: 2rem; 
+}
+
+.punts {
+    position: absolute;
+    top: 60px; 
+    left: 460px; 
+    color: white; 
+    font-size: 2rem; 
+}
+
+.vida {
+
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 90px;
+    left: 1380px;
+}
+
+.gota {
+
+    position: absolute;
+
+}
+
+.container_vides {
+
+    position: absolute;
+
+}
+
+.cor {
+
+    position: absolute;
+    width: 50px;
+    height: 50px;
 
 
 }
