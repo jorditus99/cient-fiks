@@ -8,7 +8,7 @@ const lifeContainer = document.getElementById('life')
 const basketSpeed = 20; // Velocidad de movimiento de la cesta
 const objectSpeed = 5; // Velocidad de caída de los objetos
 let fallSpeedMultiplier = 1;
-let spawnInterval = 3000;
+let spawnInterval = 2000;
 let basketPosition = gameArea.clientWidth / 2; // Posiciona la cesta en la mitad de gamearea
 let score = 0;
 let life = 3;
@@ -18,6 +18,8 @@ let vides = [];
 // Definir imágenes de objetos con nombres descriptivos
 const imagenes = {
     pez: '../img/img_virginia/Pixel-Art-Fish.png',
+    pezYellow:'../img/img_virginia/Pixel-Art-Fish-removebg-preview (2).png',
+    pezBlue:'../img/img_virginia/Pixel-Art-Fish-removebg.png',
     lata: '../img/img_virginia/lata.png',
     botella: '../img/img_virginia/plastic.png'
 };
