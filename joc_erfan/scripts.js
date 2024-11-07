@@ -170,7 +170,10 @@ function clickar_tecla (event) {
 
 }
 
-function 
+// function () {
+
+
+// }
 
 
 
