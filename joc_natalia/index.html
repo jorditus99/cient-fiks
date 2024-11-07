@@ -11,14 +11,14 @@
         <!-- <img class="imatge_joc" src="/img/img_natalia/grass_bg.png" > -->
 
         <div class="table-container" id="table-container">
-            <div id="score">Manivelas: 0/4</div>
+            <div id="score">Manetes: 0/4</div>
             <div id="life" class="life"></div>
             <table>
                 <!-- here is where the map generates -->
             </table>
         </div>
 
-        <button id = 'one' type="button" name="Click to Play" onClick = 'initializeGame();'>Jugar!</button>
+        <button id = 'one' type="button" name="Click to Play" onClick = 'loadPage();'>Jugar!</button>
     </div>
 
     <script>
@@ -30,23 +30,23 @@
             `#?....?###....#.........#.....#.#.......#`,
             `###.####.###.##.#########.###.###.#######`,
             `#...#.....#.....#.......#.#.............#`,
-            `#.###.###.#.###########.###########.#####`,
+            `#.#.#.###.#.###########.###########.#####`,
             `#...#.#.#.#.#..#...#..........#.........#`,
             `###.#.#.#......#.....#.########.#######.#`,
             `#...#.#.########...#.#........#.......#.#`,
             `#.#.#...#......#####.######.#.#.#####...#`,
             `#.#.###.#####...#.........#.#...#.#.#...#`,
             `#.#...#.....#.#.#.#######.#.#####.#.....#`,
-            `#.#########.#.#.#.......#.#.......#.##.##`,
+            `#.###.#####.#.#.#.......#.#.......#.##.##`,
             `#........#....#.####.######.#####...#...#`,
-            `#####.###########.........#.#...#####.###`,
+            `#####.#.#########.........#.#...#####.###`,
             `#.#...#...........###########.#.#.......#`,
             `#.###.#.######.##.#.....#.#...###.#######`,
             `#...#.#.#....#.#..#.#####.#.#.#.#.#.....#`,
             `###.###.#.####.#.##.#...#.#.#.#.#.#.###.#`,
             `#.......#......#.#..#.#.#...#.........#.#`,
             `#.#...#####.####.#.##.#.###.####.######.#`,
-            `#.#..........#........#........#.#......#`,
+            `#.#..............................#......#`,
             `################################!########`
         ];
 
@@ -57,6 +57,7 @@
         const scoreDisplay = document.getElementById('score');
         const lifeContainer = document.getElementById('life');
         const tableContainer = document.getElementById('table-container');
+        let isImmune = false;
         
         // Key states and counters
         let isOnKeyTile = false;
@@ -69,17 +70,13 @@
         let gameInterval;
         let vides = [];
 
-        function initializeGame() {
-            imprimir_vides();
-            loadPage();
-        }
-
         // DRAWING OF MAZE
         function loadPage() {
 
+            document.getElementById('one').style.display = 'none'; //Esconde el botón de 'Jugar!'
 
             let mover = document.createElement('div');
-            mover.style.left = '18%';
+            mover.style.left = '19.5%';
             mover.style.top = '15%';
             mover.setAttribute('id', 'player');
             mover.textContent = '@';
@@ -97,9 +94,9 @@
 
             // Initialize multiple enemies
             let enemies = [
-                { element: createEnemy(48, 37), direction: -1 },
-                { element: createEnemy(28, 66), direction: -1 },
-                { element: createEnemy(63, 79), direction: -1 }
+                { element: createEnemy(50, 37), direction: -1 },
+                { element: createEnemy(29, 66), direction: -1 },
+                { element: createEnemy(64, 79), direction: -1 }
             ];
 
             // Draw the maze
@@ -124,6 +121,7 @@
             }
 
             // Enemy movement function
+            // Update enemy movement to include collision check
             function moveEnemy(enemyObj) {
                 const enemy = enemyObj.element;
                 let enemyPosition = parseFloat(window.getComputedStyle(enemy).left);
@@ -151,6 +149,9 @@
                         enemyPosition = nextPosition;
                         enemy.style.left = `${enemyPosition}px`;
                     }
+
+                    // Check collision with player
+                    checkCollisionWithEnemies();
                 }, 30);
             }
 
@@ -171,9 +172,19 @@
                     case 'x':
                     case 'X':
                         if (isOnKeyTile && keyTile) {
+                            // Toggle key tile color
                             keyTile.style.backgroundColor = keyStates.get(keyTile) ? originalColor : 'blue';
                             keyStates.set(keyTile, !keyStates.get(keyTile));
-                            activatedKeyTiles += keyStates.get(keyTile) ? 1 : -1;
+
+                            // Update activated key tiles count and score display
+                            if (keyStates.get(keyTile)) {
+                                activatedKeyTiles++;
+                            } else {
+                                activatedKeyTiles--;
+                            }
+                            scoreDisplay.textContent = 'Manetes: ' + activatedKeyTiles + '/4';
+
+                            // Update win tile color if all keys are activated
                             let winTile = document.getElementById('win');
                             winTile.style.backgroundColor = [...keyStates.values()].every(Boolean) ? 'gold' : '';
                         }
@@ -194,6 +205,7 @@
                 }
 
                 detectKeyTile();
+                checkWinCollision();
             });
 
             // Detect if player is on a key tile
@@ -215,6 +227,77 @@
             // Initial detection
             detectKeyTile();
 
+
+            // Collision detection function
+            function checkCollisionWithEnemies() {
+                if (isImmune) return; // Exit if the player is currently immune
+
+                const playerRect = mover.getBoundingClientRect();
+
+                for (let enemyObj of enemies) {
+                    const enemyRect = enemyObj.element.getBoundingClientRect();
+
+                    // Check if player and enemy rectangles intersect
+                    if (playerRect.left < enemyRect.right && playerRect.right > enemyRect.left &&
+                        playerRect.top < enemyRect.bottom && playerRect.bottom > enemyRect.top) {
+                        
+                        // Collision detected
+                        perdre_vida();
+                        updateLifeStatus();
+                        console.log("Player hit an enemy! Lives left: ", life);
+
+                        // Activate immunity for 3 seconds
+                        isImmune = true;
+                        mover.classList.add("immune"); // Optional: visually indicate immunity (e.g., with a CSS effect)
+
+                        // Remove immunity after 3 seconds
+                        setTimeout(() => {
+                            isImmune = false;
+                            mover.classList.remove("immune"); // Optional: remove the visual indication
+                            console.log("Immunity ended");
+                        }, 3000);
+
+                        // Stop further checks to prevent multiple damage events
+                        break;
+                    }
+                }
+            }
+
+            // Check for collision with win tile when it's gold
+            function checkWinCollision() {
+                const playerRect = mover.getBoundingClientRect();
+                const winTile = document.getElementById("win");
+                const winTileRect = winTile.getBoundingClientRect();
+
+                // Check if the win tile is gold and player collides with it
+                if (winTile.style.backgroundColor === "gold" &&
+                    playerRect.left < winTileRect.right &&
+                    playerRect.right > winTileRect.left &&
+                    playerRect.top < winTileRect.bottom &&
+                    playerRect.bottom > winTileRect.top) {
+
+                    // Win condition is met
+                    alert("Felicitats! Has guanyat!");
+
+                    // Stop further gameplay
+                    endGame();
+                    location.reload(); // Or handle game reset logic here
+                }
+            }
+
+            // Function to end the game
+            function endGame() {
+                // Remove the event listener for player movement
+                window.removeEventListener("keydown", arguments.callee);
+
+                // Stop enemy movement (assuming they use setInterval for movement)
+                enemies.forEach((enemyObj) => {
+                    clearInterval(enemyObj.movementInterval);
+                });
+
+                // Optionally, add any additional logic to disable further interactions
+            }
+
             // Actualizar el puntaje y vidas según el tipo de objeto recogido
             function updateScore(imageName) {
                 if (imageName === 'lata' || imageName === 'botella') {
@@ -229,15 +312,14 @@
 
             }
 
-            // Actualizar el vidas según el tipo de objeto no recogido
-            function updateLife(imageName) {
-                if (imageName === 'lata' || imageName === 'botella') {
-                    life = life - 1;
-                    perdre_vida();
-                    checkLives();
-                    console.log(life);
+            // Update life and check if game over
+            function updateLifeStatus() {
+                life -= 1;
+                if (life <= 0) {
+                    alert("Oh no, has perdut!");
+                    // Optionally reload or reset the game
+                    location.reload(); // Or handle game reset logic here
                 }
-
             }
 
             function crear_cor(num) {
@@ -246,11 +328,14 @@
                 cor.className = "cor";
                 cor.id = num + 1;
                 cor.src = '../img/vida.png';
-                cor.style.position = "absolute"; // Ensure absolute positioning
-
-                // Add horizontal offset to position hearts
+                
+                // Add position and spacing for hearts
+                cor.style.position = "relative"; // Position relative to lifeContainer
+                cor.style.left = `${num * 0}px`; // Adjust '30px' as needed to add space between hearts
+                
+                // Append to life container
                 lifeContainer.appendChild(cor);
-                tableContainer.appendChild(lifeContainer);
+                tableContainer.appendChild(lifeContainer); // Ensure lifeContainer is appended only once to tableContainer
             }
 
             function imprimir_vides() {
@@ -258,7 +343,6 @@
                     crear_cor(i);
                 }
             }
-
 
             function perdre_vida() {
                 if (vides.length > 0) {

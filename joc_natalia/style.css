@@ -28,6 +28,21 @@ html,body {
     position: relative; /* Make sure that child elements can be absolutely positioned inside */
 }
 
+#one {
+    position: absolute;   /* Use absolute positioning */
+    top: 50%;             /* Position it 50% from the top of the screen */
+    left: 50%;            /* Position it 50% from the left of the screen */
+    transform: translate(-50%, -50%); /* Adjust the position to perfectly center */
+    padding: 10px 20px;   /* Add some padding for size */
+    font-size: 18px;      /* Set font size */
+    background-color: #4CAF50;  /* Set a background color */
+    color: white;         /* Set text color */
+    border: none;         /* Remove border */
+    border-radius: 5px;   /* Optional: round the corners */
+    cursor: pointer;      /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
 .fons {
 
     display: flex;
@@ -128,7 +143,7 @@ td {
     font-family: monospace;
     position: absolute;
     top: 4%;
-    right: 83%;
+    right: 75%;
     color: rgb(255, 255, 255);
     font-size: 24px;
     z-index: 10; /* Ensure it's above the table */
@@ -137,11 +152,24 @@ td {
 #life {
     position: absolute;
     top: 2%;
-    right: 15%;
+    right: 10%;
     z-index: 10; /* Ensure it's above the table */
 }
 
 .cor {
     width: 50px;
     height: 50px;
+}
+
+/* CHARACTER APPEARANCE STUFF */
+
+/* Define a blinking animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }   /* Fully visible at start and end of each cycle */
+    50% { opacity: 0.0; }      /* Semi-transparent at the middle of each cycle */
+}
+
+/* Class to apply during immunity */
+#player.immune {
+    animation: blink 0.5s infinite;  /* Blinks every 0.5 seconds */
 }
