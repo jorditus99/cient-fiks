@@ -2,6 +2,8 @@ let gotes = [];
 let vides = [];
 let lletres = [];
 let lletres_no_potables = [];
+let punts = document.getElementById("punts");
+let puntuacio = 0;
 
 
 
@@ -67,7 +69,7 @@ function crear_no_potable() {
 
 function lletra_random() {
 
-    const lletres = "QWERTYUIOPASDFGHJKLÑÇXCVBNM"
+    const lletres = "QWERYUIOPASDFGJKÑÇXCVBNM"
     return lletres.charAt(Math.floor(Math.random() *  lletres.length));
 
 }
@@ -80,16 +82,18 @@ function joc() {
 
     let gota_interval = setInterval(() => {
         crear_gota();
-    },5000) 
+    },500) 
 
 
     let interval = setInterval(() => {
         moure_gota();
         moure_lletra();
         colisio();
-    }, 100)
+    }, 16)
 
     document.addEventListener("keydown", clickar_tecla);
+
+    joc_perdut();
 }
 
 
@@ -140,7 +144,11 @@ function perdre_vida() {
         let vida = vides.pop();
         let corActiu = document.getElementById(vida.id);
         container_vides.removeChild(corActiu);
+
+        joc_perdut();
     } 
+    
+    
 }
 
 
@@ -166,15 +174,46 @@ function imprimir_vides() {
 
 function clickar_tecla (event) {
 
-    console.log("Tecla presionada:", event.key);
+    let tecla = event.key;
+    console.log("Tecla presionada:", tecla);
+    verificar_encert(tecla);
+    
+    
 
 }
 
-// function () {
+function verificar_encert (tecla) {
+
+    for (let i = gotes.length - 1; i >= 0; i--) {
+        let container_gota = gotes[i];
+        let lletra = container_gota.querySelector('.lletra_gota');
+
+        if (lletra && lletra.innerText === tecla.toUpperCase()) {
+            container_gota.remove();
+            gotes.splice(i, 1);
+            console.log("Encert! Gota eliminada amb lletra:", tecla);
+            sumar_punts();
+            break;
+        }
+    }
+}
+
+function sumar_punts () {
+
+    puntuacio += 5;
+    punts.innerText = puntuacio; // Actualitza el text a l'element HTML
+    console.log("Puntuació actual:", puntuacio);
+
+}
+
+function joc_perdut () {
+
+    if (vides.length === 0) {
+
+        alert("Molt bé! Has aconseguit" + " " + puntuacio + " " + "punts" );
+    }
 
 
-// }
-
-
+}
 
 joc();
