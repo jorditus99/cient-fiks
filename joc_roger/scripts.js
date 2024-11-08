@@ -1,7 +1,7 @@
 const imatge_fons = document.getElementById("image_container");
 let fons = document.getElementById("fons");
 let posicioTop = 0;
-let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png", ""];
+let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
 let velocitat = 10;
 let vides = [];
 
@@ -11,7 +11,7 @@ function moure_img_principal() {
 
     console.log("Moure imatge principal");
 
-    imatges.forEach((img, index) => {
+    imatges.forEach((img) => {
         img.style.position = "absolute";
         img.style.left = posicioX + "px";
         posicioX += img.width; // Posicionar la segona imatge just després de la primera
@@ -66,37 +66,56 @@ function moure_personatge(event) {
 
 // Creació dels obstacles
 function crear_obstacle() {
-    let img_petroli = document.createElement('img');
-    img_petroli.src = "../img/img_roger/petroli.png";
-    img_petroli.alt = "Obstacle petroli";
-    img_petroli.style.position = "absolute"; 
-    // img_petroli.style.top = "50px"; 
-    img_petroli.style.left = "1000px"; 
-    img_petroli.style.width = "100px"; 
+    // Seleccionar una imatge aleatòria de l'array obstacles
+    let imgSrc = obstacles[Math.floor(Math.random() * obstacles.length)];
+    
+    // Crear l'element img per l'obstacle
+    let obstacle = document.createElement('img');
+    obstacle.src = imgSrc;
+    obstacle.alt = "Obstacle";
+    obstacle.style.position = "absolute"; 
+    obstacle.style.left = "2000px"; 
+    obstacle.style.width = "100px"; 
 
-    imatge_fons.appendChild(img_petroli);
+    // Valors possibles per a la posició `top`
+    const posicionsTop = [0, 210, 420];
+    
+    // Seleccionar una posició aleatòria del `top`
+    obstacle.style.top = posicionsTop[Math.floor(Math.random() * posicionsTop.length)] + "px";
 
-    moure_obstacle(img_petroli);
+    // Afegir l'obstacle al contenidor de fons
+    imatge_fons.appendChild(obstacle);
+  
+    // Cridar la funció per moure l'obstacle
+    moure_obstacle(obstacle);
+
+    // Eliminar l'obstacle quan sigui necessari
+    eliminar_obstacle(obstacle);
 }
 
+ 
+  
+  // Executar crear_obstacle cada 3 segons
+  setInterval(crear_obstacle, 3000);
 
-function moure_obstacle(img_petroli) {
-    let posicioX = parseInt(img_petroli.style.left); 
+
+function moure_obstacle(obstacle) {
+    let posicioX = parseInt(obstacle.style.left); 
 
     // Moure la imatge cada 10 ms
     const moviment = setInterval(() => {
         posicioX -= velocitat;
-        img_petroli.style.left = posicioX + 'px';
+        obstacle.style.left = posicioX + 'px';
 
         // Quan la imatge surt de la pantalla, la tornem a l'inici
-        if (posicioX < -img_petroli.width) {
+        if (posicioX < -obstacle.width) {
             posicioX = window.innerWidth;
         }
     }, 10);
 }
 function detectar_colisio() {
     const personatge = document.getElementById("personatge");
-    const obstacle = imatge_fons.querySelector('img[alt="Obstacle petroli"]');
+    const obstacle = imatge_fons.querySelector('img[alt="Obstacle"]');
 
     if (!personatge || !obstacle) {
         console.log("Personatge o obstacle no trobat");
@@ -116,10 +135,21 @@ function detectar_colisio() {
         rectPersonatge.left < rectObstacle.right &&
         rectPersonatge.right > rectObstacle.left
     ) {
+
         pantalla_perdre();
     }
 }
 
+function eliminar_obstacle(obstacle) {
+
+    console.log("Dins d'eliminar");
+    let positon = parseInt(obstacle.style.left);
+    if (positon <= -400 ) {
+        console.log("obstacle tret");
+        obstacle.remove();
+    }
+
+}
 
 function pantalla_perdre() {
     alert("T'has xocat");
