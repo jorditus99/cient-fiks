@@ -6,6 +6,7 @@ const camion1 = document.getElementById("camion1");
 const valvula_inicial = document.getElementById("valvula_inicial")
 const valvula_final = document.getElementById("valvula_final")
 
+
 const recta_horizontal = document.getElementById("recta_horizontal")
 const recta_vertical = document.getElementById("recta_vertical")
 const curva_arriba_drcha = document.getElementById("curva_arriba_drcha")
@@ -48,7 +49,7 @@ const nivel1= [
     fuente, valvula_inicial, " ", " ", " ", " ", " ",
     " ", " ", " ", camion1, " ", " ", camion1,
     " ", " ", " ", " ", " ", " ", cole,
-    " ", " ", " ", " ", " ", " ", " ",
+    " ", " ", " ", " ", " ", valvula_final , camion1,
     " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ",
@@ -59,7 +60,10 @@ const nivel1= [
 const tablero = document.getElementById("tablero");
 
 // Array de obstáculos (puedes añadir más elementos aquí como "camion1", "fuente", etc.)
-const obstaculos = ["camion1", "fuente"];
+const obstaculos = ["camion1", "fuente", ];
+
+// Array para almacenar las posiciones donde se colocan las tuberías
+let posicionesTuberias = [];
 
 // Función para crear el tablero
 function crearTablero() {
@@ -121,6 +125,17 @@ function crearTablero() {
             
                 // Si la conexión es válida y la celda está vacía, agrega el elemento arrastrado al div
                 div.appendChild(elementoArrastrado);
+                
+                // Guardar la posición de la nueva tubería en el array
+                const fila = div.getAttribute('data-fila');
+                const columna = div.getAttribute('data-columna');
+                posicionesTuberias.push({ fila, columna });
+                console.log("Posiciones de las tuberías: ", posicionesTuberias);
+                
+                // Verificar si se ha colocado la tubería en la celda de victoria
+                if (div === document.querySelector(`[data-fila="6"][data-columna="5"]`)) {
+                    alert("¡Has ganado! Has conectado el camino correctamente.");
+                }
             });
             
         }
@@ -188,8 +203,12 @@ function hayConexionHaciaObstaculo(celdaDestino, tuberiaNueva) {
         }
     }
 
+    
+
     return false; // Si no hay conexiones hacia un obstáculo, permite el drop
 }
+
+
 
 // Llama a la función para crear el tablero
 crearTablero();
