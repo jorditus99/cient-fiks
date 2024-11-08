@@ -89,33 +89,40 @@ function crearTablero() {
             div.addEventListener('drop', e => {
                 e.preventDefault();
                 console.log('Drop');
-                
+            
+                // Verificar si la celda ya tiene una tubería
+                if (div.hasChildNodes()) {
+                    alert("¡Esta celda ya tiene una tubería! No se puede colocar otra.");
+                    return;
+                }
+            
                 // Obtén el elemento arrastrado desde el evento
                 const id = e.dataTransfer.getData('text');
                 const elementoArrastrado = document.getElementById(id).cloneNode(true);
-
+            
                 // Verificar que la tubería no se conecte a un obstáculo
                 if (hayConexionHaciaObstaculo(div, elementoArrastrado)) {
                     alert("¡No se puede colocar esta tubería aquí porque se conecta a un obstáculo!");
                     return;
                 }
-
+            
                 // Clona los atributos data de la tubería
                 const direcciones = ["izquierda", "derecha", "arriba", "abajo"];
                 direcciones.forEach(direccion => {
                     elementoArrastrado.setAttribute(`data-${direccion}`, document.getElementById(id).getAttribute(`data-${direccion}`));
                 });
-
+            
                 // Verificar si hay una tubería en una de las celdas adyacentes
                 const esConexionValida = validarConexion(div, elementoArrastrado);
                 if (!esConexionValida) {
                     alert("¡Conexión no válida! No se puede colocar aquí.");
                     return;
                 }
-
-                // Si la conexión es válida, agrega el elemento arrastrado al div
+            
+                // Si la conexión es válida y la celda está vacía, agrega el elemento arrastrado al div
                 div.appendChild(elementoArrastrado);
             });
+            
         }
 
         // Agrega el div al contenedor del tablero
@@ -187,20 +194,4 @@ function hayConexionHaciaObstaculo(celdaDestino, tuberiaNueva) {
 // Llama a la función para crear el tablero
 crearTablero();
 
-// Añadir los eventos a los tubos que se puedan poner en el tablero
-const tubo_recto = document.getElementById("recta_horizontal");
-tubo_recto.setAttribute("draggable", "true");
 
-// Eventos para el tubo cuando se arrastra
-tubo_recto.addEventListener('dragstart', e => {
-    console.log('Drag Start');
-    e.dataTransfer.setData('text', e.target.id);  // Guarda el ID del tubo
-});
-
-tubo_recto.addEventListener('dragend', e => {
-    console.log('Drag End');
-});
-
-tubo_recto.addEventListener('drag', e => {
-    console.log('Drag');
-});
