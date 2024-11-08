@@ -5,6 +5,11 @@ let lletres_no_potables = [];
 let punts = document.getElementById("punts");
 let puntuacio = 0;
 
+let aparicio_gotes = 2000;
+let increment_aparicio_gotes = 500;
+
+let gota_interval = 0;
+
 
 
 //Creació de gota i els seus parametres
@@ -80,9 +85,9 @@ function joc() {
 
     let positon = 0;
 
-    let gota_interval = setInterval(() => {
+    gota_interval = setInterval(() => {
         crear_gota();
-    },500) 
+    },2000) 
 
 
     let interval = setInterval(() => {
@@ -117,7 +122,7 @@ function moure_lletra() {
 //Eliminar gota i lletra al xocar
 
 function colisio() {
-    for (let i = 0; i < gotes.length; i++) {
+    for (let i = gotes.length - 1; i >= 0; i--) {
         let container_gota = gotes[i];
         let position = parseInt(container_gota.style.top);
 
@@ -199,6 +204,36 @@ function sumar_punts () {
 
     puntuacio += 5;
     punts.innerText = puntuacio;
+
+    // if (puntuacio === 50) {
+
+    //     clearInterval(gota_interval);
+
+    //     gota_interval = setInterval(() => {
+    //         crear_gota();
+    //     },1500) 
+
+    // } else if (puntuacio === 100){
+
+    //     clearInterval(gota_interval);
+
+    //     gota_interval = setInterval(() => {
+    //         crear_gota();
+    //     },1000) 
+
+    // } else if (puntuacio === 150 ) {
+
+    //     clearInterval(gota_interval);
+
+    //     gota_interval = setInterval(() => {
+    //         crear_gota();
+    //     },500) 
+
+    // }   
+
+
+
+
    
 }
 
