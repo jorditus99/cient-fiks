@@ -178,20 +178,17 @@ function clickar_tecla (event) {
     console.log("Tecla presionada:", tecla);
     verificar_encert(tecla);
     
-    
-
 }
 
 function verificar_encert (tecla) {
 
-    for (let i = gotes.length - 1; i >= 0; i--) {
+    for (let i = 0; i < gotes.length; i++) {
         let container_gota = gotes[i];
         let lletra = container_gota.querySelector('.lletra_gota');
 
         if (lletra && lletra.innerText === tecla.toUpperCase()) {
             container_gota.remove();
             gotes.splice(i, 1);
-            console.log("Encert! Gota eliminada amb lletra:", tecla);
             sumar_punts();
             break;
         }
@@ -201,9 +198,8 @@ function verificar_encert (tecla) {
 function sumar_punts () {
 
     puntuacio += 5;
-    punts.innerText = puntuacio; // Actualitza el text a l'element HTML
-    console.log("Puntuació actual:", puntuacio);
-
+    punts.innerText = puntuacio;
+   
 }
 
 function joc_perdut () {
