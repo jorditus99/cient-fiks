@@ -117,7 +117,7 @@ function moure_lletra() {
 //Eliminar gota i lletra al xocar
 
 function colisio() {
-    for (let i = gotes.length - 1; i >= 0; i--) {
+    for (let i = 0; i < gotes.length; i++) {
         let container_gota = gotes[i];
         let position = parseInt(container_gota.style.top);
 
