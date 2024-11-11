@@ -174,13 +174,18 @@ function definir_vides () {
 
 }
 
-// Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
-setInterval(detectar_colisio, 10);
-
-// Inicialització
-moure_img_principal();
-crear_personatge();
-crear_obstacle();
+function iniciar_joc() {
+    // Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
+    setInterval(detectar_colisio, 10);
+  
+    // Inicialització
+    moure_img_principal();
+    crear_personatge();
+    crear_obstacle();
+  }
+  
+  // Per iniciar el joc, només caldria cridar
+  iniciar_joc();
 
 
 // Escolta de l'esdeveniment keydown
