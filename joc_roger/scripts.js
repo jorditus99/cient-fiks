@@ -2,14 +2,14 @@ const imatge_fons = document.getElementById("image_container");
 let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
-let velocitat = 10;
+let velocitat = 5;
 let vides = [];
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
     let posicioX = 0;
 
-    console.log("Moure imatge principal");
+    // console.log("Moure imatge principal");
 
     imatges.forEach((img) => {
         img.style.position = "absolute";
@@ -34,7 +34,7 @@ function moure_img_principal() {
 
 // Creació del personatge
 function crear_personatge() {
-    console.log("Personatge creat");
+    // console.log("Personatge creat");
     const personatge = document.createElement('img');
     personatge.src = "../img/shark.gif";
     personatge.alt = "Personatge";
@@ -43,6 +43,7 @@ function crear_personatge() {
     personatge.style.position = "absolute";
     personatge.style.top = posicioTop + "px";
     personatge.style.left = "50px"; // Posició inicial a l'esquerra
+    personatge.style.border = "1px solid white";
     imatge_fons.appendChild(personatge);
 }
 // Funció per moure el personatge
@@ -76,6 +77,7 @@ function crear_obstacle() {
     obstacle.style.position = "absolute"; 
     obstacle.style.left = "2000px"; 
     obstacle.style.width = "100px"; 
+    obstacle.style.border = "1px solid white";
 
     // Valors possibles per a la posició `top`
     const posicionsTop = [0, 210, 420];
@@ -87,16 +89,16 @@ function crear_obstacle() {
     imatge_fons.appendChild(obstacle);
   
     // Cridar la funció per moure l'obstacle
-    moure_obstacle(obstacle);+
+    moure_obstacle(obstacle);
 
     // Eliminar l'obstacle quan sigui necessari
-    eliminar_obstacle(obstacle);
+    setInterval(() => eliminar_obstacle(obstacle), 10);
 }
 
  
   
   // Executar crear_obstacle cada 3 segons
-  setInterval(crear_obstacle, 3000);
+
 
 
 function moure_obstacle(obstacle) {
@@ -118,7 +120,7 @@ function detectar_colisio() {
     const obstacle = imatge_fons.querySelector('img[alt="Obstacle"]');
 
     if (!personatge || !obstacle) {
-        console.log("Personatge o obstacle no trobat");
+        // console.log("Personatge o obstacle no trobat");
         return;
     }
 
@@ -142,17 +144,19 @@ function detectar_colisio() {
 
 function eliminar_obstacle(obstacle) {
 
-    console.log("Dins d'eliminar");
+    // console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
     if (positon <= 0 ) {
-        console.log("obstacle tret");
+        // console.log("obstacle tret");
         obstacle.remove();
     }
 
 }
 
 function pantalla_perdre() {
-    alert("T'has xocat");
+    // alert("T'has xocat");
+    console.log("T'has xocat");
+    velocitat = 0;
 }
 
 function crear_cor () {
@@ -163,7 +167,7 @@ function crear_cor () {
     cor.src = '/img/vida.png';
     cor.style.position = "absolute;"
     container_vides.appendChild(cor);
-    console.log("crear cor esta activa")
+    // console.log("crear cor esta activa")
 
 }
 
@@ -175,13 +179,13 @@ function definir_vides () {
 }
 
 function iniciar_joc() {
-    // Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
-    setInterval(detectar_colisio, 10);
+ 
+    setInterval(detectar_colisio, 30);
   
     // Inicialització
     moure_img_principal();
     crear_personatge();
-    crear_obstacle();
+    setInterval(crear_obstacle, 1000);
   }
   
   // Per iniciar el joc, només caldria cridar
