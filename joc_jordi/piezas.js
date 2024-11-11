@@ -14,7 +14,7 @@ const curva_abajo_drcha = document.getElementById("curva_abajo_drcha")
 const curva_iz_abajo = document.getElementById("curva_iz_abajo")
 const curva_iz_arriba = document.getElementById("curva_iz_arriba")
 
-const ed1 = document.getElementById("ed1");
+
 const ed3 = document.getElementById("ed3");
 const ed4 = document.getElementById("ed4");
 const ed5 = document.getElementById("ed5");
@@ -58,17 +58,18 @@ dragables(tubos);
 
 
 // establecer las posiciones de cada nivel
-const nivel1= [
-    
-    fuente, valvula_inicial, " ", " ", " ", " ", " ",
-    " ", " ", " ", camion1, " ", " ", camion1,
-    " ", " ", " ", " ", " ", " ", cole,
-    " ", " ", " ", " ", " ", " " , camion1,
-    " ", " ", " ", " ", " ", " ", " ",
-    " ", " ", " ", " ", " ", " ", " ",
-    " ", " ", " ", " ", " ", " ", " ",
-
+const nivel1 = [
+    valvula_inicial, " ", ed4, " ", camion1, ed5, " ",
+    " ", " ", " ", " ", ed6, " ", " ",
+    " ", camion1, " ", " ", " ", " ", " ",
+    " ", " ", " ",ed7, " ", " ", " ",
+    " ", " ", " ", " ", ed3, ed3, " ",
+    " ", " ", escabadora1, " ", " ", " ", cole,
+    " ", " ", " ", " ", " ", escabadora3, " "
 ];
+
+
+
  
 // Selecciona el contenedor del tablero en el HTML
 const tablero = document.getElementById("tablero");
@@ -125,7 +126,7 @@ function crearTablero() {
                 }
             
                 // Verificar si la celda es la celda de victoria y si el elemento arrastrado es una tubería recta
-                const esCasillaVictoria = div === document.querySelector(`[data-fila="2"][data-columna="5"]`);
+                const esCasillaVictoria = div === document.querySelector(`[data-fila="5"][data-columna="5"]`);
                 const esTuberiaRecta = (id === "recta_horizontal" || id === "recta_vertical");
             
                 if (esCasillaVictoria && !esTuberiaRecta) {
