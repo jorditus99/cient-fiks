@@ -87,7 +87,7 @@ function crear_obstacle() {
     imatge_fons.appendChild(obstacle);
   
     // Cridar la funció per moure l'obstacle
-    moure_obstacle(obstacle);
+    moure_obstacle(obstacle);+
 
     // Eliminar l'obstacle quan sigui necessari
     eliminar_obstacle(obstacle);
@@ -144,7 +144,7 @@ function eliminar_obstacle(obstacle) {
 
     console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
-    if (positon <= -400 ) {
+    if (positon <= 0 ) {
         console.log("obstacle tret");
         obstacle.remove();
     }
