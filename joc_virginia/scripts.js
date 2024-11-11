@@ -21,7 +21,9 @@ const imagenes = {
     pezYellow:'../img/img_virginia/Pixel-Art-Fish-removebg-preview (2).png',
     pezBlue:'../img/img_virginia/Pixel-Art-Fish-removebg.png',
     lata: '../img/img_virginia/lata.png',
-    botella: '../img/img_virginia/plastic.png'
+    botella: '../img/img_virginia/plastic.png',
+    bolsa:'../img/img_virginia/bolsa-ajustada-removebg-preview.png',
+    jellifish: '../img/img_virginia/jellifish-removebg-preview.png'
 };
 
 // Inicializar el juego
@@ -122,9 +124,9 @@ function objectReachedBottom(object) {
 
 // Actualizar el puntaje y vidas según el tipo de objeto recogido
 function updateScore(imageName) {
-    if (imageName === 'lata' || imageName === 'botella') {
+    if (imageName === 'lata' || imageName === 'botella'|| imageName === 'bolsa') {
         score += 10;
-    } else if (imageName === 'pez' || imageName === 'pezYellow'|| imageName === 'pezBlue') {
+    } else if (imageName === 'pez' || imageName === 'pezYellow'|| imageName === 'pezBlue'|| imageName === 'jellifish') {
         life = life - 1;
         perdre_vida();
         checkLives();
@@ -151,7 +153,7 @@ function decreaseSpawnInterval() {
 
 // Actualizar el vidas según el tipo de objeto no recogido
 function updateLife(imageName) {
-    if (imageName === 'lata' || imageName === 'botella') {
+    if (imageName === 'lata' || imageName === 'botella'|| imageName === 'bolsa') {
         life = life - 1;
         perdre_vida();
         checkLives();
