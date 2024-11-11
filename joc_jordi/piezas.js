@@ -14,6 +14,20 @@ const curva_abajo_drcha = document.getElementById("curva_abajo_drcha")
 const curva_iz_abajo = document.getElementById("curva_iz_abajo")
 const curva_iz_arriba = document.getElementById("curva_iz_arriba")
 
+const ed1 = document.getElementById("ed1");
+const ed3 = document.getElementById("ed3");
+const ed4 = document.getElementById("ed4");
+const ed5 = document.getElementById("ed5");
+const ed6 = document.getElementById("ed6");
+const ed7 = document.getElementById("ed7");
+const ed8 = document.getElementById("ed8");
+const ed9 = document.getElementById("ed9");
+
+const escabadora1 = document.getElementById("escabadora1");
+const escabadora2 = document.getElementById("escabadora2");
+const escabadora3 = document.getElementById("escabadora3");
+
+
 // array para las cosas dragables
 const tubos= [
     recta_horizontal, recta_vertical, curva_abajo_drcha,
@@ -49,7 +63,7 @@ const nivel1= [
     fuente, valvula_inicial, " ", " ", " ", " ", " ",
     " ", " ", " ", camion1, " ", " ", camion1,
     " ", " ", " ", " ", " ", " ", cole,
-    " ", " ", " ", " ", " ", valvula_final , camion1,
+    " ", " ", " ", " ", " ", " " , camion1,
     " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ",
@@ -110,6 +124,15 @@ function crearTablero() {
                     return;
                 }
             
+                // Verificar si la celda es la celda de victoria y si el elemento arrastrado es una tubería recta
+                const esCasillaVictoria = div === document.querySelector(`[data-fila="2"][data-columna="5"]`);
+                const esTuberiaRecta = (id === "recta_horizontal" || id === "recta_vertical");
+            
+                if (esCasillaVictoria && !esTuberiaRecta) {
+                    alert("¡Solo se puede colocar una tubería recta en la celda de victoria!");
+                    return;
+                }
+            
                 // Clona los atributos data de la tubería
                 const direcciones = ["izquierda", "derecha", "arriba", "abajo"];
                 direcciones.forEach(direccion => {
@@ -131,12 +154,13 @@ function crearTablero() {
                 const columna = div.getAttribute('data-columna');
                 posicionesTuberias.push({ fila, columna });
                 console.log("Posiciones de las tuberías: ", posicionesTuberias);
-                
+            
                 // Verificar si se ha colocado la tubería en la celda de victoria
-                if (div === document.querySelector(`[data-fila="6"][data-columna="5"]`)) {
+                if (esCasillaVictoria) {
                     alert("¡Has ganado! Has conectado el camino correctamente.");
                 }
             });
+            
             
         }
 

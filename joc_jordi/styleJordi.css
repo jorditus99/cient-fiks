@@ -1,5 +1,5 @@
 html, body {
-    background-image: url(/joc_jordi/img_jordi/river_night\ 3.png);
+    background-image: url(./img_jordi/river_night\ 3\ \(1\).jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -17,7 +17,7 @@ html, body {
     display: grid;
     width: 20vw; 
     height: 81vh; 
-    background-color: lightgreen; 
+    background-color: rgba(0, 0, 0, 0.3) ; 
     margin: 35px;
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: repeat(7,1fr);
@@ -34,11 +34,18 @@ html, body {
 .tablero {
     width: 40vw; /* 70% del ancho de la pantalla */
     height: 40vw; /* Ocupa el 100% de la altura del contenedor */
-    background-color: rgba(255, 255, 255, 0.78);
+    background-color: rgba(0, 0, 0, 0.3) ;
+    
+
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 columnas de tamaño flexible */
     grid-template-rows: repeat(7, 1fr);   /* 7 filas de tamaño flexible */
-    gap: 0px; /* Espacio entre los elementos de la cuadrícula */
+    gap: 1px; /* Espacio entre los elementos de la cuadrícula */
+}
+
+.tablero > div {
+    
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .tablero div {
@@ -46,7 +53,7 @@ html, body {
     height: 100%; /* Ocupa todo el alto del grid */
     min-width: 100px; /* Ancho mínimo para los divs */
     min-height: 100px; /* Alto mínimo para los divs */
-    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho y alto total */
+    
 }
 
 .tablero div img {
