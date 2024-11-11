@@ -124,7 +124,7 @@ function objectReachedBottom(object) {
 function updateScore(imageName) {
     if (imageName === 'lata' || imageName === 'botella') {
         score += 10;
-    } else if (imageName === 'pez') {
+    } else if (imageName === 'pez' || imageName === 'pezYellow'|| imageName === 'pezBlue') {
         life = life - 1;
         perdre_vida();
         checkLives();
