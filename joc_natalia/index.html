@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +14,8 @@
 
         <div class="table-container" id="table-container">
             <div id="score">Manetes: 0/4</div>
+            <div id="timer">Temps: 4:00</div>
+            <div id="points">Punts: 240</div>
             <div id="life" class="life"></div>
             <table>
                 <!-- here is where the map generates -->
@@ -25,28 +29,28 @@
         // Maze definition
         let maze = [
             `#_#######################################`,
-            `#.#.....?..#........#.....#.......#.....#`,
-            `#.####....?####.#####.###.###.#.#######.#`,
-            `#?....?###....#.........#.....#.#.......#`,
+            `#.#.....?..#........#.....#..?.#..#.....#`,
+            `#.#####....####.#########.##...#.######.#`,
+            `#.............#.........#......#........#`,
             `###.####.###.##.#########.###.###.#######`,
-            `#...#.....#.....#.......#.#.............#`,
-            `#.#.#.###.#.###########.###########.#####`,
-            `#...#.#.#.#.#..#...#..........#.........#`,
-            `###.#.#.#......#.....#.########.#######.#`,
-            `#...#.#.########...#.#........#.......#.#`,
-            `#.#.#...#......#####.######.#.#.#####...#`,
-            `#.#.###.#####...#.........#.#...#.#.#...#`,
-            `#.#...#.....#.#.#.#######.#.#####.#.....#`,
-            `#.###.#####.#.#.#.......#.#.......#.##.##`,
-            `#........#....#.####.######.#####...#...#`,
-            `#####.#.#########.........#.#...#####.###`,
-            `#.#...#...........###########.#.#.......#`,
-            `#.###.#.######.##.#.....#.#...###.#######`,
-            `#...#.#.#....#.#..#.#####.#.#.#.#.#.....#`,
-            `###.###.#.####.#.##.#...#.#.#.#.#.#.###.#`,
-            `#.......#......#.#..#.#.#...#.........#.#`,
-            `#.#...#####.####.#.##.#.###.####.######.#`,
-            `#.#..............................#......#`,
+            `#.#...#.........#.......#.#.............#`,
+            `#.#.#.####.#########.##.###########.#####`,
+            `#.#.#......#.........#........#.........#`,
+            `#.#.######.###.##.##.#.########.#######.#`,
+            `#......#.#.....#...#.#........#.......#.#`,
+            `#.##.#.#.#.#.#.#?....######.#.#.#####...#`,
+            `#.#..#.#.###.#.#...#......#.#...#.#.#..?#`,
+            `#.#..#.#.....#.#####.####.#.#####.#.....#`,
+            `#.####.#.#####...#......#.#.......#.##.##`,
+            `#........#...#####.########.#####...#...#`,
+            `#####.######..........#...#.#...#####.###`,
+            `#.#...#........##.#######.###.#.#.......#`,
+            `#.###.#.######.#..#.....#.#...###.#######`,
+            `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
+            `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
+            `#.......#......#.#.##.#.#...#.........#.#`,
+            `#.#...#####.####.#..#.#.###.####.######.#`,
+            `#.#.?.......#.........#..........#......#`,
             `################################!########`
         ];
 
@@ -58,6 +62,12 @@
         const lifeContainer = document.getElementById('life');
         const tableContainer = document.getElementById('table-container');
         let isImmune = false;
+        let timeRemaining = 240; // 4 minutes in seconds
+        let points = timeRemaining; // Points equal to the countdown time initially
+        const timerDisplay = document.getElementById('timer');
+        const pointsDisplay = document.getElementById('points');
+
+
         
         // Key states and counters
         let isOnKeyTile = false;
@@ -70,10 +80,47 @@
         let gameInterval;
         let vides = [];
 
+        function startCountdownTimer() {
+                pointsInterval = setInterval(() => {
+                    // Decrease time and points by 1 each second
+                    timeRemaining -= 1;
+                    points = timeRemaining;
+                    
+                    // Update the timer and points displays
+                    updateTimerDisplay(timeRemaining);
+                    pointsDisplay.textContent = 'Punts: ' + points;
+
+                    // Check if time has run out
+                    if (timeRemaining <= 0) {
+                        clearInterval(pointsInterval);
+                        points = 0;
+                        pointsDisplay.textContent = 'Punts: ' + points;
+                        timerDisplay.textContent = 'Temps: 0:00';
+
+                        // Optional: End game if time runs out
+                        alert("Oh no, s'ha acabat el temps!");
+                        location.reload(); // Restart the game or implement a custom end screen
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timerDisplay.textContent = `Temps: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+
         // DRAWING OF MAZE
         function loadPage() {
 
             document.getElementById('one').style.display = 'none'; //Esconde el botón de 'Jugar!'
+
+            // Set initial points and start the countdown timer
+            points = 240; // 4 minutes in seconds
+            timeRemaining = 240;
+            pointsDisplay.textContent = 'Punts: ' + points;
+            updateTimerDisplay(timeRemaining); // Initial display as "4:00"
+            startCountdownTimer();
 
             let mover = document.createElement('div');
             mover.style.left = '19.5%';
@@ -94,7 +141,8 @@
 
             // Initialize multiple enemies
             let enemies = [
-                { element: createEnemy(50, 37), direction: -1 },
+                { element: createEnemy(30, 31), direction: -1 },
+                { element: createEnemy(56, 37), direction: -1 },
                 { element: createEnemy(29, 66), direction: -1 },
                 { element: createEnemy(64, 79), direction: -1 }
             ];
@@ -119,6 +167,7 @@
                     }
                 }
             }
+
 
             // Enemy movement function
             // Update enemy movement to include collision check
@@ -276,12 +325,15 @@
                     playerRect.top < winTileRect.bottom &&
                     playerRect.bottom > winTileRect.top) {
 
-                    // Win condition is met
-                    alert("Felicitats! Has guanyat!");
+                    // Stop the countdown
+                    clearInterval(pointsInterval);
 
-                    // Stop further gameplay
+                    // Show final points and congratulatory message
+                    alert("Felicitats! Has guanyat amb " + points + " punts!");
+
+                    // End the game or reload
                     endGame();
-                    location.reload(); // Or handle game reset logic here
+                    location.reload();
                 }
             }
 
