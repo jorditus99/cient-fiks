@@ -29,7 +29,7 @@ function crear_gota() {
     gota.className = "gota";
     gota.src = '/img/gota.png';
     gota.setAttribute('data-potable', 'true');
-    container_gota.appendChild(gota); 
+    container_gota.appendChild(gota);
 
     // Crear la letra aleatoria dins del contenidor
     let lletra = aparenca_lletra_random(0);
@@ -41,19 +41,6 @@ function crear_gota() {
 
     // Guardar el contenidor a l'array de gotes
     gotes.push(container_gota);
-}
-
-function aparenca_lletra_random (left) {
-
-    let lletra = document.createElement("span");
-    lletra.className = "lletra_gota"
-    lletra.innerText = lletra_random();
-    lletra.style.position = "absolute;"
-    lletra.style.top = "0px";
-    lletra.style.left = left + "px";
-
-    return lletra;
-    
 }
 
 function crear_no_potable() {
@@ -69,13 +56,26 @@ function crear_no_potable() {
     let fons = document.getElementById("fons");
     fons.appendChild(gota2);
     gota2.setAttribute('data-potable', 'false');
-    
+
+}
+
+function aparenca_lletra_random(left) {
+
+    let lletra = document.createElement("span");
+    lletra.className = "lletra_gota"
+    lletra.innerText = lletra_random();
+    lletra.style.position = "absolute;"
+    lletra.style.top = "0px";
+    lletra.style.left = left + "px";
+
+    return lletra;
+
 }
 
 function lletra_random() {
 
     const lletres = "QWERYUIOPASDFGJKÑÇXCVBNM"
-    return lletres.charAt(Math.floor(Math.random() *  lletres.length));
+    return lletres.charAt(Math.floor(Math.random() * lletres.length));
 
 }
 
@@ -87,7 +87,7 @@ function joc() {
 
     gota_interval = setInterval(() => {
         crear_gota();
-    },2000) 
+    }, 2000)
 
 
     let interval = setInterval(() => {
@@ -139,7 +139,7 @@ function colisio() {
             }
 
             container_gota.remove();
-            gotes.splice(i, 1); 
+            gotes.splice(i, 1);
         }
     }
 }
@@ -151,9 +151,9 @@ function perdre_vida() {
         container_vides.removeChild(corActiu);
 
         joc_perdut();
-    } 
-    
-    
+    }
+
+
 }
 
 
@@ -177,15 +177,15 @@ function imprimir_vides() {
     }
 }
 
-function clickar_tecla (event) {
+function clickar_tecla(event) {
 
     let tecla = event.key;
     console.log("Tecla presionada:", tecla);
     verificar_encert(tecla);
-    
+
 }
 
-function verificar_encert (tecla) {
+function verificar_encert(tecla) {
 
     for (let i = 0; i < gotes.length; i++) {
         let container_gota = gotes[i];
@@ -200,48 +200,44 @@ function verificar_encert (tecla) {
     }
 }
 
-function sumar_punts () {
+function sumar_punts() {
 
     puntuacio += 5;
     punts.innerText = puntuacio;
 
-    // if (puntuacio === 50) {
+    if (puntuacio === 50) {
 
-    //     clearInterval(gota_interval);
+        clearInterval(gota_interval);
 
-    //     gota_interval = setInterval(() => {
-    //         crear_gota();
-    //     },1500) 
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 1500)
 
-    // } else if (puntuacio === 100){
+    } else if (puntuacio === 100) {
 
-    //     clearInterval(gota_interval);
+        clearInterval(gota_interval);
 
-    //     gota_interval = setInterval(() => {
-    //         crear_gota();
-    //     },1000) 
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 1000)
 
-    // } else if (puntuacio === 150 ) {
+    } else if (puntuacio === 150) {
 
-    //     clearInterval(gota_interval);
+        clearInterval(gota_interval);
 
-    //     gota_interval = setInterval(() => {
-    //         crear_gota();
-    //     },500) 
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 500)
 
-    // }   
+    }
 
-
-
-
-   
 }
 
-function joc_perdut () {
+function joc_perdut() {
 
     if (vides.length === 0) {
 
-        alert("Molt bé! Has aconseguit" + " " + puntuacio + " " + "punts" );
+        alert("Molt bé! Has aconseguit" + " " + puntuacio + " " + "punts");
     }
 
 
