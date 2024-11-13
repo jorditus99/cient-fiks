@@ -64,14 +64,19 @@ const nivel1 = [
 ];
 
 const nivel2 = [
-    " ", escabadora1, " ", ed4, " ", camion1, " ",
-    " ", " ", " ", " ", ed5, " ", " ",
-    " ", " ", escabadora2, " ", " ", " ", " ",
-    " ", camion1, " ", ed6, " ", " ", " ",
-    " ", " ", ed7, " ", " ", ed8, " ",
-    " ", " ", " ", " ", escabadora3, " ", cole,
-    valvula_inicial, " ", " ", " ", " ", " ", " "
+    " ", escabadora1, " ", ed4, " ", camion1, " ", " ", " ", " ",
+    " ", " ", " ", " ", ed5, " ", " ", " ", " ", " ",
+    " ", " ", escabadora2, " ", " ", " ", " ", " ", " ", " ",
+    " ", camion1, " ", ed6, " ", " ", " ", " ", " ", " ",
+    " ", " ", ed7, " ", " ", ed8, " ", " ", " ", " ",
+    " ", " ", " ", " ", escabadora3, " ", cole, " ", " ", " ",
+    valvula_inicial, " ", " ", " ", " ", " ", " ", " ", " ", " ",
+    " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+    " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+    " ", " ", " ", " ", " ", " ", " ", " ", " ", " "
 ];
+
+
 
 // Variable para controlar el nivel actual
 let nivelActual = nivel1;
@@ -227,6 +232,23 @@ function hayConexionHaciaObstaculo(celda, tuberiaNueva) {
         return celdaVecina && celdaVecina.firstChild && obstaculos.includes(celdaVecina.firstChild.id) &&
                tuberiaNueva.getAttribute(`data-${adyacente.direccion}`) === "true";
     });
+}
+
+function ajustarTamañoTablero() {
+    const dimension = Math.sqrt(nivelActual.length);
+    if (dimension === 9) {
+        tablero.style.width = "450px"; // Ejemplo para un tablero 9x9
+        tablero.style.height = "450px";
+    } else {
+        tablero.style.width = "350px"; // Ejemplo para un tablero 7x7
+        tablero.style.height = "350px";
+    }
+}
+
+function resetearTablero() {
+    tablero.innerHTML = ""; // Limpia el tablero
+    ajustarTamañoTablero(); // Ajusta el tamaño del contenedor
+    crearTablero(); // Crea el tablero con el nuevo nivel
 }
 
 // Llama a la función para crear el tablero inicial

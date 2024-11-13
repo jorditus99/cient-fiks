@@ -38,7 +38,7 @@ html, body {
     
 
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columnas de tamaño flexible */
+    grid-template-columns: repeat(10, 1fr); /* 7 columnas de tamaño flexible */
     grid-template-rows: repeat(7, 1fr);   /* 7 filas de tamaño flexible */
     gap: 1px; /* Espacio entre los elementos de la cuadrícula */
 }
