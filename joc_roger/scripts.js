@@ -3,7 +3,10 @@ let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
 let velocitat = 5;
-let vides = [];
+let vides = []; 
+const container_vides = document.getElementById("container_vides"); 
+let punts = document.getElementById("punts"); 
+let puntuacio = 0;
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
@@ -159,33 +162,57 @@ function pantalla_perdre() {
     velocitat = 0;
 }
 
-function crear_cor () {
-
-    let cor = document.createElement('img')   
-    vides.push(cor);
-    cor.className = "cor"
-    cor.src = '/img/vida.png';
-    cor.style.position = "absolute;"
-    container_vides.appendChild(cor);
-    // console.log("crear cor esta activa")
-
+function crear_cor() {
+    let cor = document.createElement('img');
+    cor.className = "cor";
+    cor.src = '../img/vida.png';
+    // cor.style.position = "absolute"; // Treu el punt i coma del valor
+    cor.classList.add("vida");
+    container_vides.appendChild(cor); // Afegeix el cor al container de vides
+    vides.push(cor); // Afegeix el cor a l'array de vides
+    console.log("Cor creat i afegit");
 }
 
-function definir_vides () {
+function definir_vides(numVides) {
+    // Buida el contenidor i l'array de vides si ja hi ha cors
+    container_vides.innerHTML = '';
+    vides = [];
 
-    let vides = 3;
+    // Afegeix el nombre de cors especificat
+    for (let i = 0; i < numVides; i++) {
+        crear_cor();
+    }
+}
 
 
+function afegir_puntuacio() {
+
+    if (vides > 0) {
+        const interval = setInterval(() => {
+            if (vides > 0) {
+                puntuacio += 5;
+                punts.innerHTML = puntuacio;
+            } else {
+                clearInterval(interval); // Parar l'interval quan no hi ha més vides
+            }
+        }, 5000); // Cada 5 segons
+    }
+    
+    
 }
 
 function iniciar_joc() {
  
+
+    definir_vides(3);
     setInterval(detectar_colisio, 30);
   
     // Inicialització
+  
     moure_img_principal();
     crear_personatge();
     setInterval(crear_obstacle, 1000);
+    afegir_puntuacio();
   }
   
   // Per iniciar el joc, només caldria cridar
