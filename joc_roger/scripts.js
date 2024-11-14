@@ -2,14 +2,17 @@ const imatge_fons = document.getElementById("image_container");
 let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
-let velocitat = 10;
-let vides = [];
+let velocitat = 5;
+let vides = []; 
+const container_vides = document.getElementById("container_vides"); 
+let punts = document.getElementById("punts"); 
+let puntuacio = 0;
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
     let posicioX = 0;
 
-    console.log("Moure imatge principal");
+    // console.log("Moure imatge principal");
 
     imatges.forEach((img) => {
         img.style.position = "absolute";
@@ -34,7 +37,7 @@ function moure_img_principal() {
 
 // Creació del personatge
 function crear_personatge() {
-    console.log("Personatge creat");
+    // console.log("Personatge creat");
     const personatge = document.createElement('img');
     personatge.src = "../img/shark.gif";
     personatge.alt = "Personatge";
@@ -43,6 +46,7 @@ function crear_personatge() {
     personatge.style.position = "absolute";
     personatge.style.top = posicioTop + "px";
     personatge.style.left = "50px"; // Posició inicial a l'esquerra
+    personatge.style.border = "1px solid white";
     imatge_fons.appendChild(personatge);
 }
 // Funció per moure el personatge
@@ -76,6 +80,7 @@ function crear_obstacle() {
     obstacle.style.position = "absolute"; 
     obstacle.style.left = "2000px"; 
     obstacle.style.width = "100px"; 
+    obstacle.style.border = "1px solid white";
 
     // Valors possibles per a la posició `top`
     const posicionsTop = [0, 210, 420];
@@ -90,13 +95,13 @@ function crear_obstacle() {
     moure_obstacle(obstacle);
 
     // Eliminar l'obstacle quan sigui necessari
-    eliminar_obstacle(obstacle);
+    setInterval(() => eliminar_obstacle(obstacle), 10);
 }
 
  
   
   // Executar crear_obstacle cada 3 segons
-  setInterval(crear_obstacle, 3000);
+
 
 
 function moure_obstacle(obstacle) {
@@ -118,7 +123,7 @@ function detectar_colisio() {
     const obstacle = imatge_fons.querySelector('img[alt="Obstacle"]');
 
     if (!personatge || !obstacle) {
-        console.log("Personatge o obstacle no trobat");
+        // console.log("Personatge o obstacle no trobat");
         return;
     }
 
@@ -142,45 +147,76 @@ function detectar_colisio() {
 
 function eliminar_obstacle(obstacle) {
 
-    console.log("Dins d'eliminar");
+    // console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
-    if (positon <= -400 ) {
-        console.log("obstacle tret");
+    if (positon <= 0 ) {
+        // console.log("obstacle tret");
         obstacle.remove();
     }
 
 }
 
 function pantalla_perdre() {
-    alert("T'has xocat");
+    // alert("T'has xocat");
+    console.log("T'has xocat");
+    velocitat = 0;
 }
 
-function crear_cor () {
-
-    let cor = document.createElement('img')   
-    vides.push(cor);
-    cor.className = "cor"
-    cor.src = '/img/vida.png';
-    cor.style.position = "absolute;"
-    container_vides.appendChild(cor);
-    console.log("crear cor esta activa")
-
+function crear_cor() {
+    let cor = document.createElement('img');
+    cor.className = "cor";
+    cor.src = '../img/vida.png';
+    // cor.style.position = "absolute"; // Treu el punt i coma del valor
+    cor.classList.add("vida");
+    container_vides.appendChild(cor); // Afegeix el cor al container de vides
+    vides.push(cor); // Afegeix el cor a l'array de vides
+    console.log("Cor creat i afegit");
 }
 
-function definir_vides () {
+function definir_vides(numVides) {
+    // Buida el contenidor i l'array de vides si ja hi ha cors
+    container_vides.innerHTML = '';
+    vides = [];
 
-    let vides = 3;
-
-
+    // Afegeix el nombre de cors especificat
+    for (let i = 0; i < numVides; i++) {
+        crear_cor();
+    }
 }
 
-// Crida a la funció `detectar_colisio` cada 10 ms per monitoritzar les col·lisions
-setInterval(detectar_colisio, 10);
 
-// Inicialització
-moure_img_principal();
-crear_personatge();
-crear_obstacle();
+function afegir_puntuacio() {
+
+    if (vides > 0) {
+        const interval = setInterval(() => {
+            if (vides > 0) {
+                puntuacio += 5;
+                punts.innerHTML = puntuacio;
+            } else {
+                clearInterval(interval); // Parar l'interval quan no hi ha més vides
+            }
+        }, 5000); // Cada 5 segons
+    }
+    
+    
+}
+
+function iniciar_joc() {
+ 
+
+    definir_vides(3);
+    setInterval(detectar_colisio, 30);
+  
+    // Inicialització
+  
+    moure_img_principal();
+    crear_personatge();
+    setInterval(crear_obstacle, 1000);
+    afegir_puntuacio();
+  }
+  
+  // Per iniciar el joc, només caldria cridar
+  iniciar_joc();
 
 
 // Escolta de l'esdeveniment keydown
