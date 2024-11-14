@@ -1,0 +1,203 @@
+html,body {
+    height: 100%; /* Use full viewport height */
+    margin: 0; /* Remove default margin */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-image: url("/img/river_night.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+#background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#background img {
+    border-radius: 1rem;
+}
+
+.table-container {
+    height: 90%;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Center the table */
+    align-items: center; /* Align items center */
+    border-radius: 1rem;
+    background-color: black;
+    position: relative; /* Make sure that child elements can be absolutely positioned inside */
+}
+
+/* Basic styles for the tutorial container */
+.tutorial-container {
+    position: absolute;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    justify-content: center;
+    z-index: 2; /* Above the background image */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Optional: adds a shadow for depth */
+    text-align: center;
+}
+
+#one {
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.fons {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.imatge_joc {
+    size: 100%;
+    border-radius: 1rem;
+    
+}
+
+
+/* #################################################### */
+
+#player {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.6rem;
+    background-color: rgb(31, 221, 255);
+    color: rgb(31, 221, 255);
+    z-index: 2;
+}
+
+#enemy {
+    position: absolute;
+    width: 1.6rem;
+    height: 1.2rem;
+    background-color: rgb(168, 168, 168);
+    color: rgb(168, 168, 168);
+    z-index: 2;
+}
+
+.enemy {
+    position: absolute;
+    width: 1.6rem;
+    height: 1.2rem;
+    background-color: rgb(199, 199, 199); /* Color for enemies */
+    z-index: 2;
+}
+
+
+table {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: auto;
+    height: auto;
+    border-spacing: 0px;
+    border-collapse: initial;
+    position: absolute;
+}
+
+tr {
+    border: none;
+}
+
+/*table element styles*/
+td {
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+}
+
+#win {
+    background-color: rgb(163, 255, 183);
+    color:rgb(163, 255, 183);
+}
+
+.wall {
+    color: rgba(255, 255, 255, 0);
+    /* background-image: url("../img/img_natalia/wall.jpg"); */
+    background-color: rgb(40, 25, 94);
+}
+
+.freespace {
+    color:rgb(41, 128, 87);
+    background-color: rgb(41, 128, 87);
+}
+
+#start {
+    color:rgb(247, 255, 176);
+    background-color: rgb(247, 255, 176);
+}
+
+.key {
+    color:rgb(255, 158, 247);
+    background-color: rgb(255, 158, 247);
+}
+
+#score {
+    font-family: monospace;
+    position: absolute;
+    top: 4%;
+    right: 75%;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    z-index: 10; /* Ensure it's above the table */
+}
+
+#timer {
+    font-family: monospace;
+    position: absolute;
+    top: 4%;
+    right: 45%;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    z-index: 10; /* Ensure it's above the table */
+}
+
+#life {
+    position: absolute;
+    top: 2%;
+    right: 10%;
+    z-index: 10; /* Ensure it's above the table */
+}
+
+.cor {
+    width: 50px;
+    height: 50px;
+}
+
+/* CHARACTER APPEARANCE STUFF */
+
+/* Define a blinking animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }   /* Fully visible at start and end of each cycle */
+    50% { opacity: 0.0; }      /* Semi-transparent at the middle of each cycle */
+}
+
+/* Class to apply during immunity */
+#player.immune {
+    animation: blink 0.5s infinite;  /* Blinks every 0.5 seconds */
+}

@@ -90,6 +90,11 @@
         width: 100%;
         background-color: #06629E;
     }
+
+    a {
+        text-decoration: none;
+        color: #CCCCCC;
+    }
 </style>
 
 <body>
@@ -115,17 +120,17 @@
                 <h1>Iniciar Sesión</h1>
             </div>
             <div class="container-form">
-                <form action="tu_proceso_de_login.php" method="post" class="form-log-in">
+                <form action="tabla.php" method="post" class="form-log-in">
                     <div class="continer-inputs">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
-                        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario">
+                        <input type="password" id="password" name="password" placeholder="Contraseña">
                     </div>
                     <div class="container-buttons">
                         <div class="continer-buttons-top">
                             <button type="submit">Entrar</button>
-                            <button class="regis-button">Registrarse</button>
+                            <button class="regis-button"><a href="/registro.html"></a>Registrarse</a></button>
                         </div>
-                        <button class="big-button">Jugar sin Iniciar Sesión</button>
+                        <button class="big-button"><a href="/jocs.html">Jugar sin Iniciar Sesión</a></button>
                     </div>
 
                 </form>

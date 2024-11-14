@@ -6,109 +6,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css">
+    <link rel="stylesheet" href="../joc_virginia/style.css">
+    
 </head>
 
-<style>
-    .fondo_juego{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .contenedor_foto_fondo{
-        width: 70%;
-        height: 85%;
-        position: relative;
-    }
-
-    .foto_fondo {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
-
-    .contenedor_seabin {
-        position: absolute;
-        height: auto;
-        width: auto;
-        top: 88%;
-    }
-
-    .seabin {
-        height: 40%;
-        width: 40%;
-    }
-
-    .columnas {
-        position: absolute;
-        display: flex;
-        flex-direction: row;
-        z-index: 3;
-    }
-
-    .contenedor_fish {
-        height: 100%;
-        width: auto;
-
-    }
-
-    .fish{
-        height: 100%;
-        width: 100%;
-    }
-
-</style>
-
 <body>
-
-    <div class="fondo_juego">
-        <div class="contenedor_foto_fondo">
-            <img src="../img/img_virginia/afua.webp"
-            alt="" class="foto_fondo" >
-            <div class="columnas">
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-                <div class="contenedor_fish">
-                    <img src="../img/img_virginia/Pixel-Art-Fish.png" alt="" class="fish">
-                </div>
-            </div>
-            <div class="contenedor_seabin">
-                <img src="../img/img_virginia/seabin_adaptado.png" alt="" class="seabin">
-            </div>
-            
-    
-        </div>
-        
-
-        
+    <div id="gameArea" >
+           <div id="basket"></div>
+           <div id="score">Puntos: 0</div>
+           <div id="life" class="life"></div>
     </div>
-
-
-
-
+<script src="scripts.js"></script>
 </body>
 
 </html>
