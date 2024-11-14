@@ -81,8 +81,11 @@ let nivelActual = nivel1;
 // Selecciona el contenedor del tablero en el HTML
 const tablero = document.getElementById("tablero");
 
-// Array de obstáculos
-const obstaculos = ["camion1", "fuente"];
+const obstaculos = [
+    "camion1", "fuente",
+    "ed3", "ed4", "ed5", "ed6", "ed7", "ed8", "ed9",
+    "escabadora1", "escabadora2", "escabadora3"
+];
 
 // Array para almacenar las posiciones donde se colocan las tuberías
 let posicionesTuberias = [];
@@ -180,6 +183,9 @@ function crearTablero() {
 // Función para resetear el tablero y cargar el nuevo nivel
 function resetearTablero() {
     tablero.innerHTML = ""; // Limpia el tablero
+
+
+
     crearTablero(); // Crea el tablero con el nuevo nivel
 }
 
@@ -243,6 +249,14 @@ function resetearTablero() {
     ajustarTamañoTablero(); // Ajusta el tamaño del tablero
     crearTablero(); // Crea el tablero con el nuevo nivel
 }
+
+// Selecciona el botón de reinicio
+const botonReiniciar = document.getElementById("reiniciar");
+
+// Agrega el evento click para reiniciar el nivel
+botonReiniciar.addEventListener("click", () => {
+    resetearTablero(); // Llama a la función para reiniciar el tablero
+});
 
 // Llama a la función para crear el tablero inicial
 crearTablero();

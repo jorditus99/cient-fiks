@@ -66,3 +66,31 @@ html, body {
     grid-template-columns: repeat(9, 1fr); /* 9 columnas */
     grid-template-rows: repeat(9, 1fr);    /* 9 filas */
 }
+
+
+.container_tub div {
+    width: 100%; /* Ocupa todo el ancho del grid */
+    height: 100%; /* Ocupa todo el alto del grid */
+    max-width: 150px; /* Ancho mínimo para los divs */
+    max-width: 150px; /* Alto mínimo para los divs */
+    
+}
+
+.container_tub img {
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+#reiniciar {
+    background-color: red; /* Fondo transparente */
+    border: none; /* Sin bordes */
+    padding: 0; /* Sin relleno */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+#reiniciar img {
+    width: 100%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    display: block;
+}
