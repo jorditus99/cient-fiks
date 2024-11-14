@@ -1,9 +1,8 @@
-html,body {
-    height: 100%; /* Use full viewport height */
-    margin: 0; /* Remove default margin */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    background-image: url("/img/river_night.gif");
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    background-image: url("/img/river_day.gif");
     background-size: cover;
     background-position: center;
 }
@@ -16,11 +15,13 @@ html,body {
     width: 100%;
 }
 
-#background img {
+#game-img {
     border-radius: 1rem;
+    height: 90%;
+    width: 70%;
 }
 
-.table-container {
+.table-container{
     height: 90%;
     width: 70%;
     margin: 0 auto;
@@ -32,35 +33,6 @@ html,body {
     position: relative; /* Make sure that child elements can be absolutely positioned inside */
 }
 
-/* Basic styles for the tutorial container */
-.tutorial-container {
-    position: absolute;
-    border-radius: 1rem;
-    top: 50%;
-    left: 50%;
-    width: 50%;
-    height: 60%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
-    display: flex;
-    flex-direction: column; /* Stacks items vertically */
-    justify-content: center;
-    z-index: 2; /* Above the background image */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Optional: adds a shadow for depth */
-    text-align: center;
-}
-
-#one {
-    padding: 15px 30px;
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
 .fons {
 
     display: flex;
@@ -70,21 +42,16 @@ html,body {
     
 }
 
-.imatge_joc {
-    size: 100%;
-    border-radius: 1rem;
-    
-}
-
 
 /* #################################################### */
 
 #player {
     position: absolute;
+    color: rgba(255, 255, 255, 0);
+    background-image: url("../img/img_natalia/player_front.jpg");
     width: 1.2rem;
     height: 1.6rem;
     background-color: rgb(31, 221, 255);
-    color: rgb(31, 221, 255);
     z-index: 2;
 }
 
@@ -138,12 +105,13 @@ td {
 
 .wall {
     color: rgba(255, 255, 255, 0);
-    /* background-image: url("../img/img_natalia/wall.jpg"); */
+    background-image: url("../img/img_natalia/wall.jpg");
     background-color: rgb(40, 25, 94);
 }
 
 .freespace {
-    color:rgb(41, 128, 87);
+    color: rgba(255, 255, 255, 0);
+    background-image: url("../img/img_natalia/floor.jpg");
     background-color: rgb(41, 128, 87);
 }
 
@@ -153,7 +121,8 @@ td {
 }
 
 .key {
-    color:rgb(255, 158, 247);
+    color: rgba(255, 255, 255, 0);
+    /* background-image: url("../img/img_natalia/manivela_off.png"); */
     background-color: rgb(255, 158, 247);
 }
 
