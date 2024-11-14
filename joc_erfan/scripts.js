@@ -10,6 +10,8 @@ let increment_aparicio_gotes = 500;
 
 let gota_interval = 0;
 
+let left = 0;
+
 
 
 //Creació de gota i els seus parametres
@@ -17,12 +19,7 @@ let gota_interval = 0;
 function crear_gota() {
 
     // Crear el contenidor que inclourà la gota i la lletra
-    let container_gota = document.createElement("div");
-    container_gota.className = "container_gota";
-    container_gota.style.position = "absolute";
-    container_gota.style.top = "160px";  // 
-    let left = Math.random() * (1476 - 354) + 354;
-    container_gota.style.left = left + "px";
+    let container_gota = crear_container_gota();
 
     // Crear la gota dins del container_gota
     let gota = document.createElement('img');
@@ -56,6 +53,19 @@ function crear_no_potable() {
     let fons = document.getElementById("fons");
     fons.appendChild(gota2);
     gota2.setAttribute('data-potable', 'false');
+
+}
+
+function crear_container_gota() {
+
+    let container_gota = document.createElement("div");
+    container_gota.className = "container_gota";
+    container_gota.style.position = "absolute";
+    container_gota.style.top = "160px";  // 
+    left = Math.random() * (1476 - 354) + 354;
+    container_gota.style.left = left + "px";
+
+    return container_gota
 
 }
 
