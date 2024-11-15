@@ -241,7 +241,7 @@ function verificar_encert(tecla) {
             container_gota.remove();
             gotes.splice(i, 1);
             sumar_punts();
-            lletra_potable.shift(lletra);//
+            lletra_potable.shift(lletra);//LKLFJKFJKLSFJKLSJKLFJKLSJKLSJKLSJKLSGJKLSGJKLSGSGJKLJKLSGJKLSGJKLSGJKLSGJKLSGJKLSGJKL
             break;
         }
     }
