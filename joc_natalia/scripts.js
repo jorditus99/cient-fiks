@@ -192,6 +192,8 @@ function loadPage() {
     // Start enemy movements
     enemies.forEach(enemyObj => moveEnemy(enemyObj));
 
+    
+
     // Player movement and key interactions
     window.addEventListener('keydown', (event) => {
         let pos = mover.getBoundingClientRect();
@@ -206,16 +208,27 @@ function loadPage() {
             case 'x':
             case 'X':
                 if (isOnKeyTile && keyTile) {
-                    // Toggle key tile color
-                    keyTile.style.backgroundColor = keyStates.get(keyTile) ? originalColor : 'blue';
-                    keyStates.set(keyTile, !keyStates.get(keyTile));
+                    // Define image paths for the deactivated and activated states
+                    const deactivatedImage = '/img/img_natalia/manivela_off.png';
+                    const activatedImage = '/img/img_natalia/manivela_on.png';
 
-                    // Update activated key tiles count and score display
+                    // If the key tile is activated (blue), deactivate it and change image back to the default
                     if (keyStates.get(keyTile)) {
-                        activatedKeyTiles++;
-                    } else {
+                        keyTile.style.backgroundImage = `url(${deactivatedImage})`; // Reset to deactivated image
+                        keyStates.set(keyTile, false); // Set key state as deactivated
+
+                        // Decrease the activated key tiles count and update the display
                         activatedKeyTiles--;
+                    } else {
+                        // If the key tile is not activated, activate it and change to the activated image
+                        keyTile.style.backgroundImage = `url(${activatedImage})`; // Change to activated image
+                        keyStates.set(keyTile, true); // Set key state as activated
+
+                        // Increase the activated key tiles count and update the display
+                        activatedKeyTiles++;
                     }
+
+                    // Update the score display for activated key tiles
                     scoreDisplay.textContent = 'Manetes: ' + activatedKeyTiles + '/5';
 
                     // Update win tile color if all keys are activated
@@ -229,7 +242,7 @@ function loadPage() {
         let collides = [...document.querySelectorAll('.wall')].some(tile => {
             let tileRect = tile.getBoundingClientRect();
             return newPos.left < tileRect.right && newPos.left + pos.width > tileRect.left &&
-                   newPos.top < tileRect.bottom && newPos.top + pos.height > tileRect.top;
+                newPos.top < tileRect.bottom && newPos.top + pos.height > tileRect.top;
         });
 
         // Update position if no collision
@@ -241,6 +254,8 @@ function loadPage() {
         detectKeyTile();
         checkWinCollision();
     });
+
+
 
     // Detect if player is on a key tile
     function detectKeyTile() {
