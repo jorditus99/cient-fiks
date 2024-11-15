@@ -186,21 +186,13 @@ function definir_vides(numVides) {
 
 
 function afegir_puntuacio() {
-
-    if (vides > 0) {
-        const interval = setInterval(() => {
-            if (vides > 0) {
-                puntuacio += 5;
-                punts.innerHTML = puntuacio;
-            } else {
-                clearInterval(interval); // Parar l'interval quan no hi ha més vides
-            }
-        }, 5000); // Cada 5 segons
-    }
     
-    
+    do {
+        puntuacio += 5;
+        console.log(puntuacio);
+        punts.innerHTML = puntuacio;
+    } while (vides > 0);
 }
-
 function iniciar_joc() {
  
 
@@ -212,7 +204,7 @@ function iniciar_joc() {
     moure_img_principal();
     crear_personatge();
     setInterval(crear_obstacle, 1000);
-    afegir_puntuacio();
+    setInterval(afegir_puntuacio, 5000) ;
   }
   
   // Per iniciar el joc, només caldria cridar
