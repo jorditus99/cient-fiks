@@ -1,6 +1,8 @@
 let gotes = [];
 let vides = [];
+let lletra = "A";
 let lletres = [];
+let lletra_potable = [];
 let lletres_no_potables = [];
 let punts = document.getElementById("punts");
 let puntuacio = 0;
@@ -9,6 +11,7 @@ let aparicio_gotes = 2000;
 let increment_aparicio_gotes = 500;
 
 let gota_interval = 0;
+let gota_no_potable_intervaL = 0;
 
 let left = 0;
 
@@ -29,9 +32,11 @@ function crear_gota() {
     container_gota.appendChild(gota);
 
     // Crear la letra aleatoria dins del contenidor
-    let lletra = aparenca_lletra_random(0);
+    lletra = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra.innerText;
     container_gota.appendChild(lletra);
+    lletra_potable.push(lletra);
+    console.log(lletra_potable);
 
     // Afegir el contenidor a fons
     document.getElementById("fons").appendChild(container_gota);
@@ -42,19 +47,45 @@ function crear_gota() {
 
 function crear_no_potable() {
 
-    let gota2 = document.createElement('img')
-    gotes.push(gota2);
-    gota2.className = "gota"
-    gota2.src = '/img/no_potable.png';
-    gota2.style.position = "absolute;"
-    gota2.style.top = "160px";
-    let left = Math.random() * (1466 - 262) + 262;
-    gota2.style.left = left + "px";
-    let fons = document.getElementById("fons");
-    fons.appendChild(gota2);
-    gota2.setAttribute('data-potable', 'false');
+    console.log("La funció crear_no_potable FUNCIONA!");
 
+    // Crear el contenidor que inclourà la gota i la lletra
+    let container_gota = crear_container_gota();
+
+    // Crear la gota dins del container_gota
+    let gota_no_potable = document.createElement('img');
+    gota_no_potable.className = "gota";
+    gota_no_potable.src = '/img/no_potable.png';
+    gota_no_potable.setAttribute('data-potable', 'true');
+    container_gota.appendChild(gota_no_potable);
+
+    // Crear la letra aleatoria dins del contenidor
+    let lletra_no_potable = aparenca_lletra_random(0);
+    container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
+    container_gota.appendChild(lletra_no_potable);
+
+    // Afegir el contenidor a fons
+    document.getElementById("fons").appendChild(container_gota);
+
+    // Guardar el contenidor a l'array de gotes
+    gotes.push(container_gota);
 }
+
+// function crear_no_potable() {
+
+//     let gota2 = document.createElement('img')
+//     gotes.push(gota2);
+//     gota2.className = "gota"
+//     gota2.src = '/img/no_potable.png';
+//     gota2.style.position = "absolute;"
+//     gota2.style.top = "160px";
+//     let left = Math.random() * (1466 - 262) + 262;
+//     gota2.style.left = left + "px";
+//     let fons = document.getElementById("fons");
+//     fons.appendChild(gota2);
+//     gota2.setAttribute('data-potable', 'false');
+
+// }
 
 function crear_container_gota() {
 
@@ -97,7 +128,12 @@ function joc() {
 
     gota_interval = setInterval(() => {
         crear_gota();
+
     }, 2000)
+
+    gota_no_potable_intervaL = setInterval(() => {
+        crear_no_potable();
+    }, 6800)
 
 
     let interval = setInterval(() => {
@@ -108,7 +144,7 @@ function joc() {
 
     document.addEventListener("keydown", clickar_tecla);
 
-    joc_perdut();
+    increment_velocitat_no_potable();
 }
 
 
@@ -136,6 +172,8 @@ function colisio() {
         let container_gota = gotes[i];
         let position = parseInt(container_gota.style.top);
 
+        lletra_potable.shift(lletra);// No LDJKLKFKJFFJKFJKLFFGFGJKLFGFGJHGJHWGGGGGWGWGGWGWSGJHGGWGJK
+
         if (position >= 750) {
             let gota = container_gota.querySelector('.gota');
 
@@ -162,8 +200,6 @@ function perdre_vida() {
 
         joc_perdut();
     }
-
-
 }
 
 
@@ -205,6 +241,7 @@ function verificar_encert(tecla) {
             container_gota.remove();
             gotes.splice(i, 1);
             sumar_punts();
+            lletra_potable.shift(lletra);//
             break;
         }
     }
@@ -238,6 +275,36 @@ function sumar_punts() {
         gota_interval = setInterval(() => {
             crear_gota();
         }, 500)
+
+    }
+
+}
+
+function increment_velocitat_no_potable() {
+
+    if (puntuacio === 50) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 4800)
+
+    } else if (puntuacio === 100) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 2800)
+
+    } else if (puntuacio === 150) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 1800)
 
     }
 
