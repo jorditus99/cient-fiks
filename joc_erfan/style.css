@@ -1,4 +1,3 @@
-
 .fons {
 
     position: relative;
@@ -6,37 +5,34 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    
+
+
+
 }
 
 .container_joc {
 
     position: relative;
-
-}
-
-.imatge_joc {
-
-    size: 100%;
     border-radius: 1rem;
-    
+
 }
+
 
 .titol_punts {
 
     position: absolute;
-    top: 10px; 
-    left: 50px; 
-    color: white; 
-    font-size: 2rem; 
+    top: 50px;
+    left: 370px;
+    color: white;
+    font-size: 2rem;
 }
 
 .punts {
     position: absolute;
-    top: 10px; 
-    left: 170px; 
-    color: white; 
-    font-size: 2rem; 
+    top: 50px;
+    left: 480px;
+    color: white;
+    font-size: 2rem;
 }
 
 .gota {
@@ -48,8 +44,8 @@
 .container_vides {
 
     position: absolute;
-    top: 35px; 
-    left: 1100px;
+    top: 75px;
+    left: 1450px;
 
 
 }
@@ -71,3 +67,8 @@
 
 }
 
+.game-img {
+    border-radius: 1rem;
+    height: 90%;
+    width: 70%;
+}
