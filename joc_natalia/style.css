@@ -100,7 +100,7 @@ td {
 
 #win {
     background-color: rgb(163, 255, 183);
-    color:rgb(163, 255, 183);
+    color:rgba(0, 0, 0, 0);
 }
 
 .wall {
@@ -110,14 +110,14 @@ td {
 }
 
 .freespace {
-    color: rgba(255, 255, 255, 0);
+    color: rgba(0, 0, 0, 0);
     background-image: url("../img/img_natalia/floor.jpg");
     background-color: rgb(41, 128, 87);
 }
 
 #start {
-    color:rgb(247, 255, 176);
-    background-color: rgb(247, 255, 176);
+    color:rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .key {

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", loadPage);
 // Maze definition
 let maze = [
     `#########################################`,
-    `#_#.....?..#........#.....#..?.#..#.....#`,
+    `#.#.....?..#........#.....#..?.#..#.....#`,
     `#.#####....####.#########.##...#.######.#`,
     `#.............#.........#......#........#`,
     `###.####.###.##.#########.###.###.#######`,
@@ -22,7 +22,7 @@ let maze = [
     `#.###.#.######.#..#.....#.#...###.#######`,
     `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
     `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
-    `#.......#......#.#.##.#.#...#.........#.#`,
+    `#.......#......#.#..#...#...#.........#.#`,
     `#.#...#####.####.#..#.#.###.####.######.#`,
     `#.#.?.......#.........#........#!#......#`,
     `#########################################`
@@ -111,7 +111,7 @@ function loadPage() {
     mover.style.left = '19.5%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
-    mover.textContent = '@';
+    mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; // Set initial graphic
     tableDiv.appendChild(mover);
 
     // Function to create an enemy
@@ -141,13 +141,23 @@ function loadPage() {
             row.appendChild(cell);
             cell.innerHTML = maze[i].charAt(x);
             switch (maze[i].charAt(x)) {
-                case '#': cell.classList.add('wall'); break;
-                case '.': cell.classList.add('freespace'); break;
-                case '_': cell.id = 'start'; break;
-                case '!': cell.id = 'win'; break;
+                case '#': 
+                    cell.classList.add('wall'); 
+                    break;
+                case '.': 
+                    cell.classList.add('freespace'); 
+                    break;
+                case '_': 
+                    cell.id = 'start'; 
+                    break;
+                case '!': 
+                    cell.id = 'win';
+                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')"; // Default graphic
+                    break;
                 case '?': 
                     cell.classList.add('key'); 
                     keyStates.set(cell, false); 
+                    cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')"; // Set the initial graphic
                     break;
             }
         }
@@ -160,12 +170,20 @@ function loadPage() {
         const enemy = enemyObj.element;
         let enemyPosition = parseFloat(window.getComputedStyle(enemy).left);
         let direction = enemyObj.direction;
-
+    
+        // Assign initial graphic based on direction
+        const updateGraphic = () => {
+            enemy.style.backgroundImage = direction > 0 
+                ? "url('/img/img_natalia/rat_right.png')" 
+                : "url('/img/img_natalia/rat_left.png')";
+        };
+        updateGraphic();
+    
         setInterval(() => {
             const nextPosition = enemyPosition + direction * 2;
             let collidesWithWall = false;
             const impassableTiles = document.querySelectorAll('.wall');
-
+    
             for (let tile of impassableTiles) {
                 const tileRect = tile.getBoundingClientRect();
                 const enemyRect = enemy.getBoundingClientRect();
@@ -175,20 +193,21 @@ function loadPage() {
                     break;
                 }
             }
-
+    
             if (collidesWithWall) {
-                direction *= -1;
+                direction *= -1; // Reverse direction
                 enemyObj.direction = direction;
+                updateGraphic(); // Update the graphic when direction changes
             } else {
                 enemyPosition = nextPosition;
                 enemy.style.left = `${enemyPosition}px`;
             }
-
+    
             // Check collision with player
             checkCollisionWithEnemies();
         }, 30);
     }
-
+    
     // Start enemy movements
     enemies.forEach(enemyObj => moveEnemy(enemyObj));
 
@@ -199,41 +218,60 @@ function loadPage() {
         let pos = mover.getBoundingClientRect();
         let newPos = { left: pos.left, top: pos.top };
 
-        // Move based on arrow keys
+        // Define the player's graphic based on movement direction
+        const updatePlayerGraphic = (direction) => {
+            switch (direction) {
+                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.png')"; break;
+                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; break;
+                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/player_left.png')"; break;
+                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/player_right.png')"; break;
+            }
+        };
+
+        // Move based on arrow keys and update player graphic
         switch (event.key) {
-            case 'ArrowUp': newPos.top -= 5; break;
-            case 'ArrowDown': newPos.top += 5; break;
-            case 'ArrowLeft': newPos.left -= 5; break;
-            case 'ArrowRight': newPos.left += 5; break;
+            case 'ArrowUp': 
+                newPos.top -= 5; 
+                updatePlayerGraphic('up');
+                break;
+            case 'ArrowDown': 
+                newPos.top += 5; 
+                updatePlayerGraphic('down');
+                break;
+            case 'ArrowLeft': 
+                newPos.left -= 5; 
+                updatePlayerGraphic('left');
+                break;
+            case 'ArrowRight': 
+                newPos.left += 5; 
+                updatePlayerGraphic('right');
+                break;
             case 'x':
             case 'X':
+                // Handle interaction logic here
                 if (isOnKeyTile && keyTile) {
-                    // Define image paths for the deactivated and activated states
                     const deactivatedImage = '/img/img_natalia/manivela_off.png';
                     const activatedImage = '/img/img_natalia/manivela_on.png';
 
-                    // If the key tile is activated (blue), deactivate it and change image back to the default
                     if (keyStates.get(keyTile)) {
-                        keyTile.style.backgroundImage = `url(${deactivatedImage})`; // Reset to deactivated image
-                        keyStates.set(keyTile, false); // Set key state as deactivated
-
-                        // Decrease the activated key tiles count and update the display
+                        keyTile.style.backgroundImage = `url(${deactivatedImage})`;
+                        keyStates.set(keyTile, false);
                         activatedKeyTiles--;
                     } else {
-                        // If the key tile is not activated, activate it and change to the activated image
-                        keyTile.style.backgroundImage = `url(${activatedImage})`; // Change to activated image
-                        keyStates.set(keyTile, true); // Set key state as activated
-
-                        // Increase the activated key tiles count and update the display
+                        keyTile.style.backgroundImage = `url(${activatedImage})`;
+                        keyStates.set(keyTile, true);
                         activatedKeyTiles++;
                     }
 
-                    // Update the score display for activated key tiles
                     scoreDisplay.textContent = 'Manetes: ' + activatedKeyTiles + '/5';
 
-                    // Update win tile color if all keys are activated
                     let winTile = document.getElementById('win');
-                    winTile.style.backgroundColor = [...keyStates.values()].every(Boolean) ? 'gold' : '';
+                    if ([...keyStates.values()].every(Boolean)) {
+                        winTile.style.backgroundImage = "url('/img/img_natalia/win_on.png')"; // Change to win_on graphic
+                    } else {
+                        winTile.style.backgroundImage = "url('/img/img_natalia/win_off.png')"; // Revert to win_off graphic
+                    }
+
                 }
                 return;
         }
@@ -254,6 +292,7 @@ function loadPage() {
         detectKeyTile();
         checkWinCollision();
     });
+
 
 
 
@@ -317,25 +356,25 @@ function loadPage() {
         const playerRect = mover.getBoundingClientRect();
         const winTile = document.getElementById("win");
         const winTileRect = winTile.getBoundingClientRect();
-
-        // Check if the win tile is gold and player collides with it
-        if (winTile.style.backgroundColor === "gold" &&
+    
+        // Check if the win tile is in the activated state (gold) and the player collides with it
+        if (winTile.style.backgroundImage.includes("win_on.png") &&
             playerRect.left < winTileRect.right &&
             playerRect.right > winTileRect.left &&
             playerRect.top < winTileRect.bottom &&
             playerRect.bottom > winTileRect.top) {
-
+    
             // Stop the countdown
             clearInterval(gameInterval);
-
+    
             // Show final points and congratulatory message
             alert("Felicitats! Has guanyat amb " + points + " punts!");
-
+    
             // End the game or reload
             endGame();
             location.reload();
         }
-    }
+    }    
 
 
     // Function to end the game
