@@ -1,37 +1,323 @@
+let gotes = [];
+let vides = [];
+let lletra = "A";
+let lletres = [];
+let lletra_potable = [];
+let lletres_no_potables = [];
+let punts = document.getElementById("punts");
+let puntuacio = 0;
+
+let aparicio_gotes = 2000;
+let increment_aparicio_gotes = 500;
+
+let gota_interval = 0;
+let gota_no_potable_intervaL = 0;
+
+let left = 0;
 
 
-function crear_gota () {
 
-let gota = document.createElement('img')
-gota.src = '/img/gota.png';
+//Creació de gota i els seus parametres
 
-let fons = document.getElementById("fons");
-fons.appendChild(gota);
+function crear_gota() {
+
+    // Crear el contenidor que inclourà la gota i la lletra
+    let container_gota = crear_container_gota();
+
+    // Crear la gota dins del container_gota
+    let gota = document.createElement('img');
+    gota.className = "gota";
+    gota.src = '/img/gota.png';
+    gota.setAttribute('data-potable', 'true');
+    container_gota.appendChild(gota);
+
+    // Crear la letra aleatoria dins del contenidor
+    lletra = aparenca_lletra_random(0);
+    container_gota.className = container_gota.className + " " + lletra.innerText;
+    container_gota.appendChild(lletra);
+    lletra_potable.push(lletra);
+    console.log(lletra_potable);
+
+    // Afegir el contenidor a fons
+    document.getElementById("fons").appendChild(container_gota);
+
+    // Guardar el contenidor a l'array de gotes
+    gotes.push(container_gota);
+}
+
+function crear_no_potable() {
+
+    console.log("La funció crear_no_potable FUNCIONA!");
+
+    // Crear el contenidor que inclourà la gota i la lletra
+    let container_gota = crear_container_gota();
+
+    // Crear la gota dins del container_gota
+    let gota_no_potable = document.createElement('img');
+    gota_no_potable.className = "gota";
+    gota_no_potable.src = '/img/no_potable.png';
+    gota_no_potable.setAttribute('data-potable', 'true');
+    container_gota.appendChild(gota_no_potable);
+
+    // Crear la letra aleatoria dins del contenidor
+    let lletra_no_potable = aparenca_lletra_random(0);
+    container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
+    container_gota.appendChild(lletra_no_potable);
+
+    // Afegir el contenidor a fons
+    document.getElementById("fons").appendChild(container_gota);
+
+    // Guardar el contenidor a l'array de gotes
+    gotes.push(container_gota);
+}
+
+// function crear_no_potable() {
+
+//     let gota2 = document.createElement('img')
+//     gotes.push(gota2);
+//     gota2.className = "gota"
+//     gota2.src = '/img/no_potable.png';
+//     gota2.style.position = "absolute;"
+//     gota2.style.top = "160px";
+//     let left = Math.random() * (1466 - 262) + 262;
+//     gota2.style.left = left + "px";
+//     let fons = document.getElementById("fons");
+//     fons.appendChild(gota2);
+//     gota2.setAttribute('data-potable', 'false');
+
+// }
+
+function crear_container_gota() {
+
+    let container_gota = document.createElement("div");
+    container_gota.className = "container_gota";
+    container_gota.style.position = "absolute";
+    container_gota.style.top = "160px";  // 
+    left = Math.random() * (1476 - 354) + 354;
+    container_gota.style.left = left + "px";
+
+    return container_gota
 
 }
 
-let gota = crear_gota();
+function aparenca_lletra_random(left) {
+
+    let lletra = document.createElement("span");
+    lletra.className = "lletra_gota"
+    lletra.innerText = lletra_random();
+    lletra.style.position = "absolute;"
+    lletra.style.top = "0px";
+    lletra.style.left = left + "px";
+
+    return lletra;
+
+}
+
+function lletra_random() {
+
+    const lletres = "QWERYUIOPASDFGJKÑÇXCVBNM"
+    return lletres.charAt(Math.floor(Math.random() * lletres.length));
+
+}
+
+function joc() {
+
+    imprimir_vides();
+
+    let positon = 0;
+
+    gota_interval = setInterval(() => {
+        crear_gota();
+
+    }, 2000)
+
+    gota_no_potable_intervaL = setInterval(() => {
+        crear_no_potable();
+    }, 6800)
 
 
-function moure_gota () {
+    let interval = setInterval(() => {
+        moure_gota();
+        moure_lletra();
+        colisio();
+    }, 16)
 
-let gota = document.createElement('img')
-let positon = 0;
+    document.addEventListener("keydown", clickar_tecla);
 
-let interval = setInterval(() => {
-
-position = postion + 5;
-
-gota.style.top = position;
-
-})
-
-    
+    increment_velocitat_no_potable();
+}
 
 
+function moure_gota() {
+    for (let container_gota of gotes) {
+        let position = parseInt(container_gota.style.top);
+        position += 5;
+        container_gota.style.top = position + "px";
+    }
+}
 
-    
+function moure_lletra() {
+    for (lletra of lletres) {
+        positon = parseInt(lletra.style.top);
+        position += 5;
+        lletra.style.top = position + "px";
+    }
 
+}
+
+//Eliminar gota i lletra al xocar
+
+function colisio() {
+    for (let i = gotes.length - 1; i >= 0; i--) {
+        let container_gota = gotes[i];
+        let position = parseInt(container_gota.style.top);
+
+        lletra_potable.shift(lletra);// No LDJKLKFKJFFJKFJKLFFGFGJKLFGFGJHGJHWGGGGGWGWGGWGWSGJHGGWGJK
+
+        if (position >= 750) {
+            let gota = container_gota.querySelector('.gota');
+
+
+            // if (gota.dataset.potable === 'true') {
+            //     perdre_vida();
+            // }
+
+            if (gota.getAttribute('data-potable') === 'true') {
+                perdre_vida();
+            }
+
+            container_gota.remove();
+            gotes.splice(i, 1);
+        }
+    }
+}
+
+function perdre_vida() {
+    if (vides.length > 0) {
+        let vida = vides.pop();
+        let corActiu = document.getElementById(vida.id);
+        container_vides.removeChild(corActiu);
+
+        joc_perdut();
+    }
+}
+
+
+function crear_cor(num) {
+
+    let cor = document.createElement('img')
+    vides.push(cor);
+    cor.className = "cor";
+    cor.id = num + 1;
+    cor.src = '/img/vida.png';
+    cor.style.position = "absolute;"
+    let fons = document.getElementById("fons");
+    container_vides.appendChild(cor);
+
+}
+
+function imprimir_vides() {
+
+    for (let i = 0; i < 3; i++) {
+        crear_cor(i);
+    }
+}
+
+function clickar_tecla(event) {
+
+    let tecla = event.key;
+    console.log("Tecla presionada:", tecla);
+    verificar_encert(tecla);
+
+}
+
+function verificar_encert(tecla) {
+
+    for (let i = 0; i < gotes.length; i++) {
+        let container_gota = gotes[i];
+        let lletra = container_gota.querySelector('.lletra_gota');
+
+        if (lletra && lletra.innerText === tecla.toUpperCase()) {
+            container_gota.remove();
+            gotes.splice(i, 1);
+            sumar_punts();
+            lletra_potable.shift(lletra);//LKLFJKFJKLSFJKLSJKLFJKLSJKLSJKLSJKLSGJKLSGJKLSGSGJKLJKLSGJKLSGJKLSGJKLSGJKLSGJKLSGJKL
+            break;
+        }
+    }
+}
+
+function sumar_punts() {
+
+    puntuacio += 5;
+    punts.innerText = puntuacio;
+
+    if (puntuacio === 50) {
+
+        clearInterval(gota_interval);
+
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 1500)
+
+    } else if (puntuacio === 100) {
+
+        clearInterval(gota_interval);
+
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 1000)
+
+    } else if (puntuacio === 150) {
+
+        clearInterval(gota_interval);
+
+        gota_interval = setInterval(() => {
+            crear_gota();
+        }, 500)
+
+    }
+
+}
+
+function increment_velocitat_no_potable() {
+
+    if (puntuacio === 50) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 4800)
+
+    } else if (puntuacio === 100) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 2800)
+
+    } else if (puntuacio === 150) {
+
+        clearInterval(gota_no_potable_intervaL);
+
+        gota_no_potable_intervaL = setInterval(() => {
+            crear_no_potable();
+        }, 1800)
+
+    }
+
+}
+
+function joc_perdut() {
+
+    if (vides.length === 0) {
+
+        alert("Molt bé! Has aconseguit" + " " + puntuacio + " " + "punts");
+    }
 
 
 }
+
+joc();

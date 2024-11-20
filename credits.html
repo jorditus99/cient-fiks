@@ -1,52 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <title>Anna i el misteri de les tres fonts</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css">
-  </head>
 
-  <body>
-      <div class="navbar">
-        <div class="navbar-content">
-          <div class="nav-links">
-              <a href="index.html">Historia</a>
-              <a href="jocs.html">Jocs</a>
-              <a href="ranquing.html">Rànquing</a>
-              <a href="credits.html">Equip</a>
-          </div>
-        </div>
-      </div> 
-    <div class="fotos_nostres">
-      <img class="foto" src="img_credits/erfan1.jpg">
-      <img class="foto" src="img_credits/natalai2.png">
-      <img class="foto" src="img_credits/jordi.png">
-      <img class="foto" src="img_credits/roger6.png">
-      <img class="foto" src="img_credits/virginia4.png">
+<head>
+  <title>Anna i el misteri de les tres fonts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css">
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="navbar-content">
+      <div class="nav-links">
+        <a href="index.html">Inici</a>
+        <a href="jocs.html">Jocs</a>
+        <a href="ranquing.html">Rànquing</a>
+        <a href="credits.html">Equip</a>
+      </div>
+    </div>
   </div>
-    <style>
+  <div class="fotos_nostres">
+    <div class="foto_container">
+      <img class="foto" src="img_credits/erfan1.jpg">
+      <img class="foto_oculta" src="img_credits/foto_real.png">
+      <h2>Erfan</h2>
+    </div>
+    <div class="foto_container">
+      <img class="foto" src="img_credits/natalai2.png">
+      <img class="foto_oculta" src="img_credits/erfan3.png">
+      <h2>Erfan</h2>
+    </div>
+    <div class="foto_container">
+      <img class="foto" src="img_credits/jordi.png">
+      <img class="foto_oculta" src="img_credits/erfan3.png">
+      <h2>Erfan</h2>
+    </div>
+    <div class="foto_container">
+      <img class="foto" src="img_credits/roger6.png">
+      <img class="foto_oculta" src="img_credits/erfan3.png">
+      <h2>Erfan</h2>
+    </div>
+    <div class="foto_container">
+      <img class="foto" src="img_credits/virginia4.png">
+      <img class="foto_oculta" src="img_credits/erfan3.png">
+      <h2>Erfan</h2>
+    </div>
+  </div>
 
-      .foto {
 
-        height: 275px;
-        width: 275px;
-        margin: 30px;
-       
+
+  <style>
+    .fotos_nostres {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 80%;
+
+      position: relative;
+    }
+
+    .foto_container {
+      position: relative;
+      margin: 10px;
+      width: 17%;
+    }
+
+    .foto {
+      width: 100%;
+      display: block;
+      border-radius: 1rem;
+      box-shadow: 10px 10px 10px 10px rgb(123, 221, 10);
+      /*cambiar*/
+    }
+
+    .foto_oculta {
+      position: absolute;
+      border-radius: 1rem;
+      top: 0;
+      height: 100%;
+      width: 100%;
+
+
+      opacity: 0;
+      /* Oculta la imagen al inicio */
+      transition: opacity 0.3s ease;
+      /* Transición suave */
+      z-index: 10;
+      transform: translateY(0);
+      /* Asegura que la imagen oculta esté encima */
+    }
+
+    .foto_oculta.visible {
+      animation: aparecerMover 0.8s forwards;
+      /* Llama a la animación */
+    }
+
+
+    @keyframes aparecerMover {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Empieza abajo */
       }
 
-      .fotos_nostres {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 90%;
+      100% {
+        opacity: 1;
+        transform: translateY(-50px);
+        /* Se mueve hacia arriba */
       }
-      
+    }
+  </style>
 
+  <script>
 
-    </style>
+    let imatges_ocultes = document.getElementsByClassName("foto_oculta");
 
-  </body>
+    let imatges = document.getElementsByClassName("foto");
+
+    for (let imatge_oculta of imatges_ocultes) {
+      imatge_oculta.addEventListener('mouseover', (e) => {
+
+        imatge_oculta.classList.add("visible");
+
+      });
+
+      imatge_oculta.addEventListener('mouseout', (e) => {
+
+        imatge_oculta.classList.remove("visible");
+      });
+    }
+
+  </script>
+
+</body>
+
 </html>

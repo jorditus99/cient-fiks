@@ -1,0 +1,172 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    background-image: url("/img/river_day.gif");
+    background-size: cover;
+    background-position: center;
+}
+
+#background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#game-img {
+    border-radius: 1rem;
+    height: 90%;
+    width: 70%;
+}
+
+.table-container{
+    height: 90%;
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Center the table */
+    align-items: center; /* Align items center */
+    border-radius: 1rem;
+    background-color: black;
+    position: relative; /* Make sure that child elements can be absolutely positioned inside */
+}
+
+.fons {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+
+/* #################################################### */
+
+#player {
+    position: absolute;
+    color: rgba(255, 255, 255, 0);
+    background-image: url("../img/img_natalia/player_front.jpg");
+    width: 1.2rem;
+    height: 1.6rem;
+    background-color: rgb(31, 221, 255);
+    z-index: 2;
+}
+
+#enemy {
+    position: absolute;
+    width: 1.6rem;
+    height: 1.2rem;
+    background-color: rgb(168, 168, 168);
+    color: rgb(168, 168, 168);
+    z-index: 2;
+}
+
+.enemy {
+    position: absolute;
+    width: 1.6rem;
+    height: 1.2rem;
+    background-color: rgb(199, 199, 199); /* Color for enemies */
+    z-index: 2;
+}
+
+
+table {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: auto;
+    height: auto;
+    border-spacing: 0px;
+    border-collapse: initial;
+    position: absolute;
+}
+
+tr {
+    border: none;
+}
+
+/*table element styles*/
+td {
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+}
+
+#win {
+    background-color: rgb(163, 255, 183);
+    color:rgba(0, 0, 0, 0);
+}
+
+.wall {
+    color: rgba(255, 255, 255, 0);
+    background-image: url("../img/img_natalia/wall.jpg");
+    background-color: rgb(40, 25, 94);
+}
+
+.freespace {
+    color: rgba(0, 0, 0, 0);
+    background-image: url("../img/img_natalia/floor.jpg");
+    background-color: rgb(41, 128, 87);
+}
+
+#start {
+    color:rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.key {
+    color: rgba(255, 255, 255, 0);
+    /* background-image: url("../img/img_natalia/manivela_off.png"); */
+    background-color: rgb(255, 158, 247);
+}
+
+#score {
+    font-family: monospace;
+    position: absolute;
+    top: 4%;
+    right: 75%;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    z-index: 10; /* Ensure it's above the table */
+}
+
+#timer {
+    font-family: monospace;
+    position: absolute;
+    top: 4%;
+    right: 45%;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    z-index: 10; /* Ensure it's above the table */
+}
+
+#life {
+    position: absolute;
+    top: 2%;
+    right: 10%;
+    z-index: 10; /* Ensure it's above the table */
+}
+
+.cor {
+    width: 50px;
+    height: 50px;
+}
+
+/* CHARACTER APPEARANCE STUFF */
+
+/* Define a blinking animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }   /* Fully visible at start and end of each cycle */
+    50% { opacity: 0.0; }      /* Semi-transparent at the middle of each cycle */
+}
+
+/* Class to apply during immunity */
+#player.immune {
+    animation: blink 0.5s infinite;  /* Blinks every 0.5 seconds */
+}

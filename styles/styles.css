@@ -84,7 +84,6 @@ video {
     padding: 30px;
     text-shadow: 3px 3px 5px #000000;
 
-    
 }
 
 .container-text-description {
@@ -93,6 +92,8 @@ video {
 
 button {
     /* background-color: white; */
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.5rem;
     color: white;
     background-color: #FF6F1E;
     border: none;
@@ -162,5 +163,4 @@ button {
     justify-content: center;
     align-items: center;
     height: 90%;
-}
 }
