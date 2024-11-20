@@ -14,4 +14,29 @@ function openBD(){
     return $conn;
 }
 
+function closeBD()
+{
+    return null;
+};
 
+function select_usuarios()
+{
+    $conn = openBD();
+    $sentenciaText = "select * from  usuario";
+
+    $sentencia = $conn->prepare($sentenciaText);
+    $sentencia->execute();
+
+    $resultado = $sentencia->fetchAll();
+      
+      $conn = closeBD();
+
+      return $resultado;
+};
+
+function registro_insertUsuario()
+{
+
+};
+
+function registro_insertContrasenya()
