@@ -29,29 +29,39 @@
     </div>
     <div class="foto_container">
       <img class="foto" src="img_credits/natalai2.png">
-      <img class="foto_oculta" src="img_credits/erfan3.png">
-      <h2>Erfan</h2>
+      <img class="foto_oculta" src="img_credits/foto_natalia_credits.png">
+      <h2>Natalia</h2>
     </div>
     <div class="foto_container">
       <img class="foto" src="img_credits/jordi.png">
       <img class="foto_oculta" src="img_credits/erfan3.png">
-      <h2>Erfan</h2>
+      <h2>Jordi</h2>
     </div>
     <div class="foto_container">
       <img class="foto" src="img_credits/roger6.png">
-      <img class="foto_oculta" src="img_credits/erfan3.png">
-      <h2>Erfan</h2>
+      <img class="foto_oculta" src="img_credits/foto_roger_credits.png">
+      <h2>Roger</h2>
     </div>
     <div class="foto_container">
       <img class="foto" src="img_credits/virginia4.png">
       <img class="foto_oculta" src="img_credits/erfan3.png">
-      <h2>Erfan</h2>
+      <h2>Virginia</h2>
     </div>
   </div>
 
 
 
   <style>
+    h2 {
+
+      text-align: center;
+    }
+
+    :root {
+      --vignet-border-color: #FF6F1E;
+      --vignet-hover-halo-color: #7002ff;
+    }
+
     .fotos_nostres {
       display: flex;
       flex-wrap: wrap;
@@ -74,15 +84,29 @@
       width: 100%;
       display: block;
       border-radius: 1rem;
-      box-shadow: 10px 10px 10px 10px rgb(123, 221, 10);
-      /*cambiar*/
+      border-color: var(--vignet-border-color);
+      animation: moviment 1.5s infinite;
+
+    }
+
+    @keyframes moviment {
+
+      0%,
+      100% {
+        border-color: var(--vignet-border-color);
+        box-shadow: 0 0 40px var(--vignet-hover-halo-color);
+      }
+
+      50% {
+        border-color: transparent;
+        box-shadow: 0 0 0px transparent;
+      }
     }
 
     .foto_oculta {
       position: absolute;
       border-radius: 1rem;
       top: 0;
-      height: 100%;
       width: 100%;
 
 
@@ -96,7 +120,7 @@
     }
 
     .foto_oculta.visible {
-      animation: aparecerMover 0.8s forwards;
+      animation: aparecerMover 0.6s forwards;
       /* Llama a la animación */
     }
 
@@ -104,13 +128,13 @@
     @keyframes aparecerMover {
       0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(0px);
         /* Empieza abajo */
       }
 
       100% {
         opacity: 1;
-        transform: translateY(-50px);
+        transform: translateY(0px);
         /* Se mueve hacia arriba */
       }
     }
