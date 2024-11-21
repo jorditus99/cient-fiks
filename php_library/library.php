@@ -2,48 +2,66 @@
 
 
 
-function openBD(){
+function connectionDB(){
 
     $servername = "localhost";
     $username = "root";
-    $password = "mysql";
+    $pass = "mysql";
  
+    try{
+    $connection = new PDO("mysql:host=$servername;dbname=cientifiks", $username, $pass);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $connection;
 
-    $conn = new PDO("mysql:host=$servername;dbname=cientifiks", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }  catch (PDOException $e){
+        die('Error: '.$e->getMessage());
+    } 
+    }
 
-    return $conn;
-}
 
+    function secure_data($data){
+    
+        // trim quita los espacios,  strip quita las comillas 
+        // y html subnota caracteres especiales
+        
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        
+        return $data;
+    
+    }
+
+
+    function hash_pass($pass){
+        return password_hash($pass, PASSWORD_DEFAULT);
+    }
+
+    function create_user($name, $pass){
+        $nom = secure_data($name);
+        // $pass = secure_data($pass);
+        // $pass = hash_pass($pass);
+
+        $connection = connectionDB();
+
+        $stmt = $connection->prepare('Insert into usuario 
+        (nom_usuario,  contrasenya) 
+        VALUES  (:nom_usuario, :password)');
+
+         $stmt->bindParam(':nom_usuario', $nom);
+         $stmt->bindParam(':password', $pass);
+         $stmt->execute();
+
+         $connection = closeBD();
+    }
+
+    
 function closeBD()
 {
     return null;
 };
 
-function select_usuarios()
-{
-    $conn = openBD();
-    $sentenciaText = "select * from  usuario";
 
-    $sentencia = $conn->prepare($sentenciaText);
-    $sentencia->execute();
 
-    $resultado = $sentencia->fetchAll();
-      
-      $conn = closeBD();
 
-      return $resultado;
-};
 
-function registro_insertUsuario()
-{
-
-};
-
-function registro_insertContrasenya()
-
-    $conn = new PDO("mysql:host=$servername;dbname=hoteles_dwes", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    return $conn;
-}

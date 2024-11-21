@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://localhost:8080/cientifiks/cient-fiks/log_in.php",
+            "url": "http://localhost:80/cientifiks/cient-fiks/registro.php",
             "webRoot": "${workspaceFolder}"
         },
         {
