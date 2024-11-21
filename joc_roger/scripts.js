@@ -7,6 +7,7 @@ let vides = [];
 const container_vides = document.getElementById("container_vides"); 
 let punts = document.getElementById("punts"); 
 let puntuacio = 0;
+let intervalId;
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
@@ -184,15 +185,17 @@ function definir_vides(numVides) {
 
 function afegir_puntuacio() {
 
-    do {
+    console.log("Dins de puntuacio");
+    if (vides.length > 0) {
+        console.log(vides);
         puntuacio += 5;
         console.log(puntuacio);
         punts.innerHTML = puntuacio;
-    } while (vides > 0);
-    
-    
-}
+    } else {
 
+        clearInterval(intervalId);
+    }
+}
 function iniciar_joc() {
  
 
@@ -201,7 +204,7 @@ function iniciar_joc() {
     moure_img_principal();
     crear_personatge();
     setInterval(crear_obstacle, 1000);
-    setInterval(afegir_puntuacio, 5000) ;
+    intervalId = setInterval(afegir_puntuacio, 5000);
   }
   
 
