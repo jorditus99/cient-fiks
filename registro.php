@@ -1,3 +1,19 @@
+<?php
+require_once ('./php_library/library.php');
+
+if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-password'])) {
+    // print_r($_POST['password']);
+    // die();
+    if ($_POST['password'] === $_POST['confirm-password']) {
+        create_user($_POST['nom'], $_POST['password']);
+    } else {
+        echo "Las contraseñas no coinciden.";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -102,9 +118,9 @@
                 <h1>Registrarse</h1>
             </div>
             <div class="container-form">
-                <form action="tu_proceso_de_registro.php" method="post" class="form-register">
+                <form action="" method="POST" class="form-register">
                     <div class="continer-inputs">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario" required>
+                        <input type="text" id="nom" name="nom" placeholder="Nombre de usuario" required>
                         <input type="password" id="password" name="password" placeholder="Crear contraseña" required>
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Repetir contraseña" required>
                     </div>
