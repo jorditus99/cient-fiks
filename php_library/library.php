@@ -61,7 +61,43 @@ function closeBD()
     return null;
 };
 
+function check_nom($nom){
+    $nom = secure_data($nom);
+    $connection = connectionDB();
+    $stmt = $connection->prepare('SELECT nom_usuario, contrasenya FROM usuario WHERE nom_usuario = :nom');
+    $stmt->bindParam('nom',$nom);
+    $stmt->execute();
+
+    $result= $stmt->fetch();
+    if(isset($result['nom'])){
+        return true;
+    } else{
+        return false;
+    }
 
 
+}
 
 
+function get_pass($nom){
+$nom = secure_data($nom);
+$connection = connectionDB();
+$stmt = $connection->prepare('SELECT nom_usuario, contrasenya FROM usuario WHERE nom_usuario = :nom');
+$stmt->bindParam('nom',$nom);
+$stmt->execute();
+
+$result= $stmt->fetch();
+
+return $result['password'];
+}
+
+function auth_user($nom, $password){
+    $nom = secure_data($nom);
+    $password =secure_data($password);
+
+    if(check_nom($nom)){
+        $passInDB = get_pass($nom);
+        $resultAuth = password_verify($password, $passInDB);
+        return $resultAuth;
+    }
+}
