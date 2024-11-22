@@ -35,7 +35,7 @@ function crear_gota() {
     lletra = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra.innerText;
     container_gota.appendChild(lletra);
-    lletra_potable.push(lletra);
+    lletra_potable.push(lletra.innerText);
     console.log(lletra_potable);
 
     // Afegir el contenidor a fons
@@ -62,7 +62,7 @@ function crear_no_potable() {
     // Crear la letra aleatoria dins del contenidor
     let lletra_no_potable = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
-    container_gota.appendChild(lletra_no_potable);
+    container_gota.appendChild(lletra_no_potable.innerText);
 
     // Afegir el contenidor a fons
     document.getElementById("fons").appendChild(container_gota);
@@ -172,10 +172,9 @@ function colisio() {
         let container_gota = gotes[i];
         let position = parseInt(container_gota.style.top);
 
-        lletra_potable.shift(lletra);// No LDJKLKFKJFFJKFJKLFFGFGJKLFGFGJHGJHWGGGGGWGWGGWGWSGJHGGWGJK
-
         if (position >= 750) {
             let gota = container_gota.querySelector('.gota');
+            let lletra = container_gota.innerText;
 
 
             // if (gota.dataset.potable === 'true') {
@@ -184,6 +183,13 @@ function colisio() {
 
             if (gota.getAttribute('data-potable') === 'true') {
                 perdre_vida();
+            }
+
+            if (lletra) {
+                let i = lletra_potable.indexOf(lletra);
+                if (i != -1) {
+                    lletra_potable.splice(i, 1);
+                }
             }
 
             container_gota.remove();
@@ -241,8 +247,14 @@ function verificar_encert(tecla) {
             container_gota.remove();
             gotes.splice(i, 1);
             sumar_punts();
-            lletra_potable.shift(lletra);//LKLFJKFJKLSFJKLSJKLFJKLSJKLSJKLSJKLSGJKLSGJKLSGSGJKLJKLSGJKLSGJKLSGJKLSGJKLSGJKLSGJKL
             break;
+        }
+
+        if (lletra) {
+            let i = lletra_potable.indexOf(lletra);
+            if (i !== -1) {
+                lletra_potable.splice(i, 1);
+            }
         }
     }
 }
