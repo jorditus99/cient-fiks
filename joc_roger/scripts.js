@@ -13,8 +13,6 @@ function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
     let posicioX = 0;
 
-
-
     imatges.forEach((img) => {
         img.style.position = "absolute";
         img.style.left = posicioX + "px";
@@ -34,8 +32,6 @@ function moure_img_principal() {
         });
     }, 10);
 }
-
-
 
 function crear_personatge() {
 
@@ -69,12 +65,11 @@ function moure_personatge(event) {
     }
 }
 
-
 function crear_obstacle() {
 
+    const posicionsTop = [0, 210, 420];
     let imgSrc = obstacles[Math.floor(Math.random() * obstacles.length)];
     
-
     let obstacle = document.createElement('img');
     obstacle.src = imgSrc;
     obstacle.alt = "Obstacle";
@@ -83,25 +78,14 @@ function crear_obstacle() {
     obstacle.style.width = "100px"; 
     obstacle.style.border = "1px solid white";
 
-
-    const posicionsTop = [0, 210, 420];
-    
-
     obstacle.style.top = posicionsTop[Math.floor(Math.random() * posicionsTop.length)] + "px";
-
 
     imatge_fons.appendChild(obstacle);
   
     moure_obstacle(obstacle);
 
-
     setInterval(() => eliminar_obstacle(obstacle), 10);
 }
-
- 
-  
-
-
 
 function moure_obstacle(obstacle) {
     let posicioX = parseInt(obstacle.style.left); 
@@ -110,7 +94,6 @@ function moure_obstacle(obstacle) {
     const moviment = setInterval(() => {
         posicioX -= velocitat;
         obstacle.style.left = posicioX + 'px';
-
 
         if (posicioX < -obstacle.width) {
             posicioX = window.innerWidth;
@@ -122,16 +105,11 @@ function detectar_colisio() {
     const obstacle = imatge_fons.querySelector('img[alt="Obstacle"]');
 
     if (!personatge || !obstacle) {
-        // console.log("Personatge o obstacle no trobat");
         return;
     }
 
-
     const rectPersonatge = personatge.getBoundingClientRect();
     const rectObstacle = obstacle.getBoundingClientRect();
-
-    // console.log("Personatge:", rectPersonatge, "Obstacle:", rectObstacle);
-
 
     if (
         rectPersonatge.top < rectObstacle.bottom &&
@@ -139,7 +117,7 @@ function detectar_colisio() {
         rectPersonatge.left < rectObstacle.right &&
         rectPersonatge.right > rectObstacle.left
     ) {
-
+        obstacle.remove();
         pantalla_perdre();
     }
 }
@@ -152,13 +130,12 @@ function eliminar_obstacle(obstacle) {
         // console.log("obstacle tret");
         obstacle.remove();
     }
-
 }
 
 function pantalla_perdre() {
     // alert("T'has xocat");
     console.log("T'has xocat");
-    velocitat = 0;
+    // velocitat = 0;
 }
 
 function crear_cor() {
@@ -176,18 +153,14 @@ function definir_vides(numVides) {
     container_vides.innerHTML = '';
     vides = [];
 
-
     for (let i = 0; i < numVides; i++) {
         crear_cor();
     }
 }
 
-
 function afegir_puntuacio() {
 
-    console.log("Dins de puntuacio");
     if (vides.length > 0) {
-        console.log(vides);
         puntuacio += 5;
         console.log(puntuacio);
         punts.innerHTML = puntuacio;
@@ -196,9 +169,9 @@ function afegir_puntuacio() {
         clearInterval(intervalId);
     }
 }
+
 function iniciar_joc() {
  
-
     definir_vides(3);
     setInterval(detectar_colisio, 30);
     moure_img_principal();
@@ -207,9 +180,6 @@ function iniciar_joc() {
     intervalId = setInterval(afegir_puntuacio, 5000);
   }
   
-
   iniciar_joc();
-
-
 
 document.addEventListener('keydown', moure_personatge);
