@@ -1,3 +1,19 @@
+<?php
+require_once('./php_library/library.php');
+
+if(isset($_POST['nom']) && isset ($_POST['password'])){
+$resultAuth = auth_user($_POST['nom'], $_POST['password']);
+if(!$resultAuth){
+    header('Location: error.php');
+}else{
+    header('Location: error.php');
+}
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -120,7 +136,7 @@
                 <h1>Iniciar Sesión</h1>
             </div>
             <div class="container-form">
-                <form action="tabla.php" method="post" class="form-log-in">
+                <form action="" method="POST" class="form-log-in">
                     <div class="continer-inputs">
                         <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario">
                         <input type="password" id="password" name="password" placeholder="Contraseña">
