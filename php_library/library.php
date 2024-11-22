@@ -52,7 +52,7 @@ function connectionDB(){
          $stmt->bindParam(':password', $pass);
          $stmt->execute();
 
-         $connection = closeBD();
+         
     }
 
     
