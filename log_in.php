@@ -1,13 +1,21 @@
 <?php
 require_once('./php_library/library.php');
 
-if(isset($_POST['nom']) && isset ($_POST['password'])){
-$resultAuth = auth_user($_POST['nom'], $_POST['password']);
-if(!$resultAuth){
-    header('Location: error.php');
-}else{
-    header('Location: error.php');
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+    if (isset($_POST['nom']) && isset($_POST['password'])) {
+        $nom = secure_data($_POST['nom']);
+        $password = secure_data($_POST['password']);
+
+        $resultAuth = check_user($nom, $password); 
+
+        if ($resultAuth) {
+            header('Location: jocs.html');
+            exit; 
+        } else {
+            header('Location: error.php');
+            exit; 
+        }
+    }
 }
 
 
@@ -138,7 +146,7 @@ if(!$resultAuth){
             <div class="container-form">
                 <form action="" method="POST" class="form-log-in">
                     <div class="continer-inputs">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre de usuario">
+                        <input type="text" id="nom" name="nom" placeholder="Nombre de usuario">
                         <input type="password" id="password" name="password" placeholder="Contraseña">
                     </div>
                     <div class="container-buttons">
