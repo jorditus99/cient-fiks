@@ -10,6 +10,8 @@ html, body {
     background-image: url("/img/river_day.gif");
     background-size: cover;
     background-position: center;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
 }
 
 h1 {
@@ -164,3 +166,61 @@ button {
     align-items: center;
     height: 90%;
 }
+
+/* RANKING */
+
+
+.ranking-container {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center the content horizontally within the container */
+    width: 50%; /* Control the width of the ranking container */
+    height: 80%;
+    padding: 20px;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.781);
+    margin-bottom: 3rem;
+}
+  
+  .ranking-title {
+    margin-bottom: 20px; /* Adds space between the title and the table */
+    font-size: 3rem;
+    color: var(--naranja); /* Set the color for the title */
+  }
+  
+  .ranking {
+    display: flex;              /* Activamos Flexbox */
+    justify-content: center;    /* Centra la tabla horizontalmente */
+    width: 100%;                /* Asegura que el contenedor ocupe todo el ancho */
+    margin-top: 20px;           /* Espacio arriba (opcional) */
+    text-align: center;
+  }
+  
+
+  .ranking table {
+    border: 5px solid var(--naranja);
+    font-size: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    width: 90%;
+    justify-content: center;
+  }
+
+  .ranking th {
+    font-size: 30px;
+  }
+
+  .ranking th, td {
+    /* border: 5px solid var(--naranja); */
+    /* background-color: rgba(255, 255, 255, 0.808); */
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  span {
+    font-weight: bold;
+    color: white;
+    background-color: #FF6F1E;
+    padding: 0.7rem;
+    border-radius: 1rem;
+  }
