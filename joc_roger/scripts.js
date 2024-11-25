@@ -118,9 +118,24 @@ function detectar_colisio() {
         rectPersonatge.right > rectObstacle.left
     ) {
         obstacle.remove();
-        pantalla_perdre();
+        eliminar_vides();
     }
 }
+
+function eliminar_vides() {
+    if (vides.length > 0) {
+        const vidaEliminada = vides.pop(); // Elimina l'última vida de l'array
+        vidaEliminada.remove(); // Elimina l'element corresponent del DOM
+        console.log("Vida eliminada");
+    } else {
+        console.log("No queden vides!");
+        // Aquí pots cridar la funció `pantalla_perdre` o el que necessitis
+        pantalla_perdre();
+    }
+
+
+}
+
 
 function eliminar_obstacle(obstacle) {
 
@@ -134,8 +149,8 @@ function eliminar_obstacle(obstacle) {
 
 function pantalla_perdre() {
     // alert("T'has xocat");
-    console.log("T'has xocat");
-    // velocitat = 0;
+    // console.log("T'has xocat");
+    velocitat = 0;
 }
 
 function crear_cor() {
