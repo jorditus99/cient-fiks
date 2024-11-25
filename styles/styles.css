@@ -16,7 +16,8 @@ html, body {
 
 h1 {
     font-size: 4rem;
-    color: var(--naranja)
+    color: var(--naranja);
+    line-height: 1;
 }
 
 .navbar {
@@ -167,60 +168,106 @@ button {
     height: 90%;
 }
 
-/* RANKING */
+/* -----------------------------------RANKING------------------------------------------- */
 
 
 .ranking-container {
     display: flex;
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center the content horizontally within the container */
-    width: 50%; /* Control the width of the ranking container */
-    height: 80%;
+    width: 30%; /* Control the width of the ranking container */
+    height: 90%;
     padding: 20px;
     border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.781);
+    background-color: rgba(255, 255, 255, 0.849);
+    /* background-color: white; */
     margin-bottom: 3rem;
 }
-  
-  .ranking-title {
-    margin-bottom: 20px; /* Adds space between the title and the table */
-    font-size: 3rem;
-    color: var(--naranja); /* Set the color for the title */
-  }
+
+.ranking-title {
+    text-align: center;     /* Centra el texto dentro de su contenedor */
+    width: 100%;            /* Asegura que ocupe todo el ancho del contenedor */
+    margin: 0 auto;         /* Asegura que no tenga márgenes laterales */
+}
+
   
   .ranking {
-    display: flex;              /* Activamos Flexbox */
-    justify-content: center;    /* Centra la tabla horizontalmente */
-    width: 100%;                /* Asegura que el contenedor ocupe todo el ancho */
-    margin-top: 20px;           /* Espacio arriba (opcional) */
+    display: flex;                /* Activa Flexbox */
+    flex-direction: column;       /* Apila los hijos en una columna */
+    justify-content: flex-start;  /* Asegura que se mantengan al inicio */
+    align-items: center;          /* Centra los hijos horizontalmente */
+    width: 100%;                  /* Asegura que ocupe todo el ancho */
+    margin-top: 20px;             /* Espacio superior (opcional) */
     text-align: center;
-  }
+}
   
 
   .ranking table {
-    border: 5px solid var(--naranja);
     font-size: 20px;
-    background-color: white;
-    border-radius: 1rem;
-    width: 90%;
+    /* background-color: white; */
+    width: 100%;
     justify-content: center;
-  }
-
-  .ranking th {
-    font-size: 30px;
-  }
-
-  .ranking th, td {
-    /* border: 5px solid var(--naranja); */
-    /* background-color: rgba(255, 255, 255, 0.808); */
-    border-radius: 0.5rem;
     padding: 1rem;
   }
+  
 
-  span {
+  .ranking th, td {
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+  }
+
+  .ranking-container span {
+    font-size: 19px;
     font-weight: bold;
     color: white;
     background-color: #FF6F1E;
-    padding: 0.7rem;
-    border-radius: 1rem;
+    padding: 0.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
   }
+
+  .ranking-icons {
+    display: flex;                /* Activa Flexbox para los hijos */
+    justify-content: center;      /* Centra los hijos horizontalmente */
+    align-items: center;          /* Alinea los hijos verticalmente */
+    margin-bottom: 1rem;          /* Espacio entre los íconos y la tabla */
+    height: 15rem;
+    gap: 1rem;
+}
+
+
+.ranking-icons img {
+    width: 7rem;   /* Set desired width */
+    height: 7rem;  /* Set desired height to match */
+    gap: 10rem;
+    object-fit: contain; /* Ensures images maintain aspect ratio */
+    width: 40%;
+}
+
+.ranking-title {
+    margin: 0;
+}
+
+.ranking-icons p {
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+
+#number-one p {
+    font-weight: bold;
+    font-size: 40px;
+    margin: 1rem;
+    color: #FF6F1E;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#number-one span {
+    font-size: 25px;
+}
+
+#number-one img {
+    width: 100%;
+}
