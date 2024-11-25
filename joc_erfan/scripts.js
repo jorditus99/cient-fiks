@@ -1,9 +1,10 @@
 let gotes = [];
 let vides = [];
-let lletra = "A";
-let lletres = [];
-let lletra_potable = [];
-let lletres_no_potables = [];
+let lletra = "A"; // Lletra per defecte de les gotes
+let lletra_no_potable = "A"; // lletra per defecte de els gotes NO potables
+let lletres = []; //Array complet amb totes les lletres
+let lletra_potable = []; // Array amb les lletres de les gotes gotes 
+let lletres_no_potables = []; //Array amb les lletres de les gotes NO potables
 let punts = document.getElementById("punts");
 let puntuacio = 0;
 
@@ -31,7 +32,7 @@ function crear_gota() {
     gota.setAttribute('data-potable', 'true');
     container_gota.appendChild(gota);
 
-    // Crear la letra aleatoria dins del contenidor
+    // Crear la lletra aleatoria dins del contenidor
     lletra = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra.innerText;
     container_gota.appendChild(lletra);
@@ -59,10 +60,12 @@ function crear_no_potable() {
     gota_no_potable.setAttribute('data-potable', 'true');
     container_gota.appendChild(gota_no_potable);
 
-    // Crear la letra aleatoria dins del contenidor
-    let lletra_no_potable = aparenca_lletra_random(0);
+    // Crear la lletra aleatoria dins del contenidor
+    lletra_no_potable = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
-    container_gota.appendChild(lletra_no_potable.innerText);
+    container_gota.appendChild(lletra_no_potable);
+    lletra_no_potable.push(lletra.innerText);
+
 
     // Afegir el contenidor a fons
     document.getElementById("fons").appendChild(container_gota);
@@ -71,28 +74,12 @@ function crear_no_potable() {
     gotes.push(container_gota);
 }
 
-// function crear_no_potable() {
-
-//     let gota2 = document.createElement('img')
-//     gotes.push(gota2);
-//     gota2.className = "gota"
-//     gota2.src = '/img/no_potable.png';
-//     gota2.style.position = "absolute;"
-//     gota2.style.top = "160px";
-//     let left = Math.random() * (1466 - 262) + 262;
-//     gota2.style.left = left + "px";
-//     let fons = document.getElementById("fons");
-//     fons.appendChild(gota2);
-//     gota2.setAttribute('data-potable', 'false');
-
-// }
-
 function crear_container_gota() {
 
     let container_gota = document.createElement("div");
     container_gota.className = "container_gota";
     container_gota.style.position = "absolute";
-    container_gota.style.top = "160px";  // 
+    container_gota.style.top = "160px";
     left = Math.random() * (1476 - 354) + 354;
     container_gota.style.left = left + "px";
 
@@ -102,7 +89,7 @@ function crear_container_gota() {
 
 function aparenca_lletra_random(left) {
 
-    let lletra = document.createElement("span");
+    let lletra = document.createElement("div");
     lletra.className = "lletra_gota"
     lletra.innerText = lletra_random();
     lletra.style.position = "absolute;"
@@ -246,15 +233,14 @@ function verificar_encert(tecla) {
         if (lletra && lletra.innerText === tecla.toUpperCase()) {
             container_gota.remove();
             gotes.splice(i, 1);
+
+            let index = lletra_potable.indexOf(lletra.innerText);
+            if (index !== -1) {
+                lletra_potable.splice(index, 1);
+            }
+
             sumar_punts();
             break;
-        }
-
-        if (lletra) {
-            let i = lletra_potable.indexOf(lletra);
-            if (i !== -1) {
-                lletra_potable.splice(i, 1);
-            }
         }
     }
 }
