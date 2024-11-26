@@ -75,6 +75,17 @@ function check_user($nom, $pass)
     return false; 
 }
 
+function add_id ($user_type){
+    
+    $connection = connectionDB();
+    $user_type = secure_data($user_type);
+    $stmt = $connection->prepare('Insert into usuario 
+    (id_tipo) 
+    VALUES  (:user_type)'); 
+    $stmt->bindParam(':id_tipo', $user_type);
+    $stmt->execute();
+
+}
     
 
 
