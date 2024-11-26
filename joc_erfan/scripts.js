@@ -3,8 +3,7 @@ let vides = [];
 let lletra = "A"; // Lletra per defecte de les gotes
 let lletra_no_potable = "A"; // lletra per defecte de els gotes NO potables
 let lletres = []; //Array complet amb totes les lletres
-let lletra_potable = []; // Array amb les lletres de les gotes gotes 
-let lletres_no_potables = []; //Array amb les lletres de les gotes NO potables
+let lletres_a_comparar = []; // Array amb les lletres de les gotes gotes 
 let punts = document.getElementById("punts");
 let puntuacio = 0;
 
@@ -36,8 +35,8 @@ function crear_gota() {
     lletra = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra.innerText;
     container_gota.appendChild(lletra);
-    lletra_potable.push(lletra.innerText);
-    console.log(lletra_potable);
+    lletres_a_comparar.push(lletra.innerText);
+    console.log(lletres_a_comparar);
 
     // Afegir el contenidor a fons
     document.getElementById("fons").appendChild(container_gota);
@@ -57,14 +56,16 @@ function crear_no_potable() {
     let gota_no_potable = document.createElement('img');
     gota_no_potable.className = "gota";
     gota_no_potable.src = '/img/no_potable.png';
-    gota_no_potable.setAttribute('data-potable', 'true');
+    gota_no_potable.setAttribute('data-potable', 'false');
     container_gota.appendChild(gota_no_potable);
 
     // Crear la lletra aleatoria dins del contenidor
     lletra_no_potable = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
     container_gota.appendChild(lletra_no_potable);
-    lletra_no_potable.push(lletra.innerText);
+    lletres_a_comparar.push(lletra.innerText);
+
+    lletra_no_potable.classList.add("lletra_no_potable");
 
 
     // Afegir el contenidor a fons
@@ -102,7 +103,7 @@ function aparenca_lletra_random(left) {
 
 function lletra_random() {
 
-    const lletres = "QWERYUIOPASDFGJKÑÇXCVBNM"
+    const lletres = "QWERYUIOPASDFJKÑÇXCVBNM"
     return lletres.charAt(Math.floor(Math.random() * lletres.length));
 
 }
@@ -173,9 +174,9 @@ function colisio() {
             }
 
             if (lletra) {
-                let i = lletra_potable.indexOf(lletra);
+                let i = lletres_a_comparar.indexOf(lletra);
                 if (i != -1) {
-                    lletra_potable.splice(i, 1);
+                    lletres_a_comparar.splice(i, 1);
                 }
             }
 
@@ -229,18 +230,23 @@ function verificar_encert(tecla) {
     for (let i = 0; i < gotes.length; i++) {
         let container_gota = gotes[i];
         let lletra = container_gota.querySelector('.lletra_gota');
+        let gota = container_gota.querySelector('.gota');
 
         if (lletra && lletra.innerText === tecla.toUpperCase()) {
-            container_gota.remove();
-            gotes.splice(i, 1);
-
-            let index = lletra_potable.indexOf(lletra.innerText);
-            if (index !== -1) {
-                lletra_potable.splice(index, 1);
+            // Comprovar si la gota és no potable
+            if (gota && gota.getAttribute('data-potable') === 'false') {
+                perdre_vida(); // Treu una vida
+            } else {
+                let index = lletres_a_comparar.indexOf(lletra.innerText);
+                if (index !== -1) {
+                    lletres_a_comparar.splice(index, 1);
+                }
+                sumar_punts(); // Suma punts només per gotes potables
             }
 
-            sumar_punts();
-            break;
+            container_gota.remove(); // Elimina la gota en qualsevol cas
+            gotes.splice(i, 1); // Elimina la gota de l'array
+            break; // Atura el bucle després de trobar la lletra
         }
     }
 }
