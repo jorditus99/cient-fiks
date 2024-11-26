@@ -38,20 +38,22 @@ function hash_pass($pass)
     return password_hash($pass, PASSWORD_DEFAULT);
 }
 
-function create_user($name, $pass)
+function create_user($name, $pass, $id_type)
 {
     $nom = secure_data($name);
     $pass = secure_data($pass);
     $pass = hash_pass($pass);
+    $id_type = secure_data($id_type);
 
     $connection = connectionDB();
 
     $stmt = $connection->prepare('Insert into usuario 
-        (nom_usuario,  contrasenya) 
-        VALUES  (:nom_usuario, :password)');
+        (nom_usuario,  contrasenya, id_tipo) 
+        VALUES  (:nom_usuario, :password, :id_tipo)');
 
     $stmt->bindParam(':nom_usuario', $nom);
     $stmt->bindParam(':password', $pass);
+    $stmt->bindParam(':id_tipo', $id_type);
     $stmt->execute();
 }
 
@@ -70,9 +72,9 @@ function check_user($nom, $pass)
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
     if ($result && password_verify($pass, $result['contrasenya'])) {
-        return true; 
+        return $result["id_usuario"]; 
     }
-    return false; 
+    return -1; 
 }
 
 function add_id ($user_type){
