@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $resultAuth = check_user($nom, $password); 
 
-        if ($resultAuth) {
+        if ($resultAuth > 0) {                        //usuario existe
+            $_SESSION['userID'] = $resultAuth;
             header('Location: jocs.html');
             exit; 
         } else {

@@ -5,7 +5,7 @@ if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-p
     // print_r($_POST['password']);
     // die();
     if ($_POST['password'] === $_POST['confirm-password']) {
-        create_user($_POST['nom'], $_POST['password']);
+        create_user($_POST['nom'], $_POST['password'],$_POST['id_tipo']);
     } else {
         echo "Las contraseñas no coinciden.";
     }
@@ -123,6 +123,7 @@ if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-p
                         <input type="text" id="nom" name="nom" placeholder="Nombre de usuario" required>
                         <input type="password" id="password" name="password" placeholder="Crear contraseña" required>
                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Repetir contraseña" required>
+                        <input type="hidden" id="id_tipo" name="id_tipo" value="3">
                     </div>
                     <div class="container-buttons">
                         <button type="submit" class="register-button">Registrarse</button>
