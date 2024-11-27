@@ -36,8 +36,6 @@ html, body {
 }
 
 
-/* #################################################### */
-
 #player {
     position: absolute;
     color: rgba(255, 255, 255, 0);
@@ -60,7 +58,7 @@ html, body {
     position: absolute;
     width: 1.6rem;
     height: 1.2rem;
-    background-color: rgb(199, 199, 199); /* Color for enemies */
+    background-color: rgb(199, 199, 199);
     z-index: 2;
 }
 
@@ -68,17 +66,17 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95%; /* Black background height */
+    height: 95%; 
     width: 70%;
     border-radius: 1rem;
-    /* background-color: black; */
+    
     background-image: url('/img/img_natalia/sewer.jpg');
     position: relative;
 }
 
 
 table {
-    height: 70%; /* Adjust this percentage to your desired height */
+    height: 70%; 
     margin-top: 5%;
     width: 95%;
     border-spacing: 0px;
@@ -90,11 +88,11 @@ tr {
     border: none;
 }
 
-/*table element styles*/
+
 td {
-    height: calc(100% / 25); /* Divide height based on the number of rows */
-    padding: 0; /* Avoid additional spacing */
-    overflow: hidden; /* Prevent content from stretching cells */
+    height: calc(100% / 25);
+    padding: 0; 
+    overflow: hidden; 
     background-size: cover;
 }
 
@@ -106,7 +104,7 @@ td {
 
 .wall {
     background-image: url("../img/img_natalia/wall.jpg");
-    background-size: cover; /* Make sure the image fits the cell */
+    background-size: cover;
 }
 
 .freespace {
@@ -137,19 +135,19 @@ td {
     top: 2%;
     right: 72%;
     color: rgb(255, 255, 255);
-    z-index: 10; /* Ensure it's above the table */
+    z-index: 10;
 }
 
 #timer {
     right: 38%;
-    z-index: 10; /* Ensure it's above the table */
+    z-index: 10;
 }
 
 #life {
     position: absolute;
     top: 2%;
     right: 10%;
-    z-index: 10; /* Ensure it's above the table */
+    z-index: 10; 
 }
 
 .cor {
@@ -157,15 +155,11 @@ td {
     height: 50px;
 }
 
-/* CHARACTER APPEARANCE STUFF */
-
-/* Define a blinking animation */
 @keyframes blink {
-    0%, 100% { opacity: 1; }   /* Fully visible at start and end of each cycle */
-    50% { opacity: 0.0; }      /* Semi-transparent at the middle of each cycle */
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.0; } 
 }
 
-/* Class to apply during immunity */
 #player.immune {
-    animation: blink 0.5s infinite;  /* Blinks every 0.5 seconds */
+    animation: blink 0.5s infinite; 
 }
