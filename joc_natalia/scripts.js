@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", loadPage);
 
-// Maze definition
 let maze = [
     `#########################################`,
     `#.#.....?..#........#.....#..?.#..#.....#`,
@@ -28,17 +27,16 @@ let maze = [
     `#########################################`
 ];
 
-// GLOBAL VARIABLES
-// GLOBAL VARIABLES
+
 let currentLevel = maze;
 let tableDiv = document.getElementById('background');
 let table = document.querySelector('table');
-let scoreDisplay, timerDisplay;  // Change these to let so they can be reassigned
+let scoreDisplay, timerDisplay;
 const lifeContainer = document.getElementById('life');
 const tableContainer = document.getElementById('table-container');
 let isImmune = false;
-let timeRemaining = 240;  // 4 minutes in seconds
-let points = timeRemaining;  // Points equal to the countdown time initially
+let timeRemaining = 240;
+let points = timeRemaining;
 let keyStates = new Map();
 let activatedKeyTiles = 0;
 let score = 0;
@@ -57,7 +55,6 @@ function startCountdownTimer() {
         timeRemaining -= 1;
         points = timeRemaining;
 
-        // Update displays
         updateTimerDisplay(timeRemaining);
 
         if (timeRemaining <= 0) {
@@ -69,24 +66,22 @@ function startCountdownTimer() {
 }
 
 function createGameUI() {
-    // Create and append "Manetes" score display
+    
     const scoreDiv = document.createElement('div');
     scoreDiv.id = 'score';
     scoreDiv.textContent = 'Manetes: 0/5';
     tableContainer.insertBefore(scoreDiv, tableContainer.firstChild);
 
-    // Create and append "Temps" timer display
     const timerDiv = document.createElement('div');
     timerDiv.id = 'timer';
     timerDiv.textContent = 'Temps: 4:00';
     tableContainer.insertBefore(timerDiv, scoreDiv.nextSibling);
 
-    // Update global references
     scoreDisplay = document.getElementById('score');
     timerDisplay = document.getElementById('timer');
 }
 
-// DRAWING OF MAZE
+
 function loadPage() {
 
     function updateElementSizeAndPosition() {
@@ -109,41 +104,33 @@ function loadPage() {
             cell.style.height = `${cellHeight}px`;
         });
     
-        // Adjust the size of the player (e.g., 60% of cell size for width and 80% of cell height for height)
         const player = document.getElementById('player');
         if (player) {
             player.style.width = `${cellWidth * 0.6}px`;  // Make player 60% of the cell width
             player.style.height = `${cellHeight * 0.8}px`; // Make player 80% of the cell height
         }
     
-        // Adjust the size of enemies (e.g., 50% of cell width and height)
         document.querySelectorAll('.enemy').forEach(enemy => {
-            enemy.style.width = `${cellWidth * 0.8}px`;  // Make enemies 50% of the cell width
-            enemy.style.height = `${cellHeight * 0.6}px`; // Make enemies 50% of the cell height
+            enemy.style.width = `${cellWidth * 0.8}px`;  // Make enemies % of the cell width
+            enemy.style.height = `${cellHeight * 0.6}px`; // Make enemies % of the cell height
         });
     }
     
-    
-    
-    
-
-    // Call createGameUI to create and show the UI elements
     createGameUI();
 
-    // Set initial points and start the countdown timer
-    points = 240; // 4 minutes in seconds
+    points = 240;
     timeRemaining = 240;
-    updateTimerDisplay(timeRemaining); // Initial display as "4:00"
+    updateTimerDisplay(timeRemaining);
     startCountdownTimer();
 
     let mover = document.createElement('div');
     mover.style.left = '18.7%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
-    mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; // Set initial graphic
+    mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; 
     tableDiv.appendChild(mover);
 
-    // Function to create an enemy
+
     function createEnemy(left, top) {
         const enemy = document.createElement('div');
         enemy.classList.add('enemy');
@@ -153,7 +140,7 @@ function loadPage() {
         return enemy;
     }
 
-    // Initialize multiple enemies
+
     let enemies = [
         { element: createEnemy(30, 29.4), direction: -1 },
         { element: createEnemy(56, 36.5), direction: -1 },
@@ -161,7 +148,7 @@ function loadPage() {
         { element: createEnemy(70, 82.7), direction: -1 }
     ];
 
-    // Draw the maze
+
     for (let i = 0; i < currentLevel.length; i++) {
         let row = document.createElement('tr');
         table.appendChild(row);
@@ -196,14 +183,13 @@ function loadPage() {
 
     window.addEventListener('resize', updateElementSizeAndPosition);
 
-    // Enemy movement function
-    // Update enemy movement to include collision check
+
     function moveEnemy(enemyObj) {
         const enemy = enemyObj.element;
         let enemyPosition = parseFloat(window.getComputedStyle(enemy).left);
         let direction = enemyObj.direction;
     
-        // Assign initial graphic based on direction
+       
         const updateGraphic = () => {
             enemy.style.backgroundImage = direction > 0 
                 ? "url('/img/img_natalia/rat_right.png')" 
@@ -227,30 +213,28 @@ function loadPage() {
             }
     
             if (collidesWithWall) {
-                direction *= -1; // Reverse direction
+                direction *= -1;
                 enemyObj.direction = direction;
-                updateGraphic(); // Update the graphic when direction changes
+                updateGraphic();
             } else {
                 enemyPosition = nextPosition;
                 enemy.style.left = `${enemyPosition}px`;
             }
     
-            // Check collision with player
+
             checkCollisionWithEnemies();
         }, 30);
     }
     
-    // Start enemy movements
+
     enemies.forEach(enemyObj => moveEnemy(enemyObj));
 
     
-
-    // Player movement and key interactions
     window.addEventListener('keydown', (event) => {
         let pos = mover.getBoundingClientRect();
         let newPos = { left: pos.left, top: pos.top };
 
-        // Define the player's graphic based on movement direction
+
         const updatePlayerGraphic = (direction) => {
             switch (direction) {
                 case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.png')"; break;
@@ -260,7 +244,6 @@ function loadPage() {
             }
         };
 
-        // Move based on arrow keys and update player graphic
         switch (event.key) {
             case 'ArrowUp': 
                 newPos.top -= 5; 
@@ -280,7 +263,7 @@ function loadPage() {
                 break;
             case 'x':
             case 'X':
-                // Handle interaction logic here
+              
                 if (isOnKeyTile && keyTile) {
                     const deactivatedImage = '/img/img_natalia/manivela_off.png';
                     const activatedImage = '/img/img_natalia/manivela_on.png';
@@ -299,23 +282,23 @@ function loadPage() {
 
                     let winTile = document.getElementById('win');
                     if ([...keyStates.values()].every(Boolean)) {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_on.png')"; // Change to win_on graphic
+                        winTile.style.backgroundImage = "url('/img/img_natalia/win_on.png')"; 
                     } else {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_off.png')"; // Revert to win_off graphic
+                        winTile.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
                     }
 
                 }
                 return;
         }
 
-        // Check for wall collision
+
         let collides = [...document.querySelectorAll('.wall')].some(tile => {
             let tileRect = tile.getBoundingClientRect();
             return newPos.left < tileRect.right && newPos.left + pos.width > tileRect.left &&
                 newPos.top < tileRect.bottom && newPos.top + pos.height > tileRect.top;
         });
 
-        // Update position if no collision
+
         if (!collides) {
             mover.style.left = newPos.left + 'px';
             mover.style.top = newPos.top + 'px';
@@ -326,9 +309,6 @@ function loadPage() {
     });
 
 
-
-
-    // Detect if player is on a key tile
     function detectKeyTile() {
         const playerRect = mover.getBoundingClientRect();
         isOnKeyTile = false;
@@ -344,20 +324,18 @@ function loadPage() {
         }
     }
 
-    // Initial detection
     detectKeyTile();
 
 
-    // Collision detection function
     function checkCollisionWithEnemies() {
-        if (isImmune) return; // Exit if the player is currently immune
+
+        if (isImmune) return;
 
         const playerRect = mover.getBoundingClientRect();
 
         for (let enemyObj of enemies) {
             const enemyRect = enemyObj.element.getBoundingClientRect();
 
-            // Check if player and enemy rectangles intersect
             if (playerRect.left < enemyRect.right && playerRect.right > enemyRect.left &&
                 playerRect.top < enemyRect.bottom && playerRect.bottom > enemyRect.top) {
                 
@@ -383,7 +361,6 @@ function loadPage() {
         }
     }
 
-    // Check for collision with win tile when it's gold
     function checkWinCollision() {
         const playerRect = mover.getBoundingClientRect();
         const winTile = document.getElementById("win");
@@ -409,7 +386,6 @@ function loadPage() {
     }    
 
 
-    // Function to end the game
     function endGame() {
         // Remove the event listener for player movement
         window.removeEventListener("keydown", arguments.callee);
@@ -419,27 +395,13 @@ function loadPage() {
             clearInterval(enemyObj.movementInterval);
         });
 
-        // Optionally, add any additional logic to disable further interactions
-    }
-
-    // Actualizar el puntaje y vidas según el tipo de objeto recogido
-    function updateScore(imageName) {
-        if (imageName === 'lata' || imageName === 'botella') {
-            score += 10;
-        } else if (imageName === 'pez') {
-            life = life - 1;
-            perdre_vida();
-            checkLives();
-            console.log(life);
-        }
-        scoreDisplay.textContent = 'Puntos: ' + score;
-
     }
 
     // Update life and check if game over
     function updateLifeStatus() {
         life -= 1;
         if (life <= 0) {
+
             alert("Oh no, has perdut!");
             // Optionally reload or reset the game
             location.reload(); // Or handle game reset logic here
