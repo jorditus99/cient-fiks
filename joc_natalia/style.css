@@ -1,8 +1,12 @@
+@font-face {
+    font-family: Fuente;
+    src:url("/font/DePixelKlein.ttf");
+}
+
 html, body {
     height: 100%;
     margin: 0;
-    font-family: "Pixelify Sans", sans-serif;
-    background-image: url("/img/river_day.gif");
+    background-image: url("/img/river_raining.gif");
     background-size: cover;
     background-position: center;
 }
@@ -68,7 +72,7 @@ html, body {
     width: 70%;
     border-radius: 1rem;
     /* background-color: black; */
-    background-image: url('/img/sewer.jpg');
+    background-image: url('/img/img_natalia/sewer.jpg');
     position: relative;
 }
 
@@ -120,23 +124,24 @@ td {
     background-color: rgb(255, 158, 247);
 }
 
-#score {
-    font-family: monospace;
+#score, #timer {
+    font-family: Fuente;
+    font-weight: 600;
+    font-size: 34px;
+    text-shadow:
+        2px 2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black,
+        -2px -2px 0px black;
     position: absolute;
-    top: 4%;
-    right: 75%;
+    top: 2%;
+    right: 72%;
     color: rgb(255, 255, 255);
-    font-size: 24px;
     z-index: 10; /* Ensure it's above the table */
 }
 
 #timer {
-    font-family: monospace;
-    position: absolute;
-    top: 4%;
-    right: 45%;
-    font-size: 24px;
-    color: rgb(255, 255, 255);
+    right: 38%;
     z-index: 10; /* Ensure it's above the table */
 }
 
