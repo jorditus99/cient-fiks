@@ -26,6 +26,7 @@ h1 {
     line-height: 1;
     text-shadow: 3px 3px 5px #000000c5;
     margin: 10px;
+    margin-bottom: 5%;
 }
 
 h2 {
@@ -390,7 +391,7 @@ button {
 }
 
 .tutorial-container button {
-    margin-top: 0px;
+    margin-top: 1rem;
 }
 
 /* -----------------------------------RÀNQUING------------------------------------------- */
