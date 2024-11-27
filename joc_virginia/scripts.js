@@ -165,6 +165,7 @@ function updateLife(imageName) {
 function endGame() {
     clearInterval(gameInterval); // Detener la creación de objetos
     basket.style.display = 'none'; // Ocultar la cesta
+    scoreDisplay.style.display = 'none';
     let elements = document.querySelectorAll('.fallingObject');
     elements.forEach(element => {
         element.remove();
@@ -176,11 +177,11 @@ function endGame() {
     let byeText = document.createElement("h1");
     byeText.textContent = "FELICITATS";
     let byeTextP = document.createElement("p");
-    byeTextP.textContent = "Has conseguido";
+    byeTextP.textContent = "Has aconseguit";
     let byeTextScore = document.createElement("p");
     byeTextScore.textContent = " " + score + "";
     let byeTextPuntos = document.createElement("p");
-    byeTextPuntos.textContent = "puntos";
+    byeTextPuntos.textContent = "punts";
     let enlaceBoton = document.createElement("a");
     enlaceBoton.href = '../jocs.html';
     let botonContinuar = document.createElement("button");
