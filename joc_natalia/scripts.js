@@ -33,7 +33,7 @@ let maze = [
 let currentLevel = maze;
 let tableDiv = document.getElementById('background');
 let table = document.querySelector('table');
-let scoreDisplay, timerDisplay, pointsDisplay;  // Change these to let so they can be reassigned
+let scoreDisplay, timerDisplay;  // Change these to let so they can be reassigned
 const lifeContainer = document.getElementById('life');
 const tableContainer = document.getElementById('table-container');
 let isImmune = false;
@@ -59,7 +59,6 @@ function startCountdownTimer() {
 
         // Update displays
         updateTimerDisplay(timeRemaining);
-        pointsDisplay.textContent = 'Punts: ' + points;
 
         if (timeRemaining <= 0) {
             clearInterval(gameInterval);
@@ -82,20 +81,44 @@ function createGameUI() {
     timerDiv.textContent = 'Temps: 4:00';
     tableContainer.insertBefore(timerDiv, scoreDiv.nextSibling);
 
-    // Create and append "Punts" points display
-    const pointsDiv = document.createElement('div');
-    pointsDiv.id = 'points';
-    pointsDiv.textContent = 'Punts: ' + points;
-    tableContainer.insertBefore(pointsDiv, timerDiv.nextSibling);
-
     // Update global references
     scoreDisplay = document.getElementById('score');
     timerDisplay = document.getElementById('timer');
-    pointsDisplay = document.getElementById('points');
 }
 
 // DRAWING OF MAZE
 function loadPage() {
+
+    function updateElementSizeAndPosition() {
+        // Get the table container's dimensions
+        const containerWidth = tableContainer.offsetWidth;
+        const containerHeight = tableContainer.offsetHeight;
+    
+        // Calculate new table cell size based on container dimensions and maze rows/columns
+        const rows = maze.length;
+        const columns = maze[0].length;
+        const cellWidth = containerWidth / columns;
+        const cellHeight = containerHeight / rows;
+    
+        // Update the size of each cell in the table
+        document.querySelectorAll('td').forEach(cell => {
+            cell.style.width = `${cellWidth}px`;
+            cell.style.height = `${cellHeight}px`;
+        });
+    
+        // Optionally adjust other elements' sizes here (e.g., player, enemies, etc.)
+        const player = document.getElementById('player');
+        if (player) {
+            player.style.width = `${cellWidth * 0.8}px`; // Scale player size relative to cell size
+            player.style.height = `${cellHeight}px`;
+        }
+    
+        document.querySelectorAll('.enemy').forEach(enemy => {
+            enemy.style.width = `${cellWidth * 0.8}px`;
+            enemy.style.height = `${cellHeight * 0.8}px`;
+        });
+    }
+    
 
     // Call createGameUI to create and show the UI elements
     createGameUI();
@@ -103,12 +126,11 @@ function loadPage() {
     // Set initial points and start the countdown timer
     points = 240; // 4 minutes in seconds
     timeRemaining = 240;
-    pointsDisplay.textContent = 'Punts: ' + points;
     updateTimerDisplay(timeRemaining); // Initial display as "4:00"
     startCountdownTimer();
 
     let mover = document.createElement('div');
-    mover.style.left = '19.5%';
+    mover.style.left = '18.5%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
     mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; // Set initial graphic
@@ -126,10 +148,10 @@ function loadPage() {
 
     // Initialize multiple enemies
     let enemies = [
-        { element: createEnemy(30, 31), direction: -1 },
-        { element: createEnemy(56, 37), direction: -1 },
-        { element: createEnemy(29, 66), direction: -1 },
-        { element: createEnemy(64, 79), direction: -1 }
+        { element: createEnemy(30, 33), direction: -1 },
+        { element: createEnemy(56, 40.5), direction: -1 },
+        { element: createEnemy(29, 67), direction: -1 },
+        { element: createEnemy(64, 78), direction: -1 }
     ];
 
     // Draw the maze
@@ -163,6 +185,9 @@ function loadPage() {
         }
     }
 
+    updateElementSizeAndPosition();
+
+    window.addEventListener('resize', updateElementSizeAndPosition);
 
     // Enemy movement function
     // Update enemy movement to include collision check
