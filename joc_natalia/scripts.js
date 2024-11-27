@@ -90,34 +90,41 @@ function createGameUI() {
 function loadPage() {
 
     function updateElementSizeAndPosition() {
-        // Get the table container's dimensions
         const containerWidth = tableContainer.offsetWidth;
         const containerHeight = tableContainer.offsetHeight;
     
-        // Calculate new table cell size based on container dimensions and maze rows/columns
+        // Set maxTableHeight as a percentage of the container's height (e.g., 50%)
+        const maxTableHeight = containerHeight * 0.9; // Adjust 0.5 for the desired percentage
+    
         const rows = maze.length;
         const columns = maze[0].length;
-        const cellWidth = containerWidth / columns;
-        const cellHeight = containerHeight / rows;
     
-        // Update the size of each cell in the table
+        // Calculate cell sizes
+        const cellWidth = containerWidth / columns;
+        const cellHeight = Math.min(containerHeight / rows, maxTableHeight / rows);
+    
+        // Update the size of each cell
         document.querySelectorAll('td').forEach(cell => {
             cell.style.width = `${cellWidth}px`;
             cell.style.height = `${cellHeight}px`;
         });
     
-        // Optionally adjust other elements' sizes here (e.g., player, enemies, etc.)
+        // Adjust the size of the player (e.g., 60% of cell size for width and 80% of cell height for height)
         const player = document.getElementById('player');
         if (player) {
-            player.style.width = `${cellWidth * 0.8}px`; // Scale player size relative to cell size
-            player.style.height = `${cellHeight}px`;
+            player.style.width = `${cellWidth * 0.6}px`;  // Make player 60% of the cell width
+            player.style.height = `${cellHeight * 0.8}px`; // Make player 80% of the cell height
         }
     
+        // Adjust the size of enemies (e.g., 50% of cell width and height)
         document.querySelectorAll('.enemy').forEach(enemy => {
-            enemy.style.width = `${cellWidth * 0.8}px`;
-            enemy.style.height = `${cellHeight * 0.8}px`;
+            enemy.style.width = `${cellWidth * 0.8}px`;  // Make enemies 50% of the cell width
+            enemy.style.height = `${cellHeight * 0.6}px`; // Make enemies 50% of the cell height
         });
     }
+    
+    
+    
     
 
     // Call createGameUI to create and show the UI elements
@@ -130,7 +137,7 @@ function loadPage() {
     startCountdownTimer();
 
     let mover = document.createElement('div');
-    mover.style.left = '18.5%';
+    mover.style.left = '18.7%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
     mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; // Set initial graphic
@@ -148,10 +155,10 @@ function loadPage() {
 
     // Initialize multiple enemies
     let enemies = [
-        { element: createEnemy(30, 33), direction: -1 },
-        { element: createEnemy(56, 40.5), direction: -1 },
-        { element: createEnemy(29, 67), direction: -1 },
-        { element: createEnemy(64, 78), direction: -1 }
+        { element: createEnemy(30, 29.4), direction: -1 },
+        { element: createEnemy(56, 36.5), direction: -1 },
+        { element: createEnemy(29, 68.4), direction: -1 },
+        { element: createEnemy(70, 82.7), direction: -1 }
     ];
 
     // Draw the maze
