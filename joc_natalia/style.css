@@ -27,7 +27,6 @@ html, body {
     margin: 0 auto;
     display: flex;
     justify-content: center; /* Center the table */
-    align-items: center; /* Align items center */
     border-radius: 1rem;
     background-color: black;
     position: relative; /* Make sure that child elements can be absolutely positioned inside */
@@ -74,15 +73,10 @@ html, body {
 
 
 table {
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    width: auto;
-    height: auto;
+    margin-top: 6%;
+    width: 95%;
     border-spacing: 0px;
-    border-collapse: initial;
-    position: absolute;
+    color: rgba(0, 0, 0, 0);
 }
 
 tr {
@@ -91,11 +85,10 @@ tr {
 
 /*table element styles*/
 td {
-    width: 1.9rem;
-    height: 1.9rem;
-    margin: 0px;
-    border: none;
-    padding: 0px;
+    width: calc(100% / 45); /* Dividing width equally by the number of columns */
+    height: calc(100% / 25); /* Dividing height equally by the number of rows */
+    padding: 0; /* Avoid extra spacing */
+    background-size: cover; /* Ensure proper background scaling */
 }
 
 #win {
@@ -104,15 +97,13 @@ td {
 }
 
 .wall {
-    color: rgba(255, 255, 255, 0);
     background-image: url("../img/img_natalia/wall.jpg");
-    background-color: rgb(40, 25, 94);
+    background-size: cover; /* Make sure the image fits the cell */
 }
 
 .freespace {
-    color: rgba(0, 0, 0, 0);
     background-image: url("../img/img_natalia/floor.jpg");
-    background-color: rgb(41, 128, 87);
+    background-size: cover;
 }
 
 #start {
@@ -122,7 +113,6 @@ td {
 
 .key {
     color: rgba(255, 255, 255, 0);
-    /* background-image: url("../img/img_natalia/manivela_off.png"); */
     background-color: rgb(255, 158, 247);
 }
 
