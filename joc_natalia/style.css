@@ -21,16 +21,6 @@ html, body {
     width: 70%;
 }
 
-.table-container{
-    height: 90%;
-    width: 70%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center; /* Center the table */
-    border-radius: 1rem;
-    background-color: black;
-    position: relative; /* Make sure that child elements can be absolutely positioned inside */
-}
 
 .fons {
 
@@ -47,7 +37,6 @@ html, body {
 #player {
     position: absolute;
     color: rgba(255, 255, 255, 0);
-    background-image: url("../img/img_natalia/player_front.jpg");
     width: 1.2rem;
     height: 1.6rem;
     background-color: rgb(31, 221, 255);
@@ -71,13 +60,27 @@ html, body {
     z-index: 2;
 }
 
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%; /* Black background height */
+    width: 70%;
+    border-radius: 1rem;
+    /* background-color: black; */
+    background-image: url('/img/sewer.jpg');
+    position: relative;
+}
+
 
 table {
-    margin-top: 6%;
+    height: 70%; /* Adjust this percentage to your desired height */
+    margin-top: 5%;
     width: 95%;
     border-spacing: 0px;
     color: rgba(0, 0, 0, 0);
 }
+
 
 tr {
     border: none;
@@ -85,11 +88,12 @@ tr {
 
 /*table element styles*/
 td {
-    width: calc(100% / 45); /* Dividing width equally by the number of columns */
-    height: calc(100% / 25); /* Dividing height equally by the number of rows */
-    padding: 0; /* Avoid extra spacing */
-    background-size: cover; /* Ensure proper background scaling */
+    height: calc(100% / 25); /* Divide height based on the number of rows */
+    padding: 0; /* Avoid additional spacing */
+    overflow: hidden; /* Prevent content from stretching cells */
+    background-size: cover;
 }
+
 
 #win {
     background-color: rgb(163, 255, 183);
