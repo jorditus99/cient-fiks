@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Fuente;
+    src: url("/font/DePixelKlein.ttf");
+}
+
 .fons {
 
     position: relative;
@@ -24,7 +29,14 @@
     top: 50px;
     left: 370px;
     color: white;
-    font-size: 2rem;
+    font-family: Fuente;
+    font-weight: 600;
+    font-size: 34px;
+    text-shadow:
+        2px 2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black,
+        -2px -2px 0px black;
 }
 
 .punts {
@@ -32,7 +44,15 @@
     top: 50px;
     left: 480px;
     color: white;
-    font-size: 2rem;
+    font-family: Fuente;
+    font-weight: 600;
+    font-size: 34px;
+    text-shadow:
+        2px 2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black,
+        -2px -2px 0px black;
+    margin-left: 1rem;
 }
 
 .gota {
