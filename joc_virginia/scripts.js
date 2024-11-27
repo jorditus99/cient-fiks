@@ -32,7 +32,7 @@ function initializeGame() {
     basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
     document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
     startGameInterval();
-    
+
 }
 
 
@@ -170,12 +170,37 @@ function endGame() {
         element.remove();
     });
     let byeDiv = document.createElement("div");
-    byeDiv.classList.add('byeDiv');
-    let byeText = document.createElement("p");
-    byeText.textContent = "No tienes mas vidas, el juego ha terminado";
-    byeText.classList.add('byeText');
+    byeDiv.classList.add('tutorial-container');
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+    let byeText = document.createElement("h1");
+    byeText.textContent = "FELICITATS";
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has conseguido";
+    let byeTextScore = document.createElement("p");
+    byeTextScore.textContent = " " + score + "";
+    let byeTextPuntos = document.createElement("p");
+    byeTextPuntos.textContent = "puntos";
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html';
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar"
+    
 
-    byeDiv.appendChild(byeText);
+
+
+    // byeText.classList.add('byeText');
+    // byeTextP.classList.add('byeText');
+
+    byeDivtext.appendChild(byeText);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(byeTextPuntos);
+    enlaceBoton.appendChild(botonContinuar);
+    byeDiv.appendChild(byeDivtext);
+    byeDiv.appendChild(enlaceBoton);
+    // byeDiv.appendChild(byeTextP);
+
     gameArea.appendChild(byeDiv);
 
 }
