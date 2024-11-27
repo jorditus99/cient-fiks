@@ -235,18 +235,17 @@ function verificar_encert(tecla) {
         if (lletra && lletra.innerText === tecla.toUpperCase()) {
             // Comprovar si la gota és no potable
             if (gota && gota.getAttribute('data-potable') === 'false') {
-                perdre_vida(); // Treu una vida
+                perdre_vida();
             } else {
                 let index = lletres_a_comparar.indexOf(lletra.innerText);
                 if (index !== -1) {
                     lletres_a_comparar.splice(index, 1);
                 }
-                sumar_punts(); // Suma punts només per gotes potables
+                sumar_punts();
             }
 
-            container_gota.remove(); // Elimina la gota en qualsevol cas
-            gotes.splice(i, 1); // Elimina la gota de l'array
-            break; // Atura el bucle després de trobar la lletra
+            container_gota.remove();
+            gotes.splice(i, 1);
         }
     }
 }
