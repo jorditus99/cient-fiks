@@ -22,11 +22,16 @@ html, body {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 300%;
     color: var(--naranja);
     line-height: 1;
     text-shadow: 3px 3px 5px #000000c5;
 }
+
+h2 {
+    font-weight: 300;
+}
+
 
 .navbar {
     height: 10%;
@@ -55,7 +60,7 @@ h1 {
 }
 
 .nav-links a {
-    font-size: 1.3rem;
+    font-size: 130%;
     text-decoration: none;
     color: var(--gris_claro);
     transition-duration: 400ms;
@@ -79,7 +84,7 @@ h1 {
 
 .container-text {
     color: white;
-    font-size: 1.5rem;
+    font-size: 140%;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -97,7 +102,7 @@ h1 {
 
 button {
     font-family: "Pixelify Sans", sans-serif;
-    font-size: 1rem;
+    font-size: 140%;
     color: white;
     background-color: var(--naranja);
     border: none;
@@ -178,7 +183,7 @@ button {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 1.3rem;
+  font-size: 120%;
 }
 
 .intro-container a:hover {
@@ -243,7 +248,7 @@ button {
 }
 
 .img-slider .slide-content h2 {
-  font-size: 2rem;
+  font-size: 190%;
   margin: 0 0 10px;
 }
 
@@ -333,6 +338,63 @@ button {
 
 }
 
+/*-----------------------------------TUTORIALES-------------------------------------------*/
+
+.tutorial-icons {
+    display: flex;                /* Enables flexbox to align items horizontally */
+    gap: 3%;                    /* Adds space between each icon container */
+    justify-content: center;      /* Centers icons within the parent container */
+    align-items: center;          /* Aligns items vertically in the center */
+    margin-bottom: 2%;
+    font-size: 120%;
+}
+
+.tutorial-icons div{
+    width: 25%;
+}
+
+.tutorial-icons img {
+    width: 7rem;   /* Set desired width */
+    height: 7rem;  /* Set desired height to match */
+    object-fit: contain; /* Ensures images maintain aspect ratio */
+}
+
+.tutorial-container-text {
+    color: black;
+    /* color: var(--naranja); */
+    font-size: 1.3rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: block;
+    line-height: 1.5;
+    text-align: center;
+    width: 90%;
+    /* text-shadow: 3px 3px 5px #00000075; */
+}
+
+/* Basic styles for the tutorial container */
+.tutorial-container {
+    position: absolute;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 75%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    justify-content: center;
+    z-index: 2; /* Above the background image */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Optional: adds a shadow for depth */
+    text-align: center;
+}
+
+.tutorial-container button {
+    margin-top: 0px; /* Adjust this value for desired spacing above the button */
+}
+
 /* -----------------------------------RANQUING------------------------------------------- */
 
 .ranking-container {
@@ -366,7 +428,7 @@ button {
   
 
 .ranking table {
-    font-size: 1.3rem;
+    font-size: 140%;
     width: 100%;
     justify-content: center;
     padding: 1rem;
@@ -379,7 +441,6 @@ button {
 }
 
 .ranking-container span {
-    font-size: 1.3rem;
     color: white;
     background-color: var(--naranja);
     padding: 0.6rem;
@@ -392,16 +453,14 @@ button {
     display: flex;               
     justify-content: center;   
     align-items: center;      
-    margin-bottom: 1rem;    
-    height: 15rem;
-    gap: 1rem;
+    margin: 3%;   
+    gap: 12%;
 }
 
 
 .ranking-icons img {
     width: 7rem;
     height: 7rem; 
-    gap: 10rem;
     object-fit: contain; 
     width: 40%;
 }
@@ -411,21 +470,21 @@ button {
 }
 
 .ranking-icons p {
-    font-size: 1rem;
+    font-size: 140%;
     margin: 0;
     margin-bottom: 1rem;
 }
 
 
 #number-one p {
-    font-size: 1.6rem;
+    font-size: 190%;
     margin: 1rem;
     color: var(--naranja);
     background-color: rgba(0, 0, 0, 0);
 }
 
 #number-one span {
-    font-size: 1.6rem;
+    font-size: 190%;
 }
 
 #number-one img {
