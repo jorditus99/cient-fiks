@@ -25,7 +25,6 @@ function moure_img_principal() {
             posicioActual -= velocitat;
             img.style.left = posicioActual + "px";
 
-
             if (posicioActual <= -img.width) {
                 img.style.left = window.innerWidth + "px";
             }
@@ -67,7 +66,7 @@ function moure_personatge(event) {
 
 function crear_obstacle() {
 
-    const posicionsTop = [0, 210, 420];
+    const posicionsTop = [0, 210, 420, 630];
     let imgSrc = obstacles[Math.floor(Math.random() * obstacles.length)];
     
     let obstacle = document.createElement('img');
@@ -133,7 +132,6 @@ function eliminar_vides() {
         pantalla_perdre();
     }
 
-
 }
 
 
@@ -151,6 +149,7 @@ function pantalla_perdre() {
     // alert("T'has xocat");
     // console.log("T'has xocat");
     velocitat = 0;
+    alert("Has perdut");
 }
 
 function crear_cor() {
@@ -173,6 +172,11 @@ function definir_vides(numVides) {
     }
 }
 
+function augmentar_velocitat() {
+    
+}
+
+
 function afegir_puntuacio() {
 
     if (vides.length > 0) {
@@ -180,7 +184,6 @@ function afegir_puntuacio() {
         console.log(puntuacio);
         punts.innerHTML = puntuacio;
     } else {
-
         clearInterval(intervalId);
     }
 }
