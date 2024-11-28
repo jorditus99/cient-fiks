@@ -47,8 +47,6 @@ function crear_gota() {
 
 function crear_no_potable() {
 
-    console.log("La funció crear_no_potable FUNCIONA!");
-
     // Crear el contenidor que inclourà la gota i la lletra
     let container_gota = crear_container_gota();
 
@@ -63,7 +61,7 @@ function crear_no_potable() {
     lletra_no_potable = aparenca_lletra_random(0);
     container_gota.className = container_gota.className + " " + lletra_no_potable.innerText;
     container_gota.appendChild(lletra_no_potable);
-    lletres_a_comparar.push(lletra.innerText);
+    lletres_a_comparar.push(lletra_no_potable.innerText);
 
     lletra_no_potable.classList.add("lletra_no_potable");
 
@@ -102,11 +100,18 @@ function aparenca_lletra_random(left) {
 }
 
 function lletra_random() {
+    const lletres = "QERTYUOPASDFGHKLÑÇZXCVBNM";
+    let nova_lletra;
 
-    const lletres = "QWERYUIOPASDFJKÑÇXCVBNM"
-    return lletres.charAt(Math.floor(Math.random() * lletres.length));
+    do {
 
+        nova_lletra = lletres.charAt(Math.floor(Math.random() * lletres.length));
+
+    } while (lletres_a_comparar.includes(nova_lletra));
+
+    return nova_lletra;
 }
+
 
 function joc() {
 
@@ -174,9 +179,11 @@ function colisio() {
             }
 
             if (lletra) {
+
                 let i = lletres_a_comparar.indexOf(lletra);
                 if (i != -1) {
                     lletres_a_comparar.splice(i, 1);
+
                 }
             }
 
@@ -220,7 +227,6 @@ function imprimir_vides() {
 function clickar_tecla(event) {
 
     let tecla = event.key;
-    console.log("Tecla presionada:", tecla);
     verificar_encert(tecla);
 
 }
@@ -233,13 +239,16 @@ function verificar_encert(tecla) {
         let gota = container_gota.querySelector('.gota');
 
         if (lletra && lletra.innerText === tecla.toUpperCase()) {
+            let index = lletres_a_comparar.indexOf(lletra.innerText);
             // Comprovar si la gota és no potable
             if (gota && gota.getAttribute('data-potable') === 'false') {
                 perdre_vida();
+                lletres_a_comparar.splice(index, 1);
             } else {
-                let index = lletres_a_comparar.indexOf(lletra.innerText);
                 if (index !== -1) {
                     lletres_a_comparar.splice(index, 1);
+
+
                 }
                 sumar_punts();
             }
