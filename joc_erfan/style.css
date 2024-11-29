@@ -1,6 +1,18 @@
 @font-face {
     font-family: Fuente;
-    src: url("/font/DePixelKlein.ttf");
+    src: url("../font/DePixelKlein.ttf");
+}
+
+html,
+body {
+
+    height: 100%;
+    margin: 0;
+    font-family: "Pixelify Sans", sans-serif;
+    background-image: url("../img/river_day.gif");
+    background-size: cover;
+    background-position: center;
+
 }
 
 .fons {
@@ -10,8 +22,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-
-
 
 }
 

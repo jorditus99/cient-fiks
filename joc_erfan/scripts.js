@@ -27,7 +27,7 @@ function crear_gota() {
     // Crear la gota dins del container_gota
     let gota = document.createElement('img');
     gota.className = "gota";
-    gota.src = '/img/gota.png';
+    gota.src = '../img/gota.png';
     gota.setAttribute('data-potable', 'true');
     container_gota.appendChild(gota);
 
@@ -53,7 +53,7 @@ function crear_no_potable() {
     // Crear la gota dins del container_gota
     let gota_no_potable = document.createElement('img');
     gota_no_potable.className = "gota";
-    gota_no_potable.src = '/img/no_potable.png';
+    gota_no_potable.src = '../img/no_potable.png';
     gota_no_potable.setAttribute('data-potable', 'false');
     container_gota.appendChild(gota_no_potable);
 
@@ -210,7 +210,7 @@ function crear_cor(num) {
     vides.push(cor);
     cor.className = "cor";
     cor.id = num + 1;
-    cor.src = '/img/vida.png';
+    cor.src = '../img/vida.png';
     cor.style.position = "absolute;"
     let fons = document.getElementById("fons");
     container_vides.appendChild(cor);
