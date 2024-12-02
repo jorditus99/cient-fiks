@@ -1,7 +1,5 @@
 <?php
 
-
-
 function connectionDB()
 {
 
@@ -18,7 +16,6 @@ function connectionDB()
     }
 }
 
-
 function secure_data($data)
 {
 
@@ -31,7 +28,6 @@ function secure_data($data)
 
     return $data;
 }
-
 
 function hash_pass($pass)
 {
@@ -55,13 +51,10 @@ function create_user($name, $pass, $id_type)
     $stmt->bindParam(':password', $pass);
     $stmt->bindParam(':id_tipo', $id_type);
     $stmt->execute();
+
+    $connection = null;
 }
 
-
-function closeBD()
-{
-    return null;
-}
 
 function check_user($nom, $pass)
 {   $connection = connectionDB();
@@ -75,6 +68,8 @@ function check_user($nom, $pass)
         return $result["id_usuario"]; 
     }
     return -1; 
+
+    $connection = null;
 }
 
 function add_id ($user_type){
@@ -87,9 +82,22 @@ function add_id ($user_type){
     $stmt->bindParam(':id_tipo', $user_type);
     $stmt->execute();
 
+    $connection = null;
+
 }
     
+function select_usuaris(){
 
+    $connection = connectionDB();
+    $sentencia_text = "SELECT * FROM usuario";
+    $sentencia = $connection->prepare($sentencia_text);
+    $sentencia->execute();
+    $resultat = $sentencia->fetchAll();
+
+    $connection = null;
+
+    return $resultat;
+}
 
 
 // function get_pass($nom)
