@@ -14,6 +14,7 @@
         <div class="image_container" id="image_container">
             <img id="img_principal" class="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
             <img id="img_principal" class="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
+            <img id="img_principal" class="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
         </div>
         <div class="container_elements_top">
                 <p class="titol_punts">Punts :</p>
