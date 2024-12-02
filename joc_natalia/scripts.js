@@ -421,28 +421,33 @@ function loadPage() {
         // elements.forEach(element => {
         //     element.remove();
         // });
+
+        let form
+
         let byeDiv = document.createElement("div");
         byeDiv.classList.add('tutorial-container');
+
         let byeDivtext = document.createElement("div");
         byeDivtext.classList.add('tutorial-container-text');
+
         let byeText = document.createElement("h1");
         byeText.textContent = "FELICITATS";
+
         let byeTextP = document.createElement("p");
         byeTextP.textContent = "Has aconseguit";
+
         let byeTextScore = document.createElement("p");
         byeTextScore.textContent = " " + score + "";
+
         let byeTextPuntos = document.createElement("p");
         byeTextPuntos.textContent = "punts";
+
         let enlaceBoton = document.createElement("a");
         enlaceBoton.href = '../jocs.html';
+
         let botonContinuar = document.createElement("button");
         botonContinuar.textContent = "Continuar"
         
-    
-    
-    
-        // byeText.classList.add('byeText');
-        // byeTextP.classList.add('byeText');
     
         byeDivtext.appendChild(byeText);
         byeDivtext.appendChild(byeTextP);
@@ -451,6 +456,7 @@ function loadPage() {
         enlaceBoton.appendChild(botonContinuar);
         byeDiv.appendChild(byeDivtext);
         byeDiv.appendChild(enlaceBoton);
+
         // byeDiv.appendChild(byeTextP);
     
         gameArea.appendChild(byeDiv);
