@@ -261,6 +261,26 @@ function loadPage() {
                 newPos.left += 5; 
                 updatePlayerGraphic('right');
                 break;
+            case 'w': 
+            case 'W': 
+                newPos.top -= 5; 
+                updatePlayerGraphic('up');
+                break;
+            case 's': 
+            case 'S': 
+                newPos.top += 5; 
+                updatePlayerGraphic('down');
+                break;
+            case 'a': 
+            case 'A': 
+                newPos.left -= 5; 
+                updatePlayerGraphic('left');
+                break;
+            case 'd': 
+            case 'D': 
+                newPos.left += 5; 
+                updatePlayerGraphic('right');
+                break;
             case 'x':
             case 'X':
               
@@ -402,11 +422,11 @@ function loadPage() {
         life -= 1;
         if (life <= 0) {
 
-            gameOver();
+            // gameOver();
 
-            //alert("Oh no, has perdut!");
+            alert("Oh no, has perdut!");
             // Optionally reload or reset the game
-            //location.reload(); // Or handle game reset logic here
+            location.reload(); // Or handle game reset logic here
         }
     }
 
@@ -422,7 +442,11 @@ function loadPage() {
         //     element.remove();
         // });
 
-        let form
+        let form = document.createElement("form");
+        form.action = '../php_library/library.php'
+        form.method = 'get'
+        form.appendChild(byeTextScore);
+        form.appendChild(botonContinuar);
 
         let byeDiv = document.createElement("div");
         byeDiv.classList.add('tutorial-container');
@@ -442,10 +466,9 @@ function loadPage() {
         let byeTextPuntos = document.createElement("p");
         byeTextPuntos.textContent = "punts";
 
-        let enlaceBoton = document.createElement("a");
-        enlaceBoton.href = '../jocs.html';
-
         let botonContinuar = document.createElement("button");
+        botonContinuar.type = 'submit'
+        botonContinuar.name = 'puntos'
         botonContinuar.textContent = "Continuar"
         
     
