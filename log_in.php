@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+
+$_SESSION['usuari'] = $_POST['nom']; 
+
 require_once('./php_library/library.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
@@ -153,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="container-buttons">
                         <div class="continer-buttons-top">
                             <button type="submit">Acceder</button>
-                            <button class="regis-button"><a href="/registro.html">Registrarse</a></button>
+                            <button class="regis-button"><a href="../registro.php">Registrarse</a></button>
                         </div>
                         <button class="big-button"><a href="/jocs.html">Jugar sin Iniciar Sesión</a></button>
                     </div>

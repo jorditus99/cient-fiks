@@ -100,6 +100,16 @@ function select_usuaris(){
 }
 
 
+function selsect_puntuacio(){
+
+}
+
+
+function afegir_puntuacio(){
+
+}
+
+
 // function get_pass($nom)
 // {
 //     $nom = secure_data($nom);
