@@ -150,6 +150,7 @@ function pantalla_perdre() {
     // console.log("T'has xocat");
     velocitat = 0;
     alert("Has perdut");
+    enviar_puntuacio(puntuacio)
 }
 
 function crear_cor() {
@@ -172,16 +173,10 @@ function definir_vides(numVides) {
     }
 }
 
-function augmentar_velocitat() {
-    
-}
-
-
 function afegir_puntuacio() {
 
     if (vides.length > 0) {
         puntuacio += 5;
-        console.log(puntuacio);
         punts.innerHTML = puntuacio;
     } else {
         clearInterval(intervalId);
@@ -199,5 +194,22 @@ function iniciar_joc() {
   }
   
   iniciar_joc();
+
+function enviar_puntuacio(puntuacio) {
+    
+    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio='+ puntuacio)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+           return response.text();
+        })
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error al enviar la puntuación:', error);
+        });
+}
 
 document.addEventListener('keydown', moure_personatge);
