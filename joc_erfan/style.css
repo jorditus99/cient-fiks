@@ -3,6 +3,12 @@
     src: url("../font/DePixelKlein.ttf");
 }
 
+:root {
+    --naranja: #FF6F1E;
+    --azul: #06629E;
+    --gris_claro: #ccc;
+}
+
 html,
 body {
 
@@ -113,3 +119,90 @@ body {
 .final {
     display: none;
 }
+
+/*-----------------------------------TUTORIALES-------------------------------------------*/
+
+h1 {
+    font-size: 300%;
+    color: var(--naranja);
+    line-height: 1;
+    text-shadow: 3px 3px 5px #000000c5;
+    margin-bottom: 5%;
+}
+
+button {
+    font-family: Fuente;
+    color: white;
+    background-color: var(--naranja);
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    width: 10rem;
+    margin-top: 100px;
+}
+
+
+.tutorial-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+    font-size: 120%;
+}
+
+.tutorial-icons div {
+    width: 30%;
+}
+
+.tutorial-icons img {
+    width: 7rem;
+    height: 7rem;
+    object-fit: contain;
+}
+
+.tutorial-container-text {
+    color: black;
+    font-size: 1.3rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: block;
+    line-height: 1.5;
+    text-align: center;
+    width: 90%;
+}
+
+
+.tutorial-container {
+    position: absolute;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.tutorial-container button {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
+
+.tutorial-container .punts2 {
+    font-size: 300%;
+    font-weight: bolder;
+    color: var(--azul);
+    margin: 0;
+    margin-bottom: 4%;
+    padding: 0;
+}
+
+/*------------------------------------------------------------------*/
