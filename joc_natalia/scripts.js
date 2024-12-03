@@ -2,28 +2,28 @@ document.addEventListener("DOMContentLoaded", loadPage);
 
 let maze = [
     `#########################################`,
-    `#.#.....?..#........#.....#..?.#..#.....#`,
-    `#.#####....####.#########.##...#.######.#`,
+    `#.#........#........#.....#....#..#.....#`,
+    `#?#####....####.#########.##...#.######.#`,
     `#.............#.........#......#........#`,
-    `###.####.###.##.#########.###.###.#######`,
+    `#?#.####.###.##.#########.###.###.#######`,
     `#.#...#.........#.......#.#.............#`,
     `#.#.#.####.#########.##.###########.#####`,
     `#.#.#......#.........#........#.........#`,
     `#.#.######.###.##.##.#.########.#######.#`,
     `#......#.#.....#...#.#........#.......#.#`,
-    `#.##.#.#.#.#.#.#?....######.#.#.#####...#`,
-    `#.#..#.#.###.#.#...#......#.#...#.#.#..?#`,
+    `#?##.#.#.#.#.#.#.....######.#.#.#####...#`,
+    `#?#..#.#.###.#.#...#......#.#...#.#.#...#`,
     `#.#..#.#.....#.#####.####.#.#####.#.....#`,
     `#.####.#.#####...#......#.#.......#.##.##`,
     `#........#...#####.########.#####...#...#`,
-    `#####.######..........#...#.#...#####.###`,
+    `#.###.######..........#...#.#...#####.###`,
     `#.#...#........##.#######.###.#.#.......#`,
     `#.###.#.######.#..#.....#.#...###.#######`,
     `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
-    `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
+    `#.#.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
     `#.......#......#.#..#...#...#.........#.#`,
     `#.#...#####.####.#..#.#.###.####.######.#`,
-    `#.#.?.......#.........#........#!#......#`,
+    `#...?...........................!#......#`,
     `#########################################`
 ];
 
@@ -35,7 +35,7 @@ let scoreDisplay, timerDisplay;
 const lifeContainer = document.getElementById('life');
 const tableContainer = document.getElementById('table-container');
 let isImmune = false;
-let timeRemaining = 240;
+let timeRemaining;
 let points = timeRemaining;
 let keyStates = new Map();
 let activatedKeyTiles = 0;
@@ -50,17 +50,80 @@ function updateTimerDisplay(seconds) {
     timerDisplay.textContent = `Temps: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
+function gameOver() {
+
+    const gameArea = document.getElementById('table-container');
+
+    // clearInterval(gameInterval);
+    // basket.style.display = 'none'; 
+    // scoreDisplay.style.display = 'none';
+    // let elements = document.querySelectorAll('.fallingObject');
+    // elements.forEach(element => {
+    //     element.remove();
+    // });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "FELICITATS!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts');
+    byeTextScore.textContent = " " + score + " punts!";
+
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html';
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar"
+    
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(botonContinuar);
+    botonContinuar.appendChild(enlaceBoton);
+    byeDiv.appendChild(byeDivtext);
+
+    // byeDiv.appendChild(byeTextP);
+
+    gameArea.appendChild(byeDiv);
+
+}
+
+function endGame() {
+    window.removeEventListener("keydown", arguments.callee);
+
+    enemies.forEach((enemyObj) => {
+        clearInterval(enemyObj.movementInterval);
+    });
+
+}
+
 function startCountdownTimer() {
     gameInterval = setInterval(() => {
         timeRemaining -= 1;
         points = timeRemaining;
+        score = timeRemaining;
 
         updateTimerDisplay(timeRemaining);
 
         if (timeRemaining <= 0) {
+
             clearInterval(gameInterval);
-            alert("Oh no, s'ha acabat el temps!");
-            location.reload();
+            gameOver();
+            endGame();
+
+            // clearInterval(gameInterval);
+            // alert("Oh no, s'ha acabat el temps!");
+            // location.reload();
         }
     }, 1000);
 }
@@ -118,8 +181,8 @@ function loadPage() {
     
     createGameUI();
 
-    points = 240;
-    timeRemaining = 240;
+    timeRemaining = 240; // Establece segundos de juego
+    points = timeRemaining;
     updateTimerDisplay(timeRemaining);
     startCountdownTimer();
 
@@ -168,12 +231,12 @@ function loadPage() {
                     break;
                 case '!': 
                     cell.id = 'win';
-                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')"; // Default graphic
+                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
                     break;
                 case '?': 
                     cell.classList.add('key'); 
                     keyStates.set(cell, false); 
-                    cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')"; // Set the initial graphic
+                    cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')";
                     break;
             }
         }
@@ -386,105 +449,40 @@ function loadPage() {
         const winTile = document.getElementById("win");
         const winTileRect = winTile.getBoundingClientRect();
     
-        // Check if the win tile is in the activated state (gold) and the player collides with it
         if (winTile.style.backgroundImage.includes("win_on.png") &&
             playerRect.left < winTileRect.right &&
             playerRect.right > winTileRect.left &&
             playerRect.top < winTileRect.bottom &&
             playerRect.bottom > winTileRect.top) {
     
-            // Stop the countdown
+
             clearInterval(gameInterval);
-    
-            // Show final points and congratulatory message
-            alert("Felicitats! Has guanyat amb " + points + " punts!");
-    
-            // End the game or reload
+            gameOver();
             endGame();
-            location.reload();
+
+            // alert("Felicitats! Has guanyat amb " + points + " punts!");
+            // location.reload();
         }
     }    
 
 
-    function endGame() {
-        // Remove the event listener for player movement
-        window.removeEventListener("keydown", arguments.callee);
 
-        // Stop enemy movement (assuming they use setInterval for movement)
-        enemies.forEach((enemyObj) => {
-            clearInterval(enemyObj.movementInterval);
-        });
-
-    }
 
     // Update life and check if game over
     function updateLifeStatus() {
         life -= 1;
         if (life <= 0) {
 
-            // gameOver();
 
-            alert("Oh no, has perdut!");
-            // Optionally reload or reset the game
-            location.reload(); // Or handle game reset logic here
+            clearInterval(gameInterval);
+            gameOver();
+            endGame();
+
+            // alert("Oh no, has perdut!");
+            // location.reload();
         }
     }
 
-    function gameOver() {
-
-        const gameArea = document.getElementById('table-container');
-
-        // clearInterval(gameInterval);
-        // basket.style.display = 'none'; 
-        // scoreDisplay.style.display = 'none';
-        // let elements = document.querySelectorAll('.fallingObject');
-        // elements.forEach(element => {
-        //     element.remove();
-        // });
-
-        let form = document.createElement("form");
-        form.action = '../php_library/library.php'
-        form.method = 'get'
-        form.appendChild(byeTextScore);
-        form.appendChild(botonContinuar);
-
-        let byeDiv = document.createElement("div");
-        byeDiv.classList.add('tutorial-container');
-
-        let byeDivtext = document.createElement("div");
-        byeDivtext.classList.add('tutorial-container-text');
-
-        let byeText = document.createElement("h1");
-        byeText.textContent = "FELICITATS";
-
-        let byeTextP = document.createElement("p");
-        byeTextP.textContent = "Has aconseguit";
-
-        let byeTextScore = document.createElement("p");
-        byeTextScore.textContent = " " + score + "";
-
-        let byeTextPuntos = document.createElement("p");
-        byeTextPuntos.textContent = "punts";
-
-        let botonContinuar = document.createElement("button");
-        botonContinuar.type = 'submit'
-        botonContinuar.name = 'puntos'
-        botonContinuar.textContent = "Continuar"
-        
-    
-        byeDivtext.appendChild(byeText);
-        byeDivtext.appendChild(byeTextP);
-        byeDivtext.appendChild(byeTextScore);
-        byeDivtext.appendChild(byeTextPuntos);
-        enlaceBoton.appendChild(botonContinuar);
-        byeDiv.appendChild(byeDivtext);
-        byeDiv.appendChild(enlaceBoton);
-
-        // byeDiv.appendChild(byeTextP);
-    
-        gameArea.appendChild(byeDiv);
-    
-    }
 
     function crear_cor(num) {
         let cor = document.createElement('img');
