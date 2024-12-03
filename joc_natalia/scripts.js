@@ -54,13 +54,17 @@ function gameOver() {
 
     const gameArea = document.getElementById('table-container');
 
-    // clearInterval(gameInterval);
-    // basket.style.display = 'none'; 
-    // scoreDisplay.style.display = 'none';
-    // let elements = document.querySelectorAll('.fallingObject');
-    // elements.forEach(element => {
-    //     element.remove();
-    // });
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
 
     let byeDiv = document.createElement("div");
     byeDiv.classList.add('tutorial-container');
@@ -92,19 +96,50 @@ function gameOver() {
     botonContinuar.appendChild(enlaceBoton);
     byeDiv.appendChild(byeDivtext);
 
-    // byeDiv.appendChild(byeTextP);
-
     gameArea.appendChild(byeDiv);
 
 }
 
-function endGame() {
-    window.removeEventListener("keydown", arguments.callee);
+function timeIsUp() {
+    const gameArea = document.getElementById('table-container');
 
-    enemies.forEach((enemyObj) => {
-        clearInterval(enemyObj.movementInterval);
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
     });
 
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "OH NO!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "S'ha acabat el temps! Proba-ho un altre cop...";
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+    botonContinuar.addEventListener('click', () => {
+        location.reload();
+    });
+    
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(botonContinuar);
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
 }
 
 function startCountdownTimer() {
@@ -118,12 +153,8 @@ function startCountdownTimer() {
         if (timeRemaining <= 0) {
 
             clearInterval(gameInterval);
-            gameOver();
-            endGame();
-
-            // clearInterval(gameInterval);
-            // alert("Oh no, s'ha acabat el temps!");
-            // location.reload();
+            timeIsUp();
+            
         }
     }, 1000);
 }
@@ -458,14 +489,11 @@ function loadPage() {
 
             clearInterval(gameInterval);
             gameOver();
-            endGame();
 
             // alert("Felicitats! Has guanyat amb " + points + " punts!");
             // location.reload();
         }
     }    
-
-
 
 
     // Update life and check if game over
@@ -476,7 +504,6 @@ function loadPage() {
 
             clearInterval(gameInterval);
             gameOver();
-            endGame();
 
             // alert("Oh no, has perdut!");
             // location.reload();
