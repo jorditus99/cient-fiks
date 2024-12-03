@@ -16,7 +16,7 @@ body {
 
 @font-face {
     font-family: Fuente;
-    src:url("/font/DePixelKlein.ttf");
+    src:url("../font/DePixelKlein.ttf");
 }
 
 body {
@@ -66,7 +66,7 @@ h1 {
     width: 8%;
     height: 13%;
     z-index: 3;
-    background-image: url(/img/img_virginia/seabin_adaptado.png);
+    background-image: url(../img/img_virginia/seabin_adaptado.png);
     background-size: cover;
 }
 
@@ -150,4 +150,18 @@ button {
     cursor: pointer;
     width: 10rem;
     margin-top: 100px;
+}
+
+.tutorial-container  .punts {
+    font-size: 300%;
+    font-weight: bolder;
+    color: var(--azul);
+    margin: 0;
+    margin-bottom: 4%;
+    padding: 0;
+}
+
+.enlace-continuar {
+    color: white;
+    text-decoration: none;
 }
