@@ -537,9 +537,9 @@ function loadPage() {
         }
     }    
 
-    function enviar_puntuacio(puntuacio) {
+    function enviar_puntuacio(score) {
     
-        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio='+ puntuacio)
+        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio='+ score)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
