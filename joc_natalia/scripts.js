@@ -36,10 +36,9 @@ const lifeContainer = document.getElementById('life');
 const tableContainer = document.getElementById('table-container');
 let isImmune = false;
 let timeRemaining;
-let points = timeRemaining;
+let score = timeRemaining;
 let keyStates = new Map();
 let activatedKeyTiles = 0;
-let score = 0;
 let life = 3;
 let gameInterval;
 let vides = [];
@@ -50,7 +49,7 @@ function updateTimerDisplay(seconds) {
     timerDisplay.textContent = `Temps: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-function gameOver() {
+function gameWin() {
 
     const gameArea = document.getElementById('table-container');
 
@@ -83,17 +82,62 @@ function gameOver() {
     byeTextScore.textContent = " " + score + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html';
+    enlaceBoton.href = '../jocs.html'; // Set the URL
+    enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
 
     let botonContinuar = document.createElement("button");
-    botonContinuar.textContent = "Continuar"
+    botonContinuar.textContent = "Continuar";
+
+    enlaceBoton.appendChild(botonContinuar); // Button inside the anchor
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(enlaceBoton); // Append the anchor with the button
+
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+
+}
+
+function gameOver() {
+
+    const gameArea = document.getElementById('table-container');
+
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "OH NO!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "T'has quedat sense vides! Torna-ho a provar...";
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+    botonContinuar.addEventListener('click', () => {
+        location.reload();
+    });
     
 
     byeDivtext.appendChild(h1);
     byeDivtext.appendChild(byeTextP);
-    byeDivtext.appendChild(byeTextScore);
     byeDivtext.appendChild(botonContinuar);
-    botonContinuar.appendChild(enlaceBoton);
     byeDiv.appendChild(byeDivtext);
 
     gameArea.appendChild(byeDiv);
@@ -125,7 +169,7 @@ function timeIsUp() {
     h1.textContent = "OH NO!!";
 
     let byeTextP = document.createElement("p");
-    byeTextP.textContent = "S'ha acabat el temps! Proba-ho un altre cop...";
+    byeTextP.textContent = "S'ha acabat el temps! Torna-ho a provar...";
 
     let botonContinuar = document.createElement("button");
     botonContinuar.textContent = "Continuar";
@@ -145,7 +189,6 @@ function timeIsUp() {
 function startCountdownTimer() {
     gameInterval = setInterval(() => {
         timeRemaining -= 1;
-        points = timeRemaining;
         score = timeRemaining;
 
         updateTimerDisplay(timeRemaining);
@@ -213,7 +256,7 @@ function loadPage() {
     createGameUI();
 
     timeRemaining = 240; // Establece segundos de juego
-    points = timeRemaining;
+    score = timeRemaining;
     updateTimerDisplay(timeRemaining);
     startCountdownTimer();
 
@@ -488,12 +531,28 @@ function loadPage() {
     
 
             clearInterval(gameInterval);
-            gameOver();
+            enviar_puntuacio();
+            gameWin();
 
-            // alert("Felicitats! Has guanyat amb " + points + " punts!");
-            // location.reload();
         }
     }    
+
+    function enviar_puntuacio(puntuacio) {
+    
+        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio='+ puntuacio)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+               return response.text();
+            })
+            .then(data => {
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                console.error('Error al enviar la puntuación:', error);
+            });
+    }
 
 
     // Update life and check if game over
@@ -501,12 +560,9 @@ function loadPage() {
         life -= 1;
         if (life <= 0) {
 
-
             clearInterval(gameInterval);
             gameOver();
 
-            // alert("Oh no, has perdut!");
-            // location.reload();
         }
     }
 
