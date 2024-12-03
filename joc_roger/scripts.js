@@ -178,10 +178,20 @@ function afegir_puntuacio() {
     if (vides.length > 0) {
         puntuacio += 5;
         punts.innerHTML = puntuacio;
+        augmentar_velocitat();
     } else {
         clearInterval(intervalId);
     }
 }
+
+function augmentar_velocitat() {
+    
+    if (puntuacio == 10) {
+        
+        velocitat = 50;
+    }
+}
+
 
 function iniciar_joc() {
  
