@@ -3,17 +3,15 @@ let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
 let velocitat = 5;
-let vides = []; 
-const container_vides = document.getElementById("container_vides"); 
-let punts = document.getElementById("punts"); 
+let vides = [];
+const container_vides = document.getElementById("container_vides");
+let punts = document.getElementById("punts");
 let puntuacio = 0;
 let intervalId;
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
     let posicioX = 0;
-
-
 
     imatges.forEach((img) => {
         img.style.position = "absolute";
@@ -27,15 +25,12 @@ function moure_img_principal() {
             posicioActual -= velocitat;
             img.style.left = posicioActual + "px";
 
-
             if (posicioActual <= -img.width) {
                 img.style.left = window.innerWidth + "px";
             }
         });
     }, 10);
 }
-
-
 
 function crear_personatge() {
 
@@ -57,60 +52,47 @@ function moure_personatge(event) {
 
     switch (event.key) {
         case 'ArrowUp':
-            posicioTop -= 210; 
+            posicioTop -= 210;
             personatge.style.top = posicioTop + "px";
             break;
         case 'ArrowDown':
-            posicioTop += 210; 
+            posicioTop += 210;
             personatge.style.top = posicioTop + "px";
             break;
         default:
-            return; 
+            return;
     }
 }
 
-
 function crear_obstacle() {
 
+    const posicionsTop = [0, 210, 420, 630];
     let imgSrc = obstacles[Math.floor(Math.random() * obstacles.length)];
-    
 
     let obstacle = document.createElement('img');
     obstacle.src = imgSrc;
     obstacle.alt = "Obstacle";
-    obstacle.style.position = "absolute"; 
-    obstacle.style.left = "2000px"; 
-    obstacle.style.width = "100px"; 
+    obstacle.style.position = "absolute";
+    obstacle.style.left = "2000px";
+    obstacle.style.width = "100px";
     obstacle.style.border = "1px solid white";
-
-
-    const posicionsTop = [0, 210, 420];
-    
 
     obstacle.style.top = posicionsTop[Math.floor(Math.random() * posicionsTop.length)] + "px";
 
-
     imatge_fons.appendChild(obstacle);
-  
-    moure_obstacle(obstacle);
 
+    moure_obstacle(obstacle);
 
     setInterval(() => eliminar_obstacle(obstacle), 10);
 }
 
- 
-  
-
-
-
 function moure_obstacle(obstacle) {
-    let posicioX = parseInt(obstacle.style.left); 
+    let posicioX = parseInt(obstacle.style.left);
 
 
     const moviment = setInterval(() => {
         posicioX -= velocitat;
         obstacle.style.left = posicioX + 'px';
-
 
         if (posicioX < -obstacle.width) {
             posicioX = window.innerWidth;
@@ -122,16 +104,11 @@ function detectar_colisio() {
     const obstacle = imatge_fons.querySelector('img[alt="Obstacle"]');
 
     if (!personatge || !obstacle) {
-        // console.log("Personatge o obstacle no trobat");
         return;
     }
 
-
     const rectPersonatge = personatge.getBoundingClientRect();
     const rectObstacle = obstacle.getBoundingClientRect();
-
-    // console.log("Personatge:", rectPersonatge, "Obstacle:", rectObstacle);
-
 
     if (
         rectPersonatge.top < rectObstacle.bottom &&
@@ -139,26 +116,41 @@ function detectar_colisio() {
         rectPersonatge.left < rectObstacle.right &&
         rectPersonatge.right > rectObstacle.left
     ) {
-
-        pantalla_perdre();
+        obstacle.remove();
+        eliminar_vides();
     }
 }
+
+function eliminar_vides() {
+    if (vides.length > 0) {
+        const vidaEliminada = vides.pop(); // Elimina l'última vida de l'array
+        vidaEliminada.remove(); // Elimina l'element corresponent del DOM
+        console.log("Vida eliminada");
+    } else {
+        console.log("No queden vides!");
+        // Aquí pots cridar la funció `pantalla_perdre` o el que necessitis
+        pantalla_perdre();
+    }
+
+}
+
 
 function eliminar_obstacle(obstacle) {
 
     // console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
-    if (positon <= 0 ) {
+    if (positon <= 0) {
         // console.log("obstacle tret");
         obstacle.remove();
     }
-
 }
 
 function pantalla_perdre() {
     // alert("T'has xocat");
-    console.log("T'has xocat");
+    // console.log("T'has xocat");
     velocitat = 0;
+    alert("Has perdut");
+    enviar_puntuacio(puntuacio)
 }
 
 function crear_cor() {
@@ -176,28 +168,32 @@ function definir_vides(numVides) {
     container_vides.innerHTML = '';
     vides = [];
 
-
     for (let i = 0; i < numVides; i++) {
         crear_cor();
     }
 }
 
-
 function afegir_puntuacio() {
 
-    console.log("Dins de puntuacio");
     if (vides.length > 0) {
-        console.log(vides);
         puntuacio += 5;
-        console.log(puntuacio);
         punts.innerHTML = puntuacio;
+        augmentar_velocitat();
     } else {
-
         clearInterval(intervalId);
     }
 }
+
+function augmentar_velocitat() {
+    
+    if (puntuacio == 10) {
+        
+        velocitat = 50;
+    }
+}
+
+
 function iniciar_joc() {
- 
 
     definir_vides(3);
     setInterval(detectar_colisio, 30);
@@ -205,11 +201,25 @@ function iniciar_joc() {
     crear_personatge();
     setInterval(crear_obstacle, 1000);
     intervalId = setInterval(afegir_puntuacio, 5000);
-  }
-  
+}
 
-  iniciar_joc();
+iniciar_joc();
 
+function enviar_puntuacio(puntuacio) {
 
+    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio=' + puntuacio)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error al enviar la puntuación:', error);
+        });
+}
 
 document.addEventListener('keydown', moure_personatge);

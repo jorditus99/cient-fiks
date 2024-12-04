@@ -1,7 +1,5 @@
 <?php
 
-
-
 function connectionDB()
 {
 
@@ -18,7 +16,6 @@ function connectionDB()
     }
 }
 
-
 function secure_data($data)
 {
 
@@ -32,34 +29,32 @@ function secure_data($data)
     return $data;
 }
 
-
 function hash_pass($pass)
 {
     return password_hash($pass, PASSWORD_DEFAULT);
 }
 
-function create_user($name, $pass)
+function create_user($name, $pass, $id_type)
 {
     $nom = secure_data($name);
     $pass = secure_data($pass);
     $pass = hash_pass($pass);
+    $id_type = secure_data($id_type);
 
     $connection = connectionDB();
 
     $stmt = $connection->prepare('Insert into usuario 
-        (nom_usuario,  contrasenya) 
-        VALUES  (:nom_usuario, :password)');
+        (nom_usuario,  contrasenya, id_tipo) 
+        VALUES  (:nom_usuario, :password, :id_tipo)');
 
     $stmt->bindParam(':nom_usuario', $nom);
     $stmt->bindParam(':password', $pass);
+    $stmt->bindParam(':id_tipo', $id_type);
     $stmt->execute();
+
+    $connection = null;
 }
 
-
-function closeBD()
-{
-    return null;
-}
 
 function check_user($nom, $pass)
 {   $connection = connectionDB();
@@ -70,9 +65,11 @@ function check_user($nom, $pass)
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC); 
     if ($result && password_verify($pass, $result['contrasenya'])) {
-        return true; 
+        return $result["id_usuario"]; 
     }
-    return false; 
+    return -1; 
+
+    $connection = null;
 }
 
 function add_id ($user_type){
@@ -85,8 +82,33 @@ function add_id ($user_type){
     $stmt->bindParam(':id_tipo', $user_type);
     $stmt->execute();
 
+    $connection = null;
+
 }
     
+function select_usuaris(){
+
+    $connection = connectionDB();
+    $sentencia_text = "SELECT * FROM usuario";
+    $sentencia = $connection->prepare($sentencia_text);
+    $sentencia->execute();
+    $resultat = $sentencia->fetchAll();
+
+    $connection = null;
+
+    return $resultat;
+}
+
+
+function selsect_puntuacio(){
+
+}
+
+
+function afegir_puntuacio(){
+
+}
+
 
 
 

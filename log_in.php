@@ -1,19 +1,25 @@
 <?php
+
+session_start();
+
+$_SESSION['usuari'] = $_POST['nom'];
+
 require_once('./php_library/library.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') { 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['nom']) && isset($_POST['password'])) {
         $nom = secure_data($_POST['nom']);
         $password = secure_data($_POST['password']);
 
-        $resultAuth = check_user($nom, $password); 
+        $resultAuth = check_user($nom, $password);
 
-        if ($resultAuth) {
+        if ($resultAuth > 0) {                        //usuario existe
+            $_SESSION['userID'] = $resultAuth;
             header('Location: jocs.html');
-            exit; 
+            exit;
         } else {
             header('Location: error.php');
-            exit; 
+            exit;
         }
     }
 }
@@ -152,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="container-buttons">
                         <div class="continer-buttons-top">
                             <button type="submit">Acceder</button>
-                            <button class="regis-button"><a href="/registro.html">Registrarse</a></button>
+                            <button class="regis-button"><a href="./registro.php">Registrarse</a></button>
                         </div>
                         <button class="big-button"><a href="/jocs.html">Jugar sin Iniciar Sesión</a></button>
                     </div>

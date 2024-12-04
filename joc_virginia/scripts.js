@@ -18,11 +18,11 @@ let vides = [];
 // Definir imágenes de objetos con nombres descriptivos
 const imagenes = {
     pez: '../img/img_virginia/Pixel-Art-Fish.png',
-    pezYellow:'../img/img_virginia/Pixel-Art-Fish-removebg-preview (2).png',
-    pezBlue:'../img/img_virginia/Pixel-Art-Fish-removebg.png',
+    pezYellow: '../img/img_virginia/Pixel-Art-Fish-removebg-preview (2).png',
+    pezBlue: '../img/img_virginia/Pixel-Art-Fish-removebg.png',
     lata: '../img/img_virginia/lata.png',
     botella: '../img/img_virginia/plastic.png',
-    bolsa:'../img/img_virginia/bolsa-ajustada-removebg-preview.png',
+    bolsa: '../img/img_virginia/bolsa-ajustada-removebg-preview.png',
     jellifish: '../img/img_virginia/jellifish-removebg-preview.png'
 };
 
@@ -32,7 +32,7 @@ function initializeGame() {
     basket.style.left = basketPosition + 'px'; // Posicionar la cesta al inicio
     document.addEventListener('keydown', moveBasket); // EventListener para el movimiento de la cesta
     startGameInterval();
-    
+
 }
 
 
@@ -124,9 +124,9 @@ function objectReachedBottom(object) {
 
 // Actualizar el puntaje y vidas según el tipo de objeto recogido
 function updateScore(imageName) {
-    if (imageName === 'lata' || imageName === 'botella'|| imageName === 'bolsa') {
+    if (imageName === 'lata' || imageName === 'botella' || imageName === 'bolsa') {
         score += 10;
-    } else if (imageName === 'pez' || imageName === 'pezYellow'|| imageName === 'pezBlue'|| imageName === 'jellifish') {
+    } else if (imageName === 'pez' || imageName === 'pezYellow' || imageName === 'pezBlue' || imageName === 'jellifish') {
         life = life - 1;
         perdre_vida();
         checkLives();
@@ -153,7 +153,7 @@ function decreaseSpawnInterval() {
 
 // Actualizar el vidas según el tipo de objeto no recogido
 function updateLife(imageName) {
-    if (imageName === 'lata' || imageName === 'botella'|| imageName === 'bolsa') {
+    if (imageName === 'lata' || imageName === 'botella' || imageName === 'bolsa') {
         life = life - 1;
         perdre_vida();
         checkLives();
@@ -165,17 +165,44 @@ function updateLife(imageName) {
 function endGame() {
     clearInterval(gameInterval); // Detener la creación de objetos
     basket.style.display = 'none'; // Ocultar la cesta
+    scoreDisplay.style.display = 'none';
     let elements = document.querySelectorAll('.fallingObject');
     elements.forEach(element => {
         element.remove();
     });
     let byeDiv = document.createElement("div");
-    byeDiv.classList.add('byeDiv');
-    let byeText = document.createElement("p");
-    byeText.textContent = "No tienes mas vidas, el juego ha terminado";
-    byeText.classList.add('byeText');
+    byeDiv.classList.add('tutorial-container');
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+    let byeText = document.createElement("h1");
+    byeText.textContent = "FELICITATS!!";
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit";
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts');
+    byeTextScore.textContent = " " + score + " punts!";
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html';
+    enlaceBoton.textContent = "Continuar";
+    enlaceBoton.classList.add('enlace-continuar')
+    let botonContinuar = document.createElement("button");
+    
 
-    byeDiv.appendChild(byeText);
+
+
+
+    // byeText.classList.add('byeText');
+    // byeTextP.classList.add('byeText');
+
+    byeDivtext.appendChild(byeText);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(botonContinuar);
+    botonContinuar.appendChild(enlaceBoton);
+    byeDiv.appendChild(byeDivtext);
+    // byeDiv.appendChild(enlaceBoton);
+    // byeDiv.appendChild(byeTextP);
+
     gameArea.appendChild(byeDiv);
 
 }
@@ -183,6 +210,7 @@ function endGame() {
 function checkLives() {
     if (life <= 0) {
         endGame();
+        // enviar_puntuacio(score);
     }
 }
 
@@ -216,6 +244,22 @@ function perdre_vida() {
     }
 }
 
+// function enviar_puntuacio(score) {
+
+//     fetch('../php_library/puntuacio.php?3=1&puntuacio=' + score)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`Error: ${response.status}`);
+//             }
+//             return response.text();
+//         })
+//         .then(data => {
+//             console.log('Respuesta del servidor:', data);
+//         })
+//         .catch(error => {
+//             console.error('Error al enviar la puntuación:', error);
+//         });
+// }
 
 
 

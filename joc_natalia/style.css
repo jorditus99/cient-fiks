@@ -1,10 +1,22 @@
+
+@font-face {
+    font-family: Fuente;
+    src:url("/font/DePixelKlein.ttf");
+}
+
+:root {
+    --naranja: #FF6F1E;
+    --azul: #06629E;
+    --gris_claro: #ccc;
+}
+
 html, body {
     height: 100%;
     margin: 0;
-    font-family: "Pixelify Sans", sans-serif;
-    background-image: url("/img/river_day.gif");
+    background-image: url("/img/river_raining.gif");
     background-size: cover;
     background-position: center;
+    font-family: Fuente;
 }
 
 #background {
@@ -21,17 +33,6 @@ html, body {
     width: 70%;
 }
 
-.table-container{
-    height: 90%;
-    width: 70%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center; /* Center the table */
-    align-items: center; /* Align items center */
-    border-radius: 1rem;
-    background-color: black;
-    position: relative; /* Make sure that child elements can be absolutely positioned inside */
-}
 
 .fons {
 
@@ -43,12 +44,9 @@ html, body {
 }
 
 
-/* #################################################### */
-
 #player {
     position: absolute;
     color: rgba(255, 255, 255, 0);
-    background-image: url("../img/img_natalia/player_front.jpg");
     width: 1.2rem;
     height: 1.6rem;
     background-color: rgb(31, 221, 255);
@@ -68,35 +66,44 @@ html, body {
     position: absolute;
     width: 1.6rem;
     height: 1.2rem;
-    background-color: rgb(199, 199, 199); /* Color for enemies */
+    background-color: rgb(199, 199, 199);
     z-index: 2;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%; 
+    width: 70%;
+    border-radius: 1rem;
+    
+    background-image: url('/img/img_natalia/sewer.jpg');
+    position: relative;
 }
 
 
 table {
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    width: auto;
-    height: auto;
+    height: 70%; 
+    margin-top: 5%;
+    width: 95%;
     border-spacing: 0px;
-    border-collapse: initial;
-    position: absolute;
+    color: rgba(0, 0, 0, 0);
 }
+
 
 tr {
     border: none;
 }
 
-/*table element styles*/
+
 td {
-    width: 1.9rem;
-    height: 1.9rem;
-    margin: 0px;
-    border: none;
-    padding: 0px;
+    height: calc(100% / 25);
+    padding: 0; 
+    overflow: hidden; 
+    background-size: cover;
 }
+
 
 #win {
     background-color: rgb(163, 255, 183);
@@ -104,15 +111,13 @@ td {
 }
 
 .wall {
-    color: rgba(255, 255, 255, 0);
     background-image: url("../img/img_natalia/wall.jpg");
-    background-color: rgb(40, 25, 94);
+    background-size: cover;
 }
 
 .freespace {
-    color: rgba(0, 0, 0, 0);
     background-image: url("../img/img_natalia/floor.jpg");
-    background-color: rgb(41, 128, 87);
+    background-size: cover;
 }
 
 #start {
@@ -122,35 +127,35 @@ td {
 
 .key {
     color: rgba(255, 255, 255, 0);
-    /* background-image: url("../img/img_natalia/manivela_off.png"); */
     background-color: rgb(255, 158, 247);
 }
 
-#score {
-    font-family: monospace;
+#score, #timer {
+    font-family: Fuente;
+    font-weight: 600;
+    font-size: 34px;
+    text-shadow:
+        2px 2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black,
+        -2px -2px 0px black;
     position: absolute;
-    top: 4%;
-    right: 75%;
+    top: 2%;
+    right: 72%;
     color: rgb(255, 255, 255);
-    font-size: 24px;
-    z-index: 10; /* Ensure it's above the table */
+    z-index: 10;
 }
 
 #timer {
-    font-family: monospace;
-    position: absolute;
-    top: 4%;
-    right: 45%;
-    font-size: 24px;
-    color: rgb(255, 255, 255);
-    z-index: 10; /* Ensure it's above the table */
+    right: 38%;
+    z-index: 10;
 }
 
 #life {
     position: absolute;
     top: 2%;
     right: 10%;
-    z-index: 10; /* Ensure it's above the table */
+    z-index: 10; 
 }
 
 .cor {
@@ -158,15 +163,99 @@ td {
     height: 50px;
 }
 
-/* CHARACTER APPEARANCE STUFF */
-
-/* Define a blinking animation */
 @keyframes blink {
-    0%, 100% { opacity: 1; }   /* Fully visible at start and end of each cycle */
-    50% { opacity: 0.0; }      /* Semi-transparent at the middle of each cycle */
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.0; } 
 }
 
-/* Class to apply during immunity */
 #player.immune {
-    animation: blink 0.5s infinite;  /* Blinks every 0.5 seconds */
+    animation: blink 0.5s infinite; 
 }
+
+
+/*-----------------------------------TUTORIALES-------------------------------------------*/
+
+h1 {
+    font-size: 300%;
+    color: var(--naranja);
+    line-height: 1;
+    text-shadow: 3px 3px 5px #000000c5;
+    margin-bottom: 5%;
+}
+
+button {
+    font-family: Fuente;
+    color: white;
+    background-color: var(--naranja);
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    width: 10rem;
+    margin-top: 100px;
+}
+
+
+.tutorial-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+    font-size: 120%;
+}
+
+.tutorial-icons div {
+    width: 30%;
+}
+
+.tutorial-icons img {
+    width: 7rem;
+    height: 7rem;
+    object-fit: contain;
+}
+
+.tutorial-container-text {
+    color: black;
+    font-size: 1.3rem;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: block;
+    line-height: 1.5;
+    text-align: center;
+    width: 90%;
+}
+
+
+.tutorial-container {
+    position: absolute;
+    border-radius: 1rem;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.tutorial-container button {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
+
+.tutorial-container  .punts {
+    font-size: 300%;
+    font-weight: bolder;
+    color: var(--azul);
+    margin: 0;
+    margin-bottom: 4%;
+    padding: 0;
+}
+
+/*------------------------------------------------------------------*/
