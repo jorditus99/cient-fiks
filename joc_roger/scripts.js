@@ -188,7 +188,15 @@ function augmentar_velocitat() {
     
     if (puntuacio == 10) {
         
-        velocitat = 50;
+        velocitat = 7;
+    }
+    else if(puntuacio == 50 ){
+
+        velocitat = 10;
+    }
+    else if(puntuacio == 100 ){
+
+        velocitat = 15;
     }
 }
 
@@ -199,7 +207,7 @@ function iniciar_joc() {
     setInterval(detectar_colisio, 30);
     moure_img_principal();
     crear_personatge();
-    setInterval(crear_obstacle, 1000);
+    setInterval(crear_obstacle, 750);
     intervalId = setInterval(afegir_puntuacio, 5000);
   }
   
