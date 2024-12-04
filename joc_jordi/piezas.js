@@ -69,7 +69,7 @@ const nivel2 = [
     " ", " ", escabadora2, " ", " ", " ", " ", " ", " ",
     " ", camion1, " ", ed6, " ", " ", " ", " ", " ",
     " ", " ", ed7, " ", " ", ed8, " ", " ", " ",
-    " ", " ", " ", " ", escabadora3, " ", cole, " ", " ",
+    " ", " ", " ", " ", " ", " ", cole, " ", " ",
     valvula_inicial, " ", " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ", " ", " ",
     " ", " ", " ", " ", " ", " ", " ", " ", " "
@@ -86,6 +86,30 @@ const obstaculos = [
     "ed3", "ed4", "ed5", "ed6", "ed7", "ed8", "ed9",
     "escabadora1", "escabadora2", "escabadora3"
 ];
+
+let tiempoTotal = 0; // Variable para almacenar el tiempo total
+let timer; // Para almacenar el setInterval
+let tiempoIniciado = false; // Variable para saber si el contador ya está corriendo
+
+// Función para iniciar el contador
+function iniciarTiempo() {
+    if (!tiempoIniciado) {
+        tiempoIniciado = true;
+        timer = setInterval(() => {
+            tiempoTotal++; // Aumentar el tiempo cada segundo
+            document.getElementById('tiempo').innerText = `Tiempo: ${tiempoTotal} segundos`;
+        }, 1000);
+    }
+}
+
+// Función para parar el contador y guardar el tiempo
+function pararTiempo() {
+    if (tiempoIniciado) {
+        clearInterval(timer); // Detener el contador
+        tiempoIniciado = false; // Marcar que el contador ha sido detenido
+        console.log(`Tiempo total: ${tiempoTotal} segundos`); // Mostrar el tiempo total en la consola
+    }
+}
 
 // Array para almacenar las posiciones donde se colocan las tuberías
 let posicionesTuberias = [];
@@ -167,11 +191,14 @@ function crearTablero() {
                 console.log("Posiciones de las tuberías: ", posicionesTuberias);
 
                 // Verificar si se ha colocado la tubería en la celda de victoria
-                if (esCasillaVictoria) {
-                    alert("¡Has ganado el nivel 1!");
-                    nivelActual = nivel2; // Cambiar al segundo nivel
-                    resetearTablero(); // Cargar el nuevo nivel
-                }
+if (esCasillaVictoria && nivelActual === nivel1) {
+    alert("¡Has ganado el nivel 1!");
+    nivelActual = nivel2; // Cambiar al segundo nivel
+    resetearTablero(); // Cargar el nuevo nivel
+} else if (esCasillaVictoria && nivelActual === nivel2) {
+    alert("¡Has ganado el nivel 2!");
+    gameWin(); // Llamar a la función win cuando se gane el nivel 2
+}
             });
         }
 
@@ -262,3 +289,54 @@ botonReiniciar.addEventListener("click", () => {
 crearTablero();
 
 
+function gameWin() {
+
+    console.log ('nivel 2');
+    const gameArea = document.getElementById('table-container');
+
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "FELICITATS!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts');
+    byeTextScore.textContent = " " + score + " punts!";
+
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html'; // Set the URL
+    enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+
+    enlaceBoton.appendChild(botonContinuar); // Button inside the anchor
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(enlaceBoton); // Append the anchor with the button
+
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+
+}

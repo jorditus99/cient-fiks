@@ -2,28 +2,28 @@ document.addEventListener("DOMContentLoaded", loadPage);
 
 let maze = [
     `#########################################`,
-    `#.#.....?..#........#.....#..?.#..#.....#`,
-    `#.#####....####.#########.##...#.######.#`,
+    `#.#........#........#.....#....#..#.....#`,
+    `#?#####....####.#########.##...#.######.#`,
     `#.............#.........#......#........#`,
-    `###.####.###.##.#########.###.###.#######`,
+    `#?#.####.###.##.#########.###.###.#######`,
     `#.#...#.........#.......#.#.............#`,
     `#.#.#.####.#########.##.###########.#####`,
     `#.#.#......#.........#........#.........#`,
     `#.#.######.###.##.##.#.########.#######.#`,
     `#......#.#.....#...#.#........#.......#.#`,
-    `#.##.#.#.#.#.#.#?....######.#.#.#####...#`,
-    `#.#..#.#.###.#.#...#......#.#...#.#.#..?#`,
+    `#?##.#.#.#.#.#.#.....######.#.#.#####...#`,
+    `#?#..#.#.###.#.#...#......#.#...#.#.#...#`,
     `#.#..#.#.....#.#####.####.#.#####.#.....#`,
     `#.####.#.#####...#......#.#.......#.##.##`,
     `#........#...#####.########.#####...#...#`,
-    `#####.######..........#...#.#...#####.###`,
+    `#.###.######..........#...#.#...#####.###`,
     `#.#...#........##.#######.###.#.#.......#`,
     `#.###.#.######.#..#.....#.#...###.#######`,
     `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
-    `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
+    `#.#.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
     `#.......#......#.#..#...#...#.........#.#`,
     `#.#...#####.####.#..#.#.###.####.######.#`,
-    `#.#.?.......#.........#........#!#......#`,
+    `#...?...........................!#......#`,
     `#########################################`
 ];
 
@@ -35,11 +35,10 @@ let scoreDisplay, timerDisplay;
 const lifeContainer = document.getElementById('life');
 const tableContainer = document.getElementById('table-container');
 let isImmune = false;
-let timeRemaining = 240;
-let points = timeRemaining;
+let timeRemaining;
+let score = timeRemaining;
 let keyStates = new Map();
 let activatedKeyTiles = 0;
-let score = 0;
 let life = 3;
 let gameInterval;
 let vides = [];
@@ -50,17 +49,155 @@ function updateTimerDisplay(seconds) {
     timerDisplay.textContent = `Temps: ${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
+function gameWin() {
+
+    const gameArea = document.getElementById('table-container');
+
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "FELICITATS!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts');
+    byeTextScore.textContent = " " + score + " punts!";
+
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../ranquing.html'; // Set the URL
+    enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+
+    enlaceBoton.appendChild(botonContinuar); // Button inside the anchor
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    byeDivtext.appendChild(enlaceBoton); // Append the anchor with the button
+
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+
+}
+
+function gameOver() {
+
+    const gameArea = document.getElementById('table-container');
+
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "OH NO!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "T'has quedat sense vides! Torna-ho a provar...";
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+    botonContinuar.addEventListener('click', () => {
+        location.reload();
+    });
+    
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(botonContinuar);
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+
+}
+
+function timeIsUp() {
+    const gameArea = document.getElementById('table-container');
+
+    clearInterval(gameInterval);
+
+    const player = document.getElementById('player');
+    if (player) {
+        player.style.display = 'none';
+    }
+
+    const enemies = document.querySelectorAll('.enemy'); 
+    enemies.forEach(enemy => {
+        enemy.style.display = 'none';
+    });
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "OH NO!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "S'ha acabat el temps! Torna-ho a provar...";
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+    botonContinuar.addEventListener('click', () => {
+        location.reload();
+    });
+    
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(botonContinuar);
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+}
+
 function startCountdownTimer() {
     gameInterval = setInterval(() => {
         timeRemaining -= 1;
-        points = timeRemaining;
+        score = timeRemaining;
 
         updateTimerDisplay(timeRemaining);
 
         if (timeRemaining <= 0) {
+
             clearInterval(gameInterval);
-            alert("Oh no, s'ha acabat el temps!");
-            location.reload();
+            timeIsUp();
+            
         }
     }, 1000);
 }
@@ -118,8 +255,8 @@ function loadPage() {
     
     createGameUI();
 
-    points = 240;
-    timeRemaining = 240;
+    timeRemaining = 240; // Establece segundos de juego
+    score = timeRemaining;
     updateTimerDisplay(timeRemaining);
     startCountdownTimer();
 
@@ -168,12 +305,12 @@ function loadPage() {
                     break;
                 case '!': 
                     cell.id = 'win';
-                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')"; // Default graphic
+                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
                     break;
                 case '?': 
                     cell.classList.add('key'); 
                     keyStates.set(cell, false); 
-                    cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')"; // Set the initial graphic
+                    cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')";
                     break;
             }
         }
@@ -258,6 +395,26 @@ function loadPage() {
                 updatePlayerGraphic('left');
                 break;
             case 'ArrowRight': 
+                newPos.left += 5; 
+                updatePlayerGraphic('right');
+                break;
+            case 'w': 
+            case 'W': 
+                newPos.top -= 5; 
+                updatePlayerGraphic('up');
+                break;
+            case 's': 
+            case 'S': 
+                newPos.top += 5; 
+                updatePlayerGraphic('down');
+                break;
+            case 'a': 
+            case 'A': 
+                newPos.left -= 5; 
+                updatePlayerGraphic('left');
+                break;
+            case 'd': 
+            case 'D': 
                 newPos.left += 5; 
                 updatePlayerGraphic('right');
                 break;
@@ -366,96 +523,49 @@ function loadPage() {
         const winTile = document.getElementById("win");
         const winTileRect = winTile.getBoundingClientRect();
     
-        // Check if the win tile is in the activated state (gold) and the player collides with it
         if (winTile.style.backgroundImage.includes("win_on.png") &&
             playerRect.left < winTileRect.right &&
             playerRect.right > winTileRect.left &&
             playerRect.top < winTileRect.bottom &&
             playerRect.bottom > winTileRect.top) {
     
-            // Stop the countdown
+
             clearInterval(gameInterval);
-    
-            // Show final points and congratulatory message
-            alert("Felicitats! Has guanyat amb " + points + " punts!");
-    
-            // End the game or reload
-            endGame();
-            location.reload();
+            enviar_puntuacio(score);
+            gameWin();
+
         }
     }    
 
-
-    function endGame() {
-        // Remove the event listener for player movement
-        window.removeEventListener("keydown", arguments.callee);
-
-        // Stop enemy movement (assuming they use setInterval for movement)
-        enemies.forEach((enemyObj) => {
-            clearInterval(enemyObj.movementInterval);
-        });
-
+    function enviar_puntuacio(score) {
+    
+        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio='+ score)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+               return response.text();
+            })
+            .then(data => {
+                console.log('Respuesta del servidor:', data);
+            })
+            .catch(error => {
+                console.error('Error al enviar la puntuación:', error);
+            });
     }
+
 
     // Update life and check if game over
     function updateLifeStatus() {
         life -= 1;
         if (life <= 0) {
 
+            clearInterval(gameInterval);
             gameOver();
 
-            //alert("Oh no, has perdut!");
-            // Optionally reload or reset the game
-            //location.reload(); // Or handle game reset logic here
         }
     }
 
-    function gameOver() {
-
-        const gameArea = document.getElementById('table-container');
-
-        // clearInterval(gameInterval);
-        // basket.style.display = 'none'; 
-        // scoreDisplay.style.display = 'none';
-        // let elements = document.querySelectorAll('.fallingObject');
-        // elements.forEach(element => {
-        //     element.remove();
-        // });
-        let byeDiv = document.createElement("div");
-        byeDiv.classList.add('tutorial-container');
-        let byeDivtext = document.createElement("div");
-        byeDivtext.classList.add('tutorial-container-text');
-        let byeText = document.createElement("h1");
-        byeText.textContent = "FELICITATS";
-        let byeTextP = document.createElement("p");
-        byeTextP.textContent = "Has aconseguit";
-        let byeTextScore = document.createElement("p");
-        byeTextScore.textContent = " " + score + "";
-        let byeTextPuntos = document.createElement("p");
-        byeTextPuntos.textContent = "punts";
-        let enlaceBoton = document.createElement("a");
-        enlaceBoton.href = '../jocs.html';
-        let botonContinuar = document.createElement("button");
-        botonContinuar.textContent = "Continuar"
-        
-    
-    
-    
-        // byeText.classList.add('byeText');
-        // byeTextP.classList.add('byeText');
-    
-        byeDivtext.appendChild(byeText);
-        byeDivtext.appendChild(byeTextP);
-        byeDivtext.appendChild(byeTextScore);
-        byeDivtext.appendChild(byeTextPuntos);
-        enlaceBoton.appendChild(botonContinuar);
-        byeDiv.appendChild(byeDivtext);
-        byeDiv.appendChild(enlaceBoton);
-        // byeDiv.appendChild(byeTextP);
-    
-        gameArea.appendChild(byeDiv);
-    
-    }
 
     function crear_cor(num) {
         let cor = document.createElement('img');

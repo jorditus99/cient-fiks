@@ -3,9 +3,9 @@ let fons = document.getElementById("fons");
 let posicioTop = 0;
 let obstacles = ["../img/img_roger/petroli.png", "../img/img_roger/llauna.png"];
 let velocitat = 5;
-let vides = []; 
-const container_vides = document.getElementById("container_vides"); 
-let punts = document.getElementById("punts"); 
+let vides = [];
+const container_vides = document.getElementById("container_vides");
+let punts = document.getElementById("punts");
 let puntuacio = 0;
 let intervalId;
 
@@ -52,15 +52,15 @@ function moure_personatge(event) {
 
     switch (event.key) {
         case 'ArrowUp':
-            posicioTop -= 210; 
+            posicioTop -= 210;
             personatge.style.top = posicioTop + "px";
             break;
         case 'ArrowDown':
-            posicioTop += 210; 
+            posicioTop += 210;
             personatge.style.top = posicioTop + "px";
             break;
         default:
-            return; 
+            return;
     }
 }
 
@@ -68,26 +68,26 @@ function crear_obstacle() {
 
     const posicionsTop = [0, 210, 420, 630];
     let imgSrc = obstacles[Math.floor(Math.random() * obstacles.length)];
-    
+
     let obstacle = document.createElement('img');
     obstacle.src = imgSrc;
     obstacle.alt = "Obstacle";
-    obstacle.style.position = "absolute"; 
-    obstacle.style.left = "2000px"; 
-    obstacle.style.width = "100px"; 
+    obstacle.style.position = "absolute";
+    obstacle.style.left = "2000px";
+    obstacle.style.width = "100px";
     obstacle.style.border = "1px solid white";
 
     obstacle.style.top = posicionsTop[Math.floor(Math.random() * posicionsTop.length)] + "px";
 
     imatge_fons.appendChild(obstacle);
-  
+
     moure_obstacle(obstacle);
 
     setInterval(() => eliminar_obstacle(obstacle), 10);
 }
 
 function moure_obstacle(obstacle) {
-    let posicioX = parseInt(obstacle.style.left); 
+    let posicioX = parseInt(obstacle.style.left);
 
 
     const moviment = setInterval(() => {
@@ -139,7 +139,7 @@ function eliminar_obstacle(obstacle) {
 
     // console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
-    if (positon <= 0 ) {
+    if (positon <= 0) {
         // console.log("obstacle tret");
         obstacle.remove();
     }
@@ -202,25 +202,25 @@ function augmentar_velocitat() {
 
 
 function iniciar_joc() {
- 
+
     definir_vides(3);
     setInterval(detectar_colisio, 30);
     moure_img_principal();
     crear_personatge();
     setInterval(crear_obstacle, 750);
     intervalId = setInterval(afegir_puntuacio, 5000);
-  }
-  
-  iniciar_joc();
+}
+
+iniciar_joc();
 
 function enviar_puntuacio(puntuacio) {
-    
-    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio='+ puntuacio)
+
+    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio=' + puntuacio)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-           return response.text();
+            return response.text();
         })
         .then(data => {
             console.log('Respuesta del servidor:', data);
