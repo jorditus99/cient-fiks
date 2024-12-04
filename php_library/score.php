@@ -3,7 +3,6 @@
 
 require_once('library.php');
 
-
 $connection = connectionDB();
 
 $sentencia_text = "SELECT 
