@@ -531,7 +531,7 @@ function loadPage() {
     
 
             clearInterval(gameInterval);
-            enviar_puntuacio();
+            enviar_puntuacio(score);
             gameWin();
 
         }
