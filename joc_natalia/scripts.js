@@ -82,7 +82,7 @@ function gameWin() {
     byeTextScore.textContent = " " + score + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html'; // Set the URL
+    enlaceBoton.href = '../ranquing.html'; // Set the URL
     enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
 
     let botonContinuar = document.createElement("button");
