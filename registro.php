@@ -1,11 +1,12 @@
 <?php
-require_once ('./php_library/library.php');
+require_once('./php_library/library.php');
 
 if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-password'])) {
     // print_r($_POST['password']);
     // die();
     if ($_POST['password'] === $_POST['confirm-password']) {
-        create_user($_POST['nom'], $_POST['password'],$_POST['id_tipo']);
+        create_user($_POST['nom'], $_POST['password'], $_POST['id_tipo']);
+        header("Location: ./log_in.php");
     } else {
         echo "Las contraseñas no coinciden.";
     }
@@ -94,7 +95,6 @@ if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-p
         font-size: 1.2em;
         cursor: pointer;
     }
-
 </style>
 
 <body>
@@ -104,13 +104,13 @@ if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-p
             <div class="nav-links">
                 <a href="index.html">Inici</a>
                 <a href="jocs.html">Jocs</a>
-                <a href="ranquing.html">Rànquing</a>
+                <a href="ranquing.php">Rànquing</a>
                 <a href="equipo.html">Equip</a>
             </div>
         </div>
     </div>
 
-        
+
 
     <div class="master-container-register">
         <div class="container-register">
@@ -134,9 +134,5 @@ if (isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['confirm-p
     </div>
 
 </body>
+
 </html>
-
-
-
-
-
