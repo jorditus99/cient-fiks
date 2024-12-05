@@ -186,7 +186,7 @@ function endGame() {
     enlaceBoton.textContent = "Continuar";
     enlaceBoton.classList.add('enlace-continuar')
     let botonContinuar = document.createElement("button");
-    
+
 
 
 
@@ -209,6 +209,7 @@ function endGame() {
 
 function checkLives() {
     if (life <= 0) {
+        enviar_puntuacio(score);
         endGame();
         // enviar_puntuacio(score);
     }
@@ -244,22 +245,22 @@ function perdre_vida() {
     }
 }
 
-// function enviar_puntuacio(score) {
+function enviar_puntuacio(score) {
 
-//     fetch('../php_library/puntuacio.php?3=1&puntuacio=' + score)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`Error: ${response.status}`);
-//             }
-//             return response.text();
-//         })
-//         .then(data => {
-//             console.log('Respuesta del servidor:', data);
-//         })
-//         .catch(error => {
-//             console.error('Error al enviar la puntuación:', error);
-//         });
-// }
+    fetch('../php_library/puntuacio.php?id_juego=3&puntuacio=' + score)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error al enviar la puntuación:', error);
+        });
+}
 
 
 
