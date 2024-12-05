@@ -2,17 +2,17 @@ document.addEventListener("DOMContentLoaded", loadPage);
 
 let maze = [
     `#########################################`,
-    `#.#........#........#.....#....#..#.....#`,
-    `#?#####....####.#########.##...#.######.#`,
+    `#.#......?.#........#.....#..?.#..#.....#`,
+    `#.######...####.#########.##...#.######.#`,
     `#.............#.........#......#........#`,
-    `#?#.####.###.##.#########.###.###.#######`,
+    `###.####.###.##.#########.###.###.#######`,
     `#.#...#.........#.......#.#.............#`,
     `#.#.#.####.#########.##.###########.#####`,
     `#.#.#......#.........#........#.........#`,
     `#.#.######.###.##.##.#.########.#######.#`,
     `#......#.#.....#...#.#........#.......#.#`,
-    `#?##.#.#.#.#.#.#.....######.#.#.#####...#`,
-    `#?#..#.#.###.#.#...#......#.#...#.#.#...#`,
+    `####.#.#.#.#.#.#?....######.#.#.#####...#`,
+    `#.#..#.#.###.#.#...#......#.#...#.#.#..?#`,
     `#.#..#.#.....#.#####.####.#.#####.#.....#`,
     `#.####.#.#####...#......#.#.......#.##.##`,
     `#........#...#####.########.#####...#...#`,
@@ -20,10 +20,10 @@ let maze = [
     `#.#...#........##.#######.###.#.#.......#`,
     `#.###.#.######.#..#.....#.#...###.#######`,
     `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
-    `#.#.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
-    `#.......#......#.#..#...#...#.........#.#`,
-    `#.#...#####.####.#..#.#.###.####.######.#`,
-    `#...?...........................!#......#`,
+    `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
+    `#.#.....#......#.#..#...#...#.........#.#`,
+    `#.#...#####.####.##.#.#.###.####.######.#`,
+    `#...?............#....#........#!#......#`,
     `#########################################`
 ];
 
@@ -82,17 +82,17 @@ function gameWin() {
     byeTextScore.textContent = " " + score + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../ranquing.html'; // Set the URL
-    enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
+    enlaceBoton.href = '../ranquing.html';
+    enlaceBoton.style.textDecoration = "none";
 
     let botonContinuar = document.createElement("button");
     botonContinuar.textContent = "Continuar";
 
-    enlaceBoton.appendChild(botonContinuar); // Button inside the anchor
+    enlaceBoton.appendChild(botonContinuar);
     byeDivtext.appendChild(h1);
     byeDivtext.appendChild(byeTextP);
     byeDivtext.appendChild(byeTextScore);
-    byeDivtext.appendChild(enlaceBoton); // Append the anchor with the button
+    byeDivtext.appendChild(enlaceBoton);
 
     byeDiv.appendChild(byeDivtext);
 
@@ -305,7 +305,7 @@ function loadPage() {
                     break;
                 case '!': 
                     cell.id = 'win';
-                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
+                    cell.style.backgroundImage = "url('/img/img_natalia/door_off.png')";
                     break;
                 case '?': 
                     cell.classList.add('key'); 
@@ -329,8 +329,8 @@ function loadPage() {
        
         const updateGraphic = () => {
             enemy.style.backgroundImage = direction > 0 
-                ? "url('/img/img_natalia/rat_right.png')" 
-                : "url('/img/img_natalia/rat_left.png')";
+                ? "url('/img/img_natalia/rat_right.gif')" 
+                : "url('/img/img_natalia/rat_left.gif')";
         };
         updateGraphic();
     
@@ -374,10 +374,10 @@ function loadPage() {
 
         const updatePlayerGraphic = (direction) => {
             switch (direction) {
-                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.png')"; break;
-                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; break;
-                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/player_left.png')"; break;
-                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/player_right.png')"; break;
+                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/up.gif')"; break;
+                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/down.gif')"; break;
+                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/left.gif')"; break;
+                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/right.gif')"; break;
             }
         };
 
@@ -439,9 +439,9 @@ function loadPage() {
 
                     let winTile = document.getElementById('win');
                     if ([...keyStates.values()].every(Boolean)) {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_on.png')"; 
+                        winTile.style.backgroundImage = "url('/img/img_natalia/door_on.png')"; 
                     } else {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
+                        winTile.style.backgroundImage = "url('/img/img_natalia/door_off.png')";
                     }
 
                 }
@@ -523,7 +523,7 @@ function loadPage() {
         const winTile = document.getElementById("win");
         const winTileRect = winTile.getBoundingClientRect();
     
-        if (winTile.style.backgroundImage.includes("win_on.png") &&
+        if (winTile.style.backgroundImage.includes("door_on.png") &&
             playerRect.left < winTileRect.right &&
             playerRect.right > winTileRect.left &&
             playerRect.top < winTileRect.bottom &&
