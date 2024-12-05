@@ -129,7 +129,8 @@ function eliminar_vides() {
     } else {
         console.log("No queden vides!");
         // Aquí pots cridar la funció `pantalla_perdre` o el que necessitis
-        pantalla_perdre();
+        // pantalla_perdre();
+        gameOver();
     }
 
 }
@@ -228,6 +229,43 @@ function enviar_puntuacio(puntuacio) {
         .catch(error => {
             console.error('Error al enviar la puntuación:', error);
         });
+}
+
+function gameOver() {
+
+    velocitat = 0;
+    const gameArea = document.getElementById('fons');
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "FELICITATS!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts2');
+    byeTextScore.textContent = " " + puntuacio + " punts!"; // Cambia punts por puntuacio
+
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html';
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    enlaceBoton.appendChild(botonContinuar);
+    byeDivtext.appendChild(enlaceBoton); // Añade el enlace al contenedor de texto
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
 }
 
 document.addEventListener('keydown', moure_personatge);
