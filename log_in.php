@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="nav-links">
                     <a href="index.html">Inici</a>
                     <a href="jocs.html">Jocs</a>
-                    <a href="ranquing.html">Rànquing</a>
+                    <a href="ranquing.php">Rànquing</a>
                     <a href="equipo.html">Equip</a>
                 </div>
             </div>

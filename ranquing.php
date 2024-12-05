@@ -33,7 +33,7 @@ $ranking = enviar_ranquing();
       <div class="nav-links">
         <a href="index.html">Inici</a>
         <a href="jocs.html">Jocs</a>
-        <a href="ranquing.html" class="active">Rànquing</a>
+        <a href="ranquing.php" class="active">Rànquing</a>
         <a href="credits.html">Equip</a>
       </div>
     </div>
