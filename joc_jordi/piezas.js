@@ -75,6 +75,9 @@ const nivel2 = [
     " ", " ", " ", " ", " ", " ", " ", " ", " "
 ];
 
+
+
+
 // Variable para controlar el nivel actual
 let nivelActual = nivel1;
 
@@ -90,7 +93,7 @@ const obstaculos = [
 let tiempoTotal = 0; // Variable para almacenar el tiempo total
 let timer; // Para almacenar el setInterval
 let tiempoIniciado = false; // Variable para saber si el contador ya está corriendo
-
+let puntaje;
 // Función para iniciar el contador
 function iniciarTiempo() {
     if (!tiempoIniciado) {
@@ -102,13 +105,17 @@ function iniciarTiempo() {
     }
 }
 
-// Función para parar el contador y guardar el tiempo
+// Función para parar el contador y devolver el puntaje
 function pararTiempo() {
     if (tiempoIniciado) {
         clearInterval(timer); // Detener el contador
         tiempoIniciado = false; // Marcar que el contador ha sido detenido
-        console.log(`Tiempo total: ${tiempoTotal} segundos`); // Mostrar el tiempo total en la consola
+        let punts = 240 - tiempoTotal; // Calcular el puntaje
+        console.log(`Tiempo total: ${tiempoTotal} segundos`);
+        console.log(`Puntaje: ${punts}`);
+        return punts; // Devolver el puntaje
     }
+    return null; // Si no estaba corriendo, devolver null
 }
 
 // Array para almacenar las posiciones donde se colocan las tuberías
@@ -196,8 +203,9 @@ if (esCasillaVictoria && nivelActual === nivel1) {
     nivelActual = nivel2; // Cambiar al segundo nivel
     resetearTablero(); // Cargar el nuevo nivel
 } else if (esCasillaVictoria && nivelActual === nivel2) {
-    alert("¡Has ganado el nivel 2!");
-    gameWin(); // Llamar a la función win cuando se gane el nivel 2
+    let puntaje = pararTiempo();
+gameWin(puntaje); // Pasar puntaje calculado a la función gameWin
+enviar_puntuacio(puntaje);
 }
             });
         }
@@ -288,23 +296,18 @@ botonReiniciar.addEventListener("click", () => {
 // Llama a la función para crear el tablero inicial
 crearTablero();
 
+iniciarTiempo();
 
-function gameWin() {
+
+
+function gameWin(punts, gameInterval) {
 
     console.log ('nivel 2');
-    const gameArea = document.getElementById('table-container');
+    const gameArea = document.getElementById('master_container');
 
-    clearInterval(gameInterval);
+    
 
-    const player = document.getElementById('player');
-    if (player) {
-        player.style.display = 'none';
-    }
-
-    const enemies = document.querySelectorAll('.enemy'); 
-    enemies.forEach(enemy => {
-        enemy.style.display = 'none';
-    });
+   
 
     let byeDiv = document.createElement("div");
     byeDiv.classList.add('tutorial-container');
@@ -320,7 +323,7 @@ function gameWin() {
 
     let byeTextScore = document.createElement("p");
     byeTextScore.setAttribute('class', 'punts');
-    byeTextScore.textContent = " " + score + " punts!";
+    byeTextScore.textContent = " " + punts + " punts!";
 
     let enlaceBoton = document.createElement("a");
     enlaceBoton.href = '../jocs.html'; // Set the URL
@@ -339,4 +342,21 @@ function gameWin() {
 
     gameArea.appendChild(byeDiv);
 
+}
+
+function enviar_puntuacio(puntuacio) {
+
+    fetch('../php_library/puntuacio.php?id_juego=4&puntuacio=' + puntuacio)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+            console.error('Error al enviar la puntuación:', error);
+        });
 }
