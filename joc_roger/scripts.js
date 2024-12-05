@@ -216,7 +216,7 @@ iniciar_joc();
 
 function enviar_puntuacio(puntuacio) {
 
-    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio=' + puntuacio)
+    fetch('../php_library/puntuacio.php?id_juego=2&puntuacio=' + puntuacio)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
