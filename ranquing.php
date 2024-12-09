@@ -20,14 +20,6 @@ $ranking = enviar_ranquing();
 
 <body>
 
-  <style>
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  </style>
-
-
   <div class="navbar">
     <div class="navbar-content">
       <div class="nav-links">
