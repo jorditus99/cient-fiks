@@ -265,7 +265,7 @@ function loadPage() {
     mover.style.left = '18.7%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
-    mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')";
+    mover.style.backgroundImage = "url('/img/img_natalia/player_down2.png')";
     tableDiv.appendChild(mover);
 
 
@@ -376,10 +376,10 @@ function loadPage() {
 
         const updatePlayerGraphic = (direction) => {
             switch (direction) {
-                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/up.gif')"; break;
-                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/down.gif')"; break;
-                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/left.gif')"; break;
-                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/right.gif')"; break;
+                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.gif')"; break;
+                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/player_down.gif')"; break;
+                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/player_left.gif')"; break;
+                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/player_right.gif')"; break;
             }
         };
 
