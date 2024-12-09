@@ -89,7 +89,6 @@ function crear_obstacle() {
 function moure_obstacle(obstacle) {
     let posicioX = parseInt(obstacle.style.left);
 
-
     const moviment = setInterval(() => {
         posicioX -= velocitat;
         obstacle.style.left = posicioX + 'px';
@@ -123,13 +122,11 @@ function detectar_colisio() {
 
 function eliminar_vides() {
     if (vides.length > 0) {
-        const vidaEliminada = vides.pop(); // Elimina l'última vida de l'array
-        vidaEliminada.remove(); // Elimina l'element corresponent del DOM
+        const vidaEliminada = vides.pop();
+        vidaEliminada.remove(); 
         console.log("Vida eliminada");
     } else {
         console.log("No queden vides!");
-        // Aquí pots cridar la funció `pantalla_perdre` o el que necessitis
-        // pantalla_perdre();
         gameOver();
     }
 
@@ -138,17 +135,13 @@ function eliminar_vides() {
 
 function eliminar_obstacle(obstacle) {
 
-    // console.log("Dins d'eliminar");
     let positon = parseInt(obstacle.style.left);
     if (positon <= 0) {
-        // console.log("obstacle tret");
         obstacle.remove();
     }
 }
 
 function pantalla_perdre() {
-    // alert("T'has xocat");
-    // console.log("T'has xocat");
     velocitat = 0;
     alert("Has perdut");
     enviar_puntuacio(puntuacio)
@@ -250,7 +243,7 @@ function gameOver() {
 
     let byeTextScore = document.createElement("p");
     byeTextScore.setAttribute('class', 'punts2');
-    byeTextScore.textContent = " " + puntuacio + " punts!"; // Cambia punts por puntuacio
+    byeTextScore.textContent = " " + puntuacio + " punts!"; 
 
     let enlaceBoton = document.createElement("a");
     enlaceBoton.href = '../jocs.html';
@@ -262,7 +255,7 @@ function gameOver() {
     byeDivtext.appendChild(byeTextP);
     byeDivtext.appendChild(byeTextScore);
     enlaceBoton.appendChild(botonContinuar);
-    byeDivtext.appendChild(enlaceBoton); // Añade el enlace al contenedor de texto
+    byeDivtext.appendChild(enlaceBoton); 
     byeDiv.appendChild(byeDivtext);
 
     gameArea.appendChild(byeDiv);
