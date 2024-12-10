@@ -2,17 +2,17 @@ document.addEventListener("DOMContentLoaded", loadPage);
 
 let maze = [
     `#########################################`,
-    `#.#........#........#.....#....#..#.....#`,
-    `#?#####....####.#########.##...#.######.#`,
+    `#.#......?.#........#.....#..?.#..#.....#`,
+    `#.######...####.#########.##...#.######.#`,
     `#.............#.........#......#........#`,
-    `#?#.####.###.##.#########.###.###.#######`,
+    `###.####.###.##.#########.###.###.#######`,
     `#.#...#.........#.......#.#.............#`,
     `#.#.#.####.#########.##.###########.#####`,
     `#.#.#......#.........#........#.........#`,
     `#.#.######.###.##.##.#.########.#######.#`,
     `#......#.#.....#...#.#........#.......#.#`,
-    `#?##.#.#.#.#.#.#.....######.#.#.#####...#`,
-    `#?#..#.#.###.#.#...#......#.#...#.#.#...#`,
+    `####.#.#.#.#.#.#?....######.#.#.#####...#`,
+    `#.#..#.#.###.#.#...#......#.#...#.#.#..?#`,
     `#.#..#.#.....#.#####.####.#.#####.#.....#`,
     `#.####.#.#####...#......#.#.......#.##.##`,
     `#........#...#####.########.#####...#...#`,
@@ -20,10 +20,10 @@ let maze = [
     `#.#...#........##.#######.###.#.#.......#`,
     `#.###.#.######.#..#.....#.#...###.#######`,
     `#...#.#.#....#.#.##.#####.#.#.#.#.#.....#`,
-    `#.#.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
-    `#.......#......#.#..#...#...#.........#.#`,
-    `#.#...#####.####.#..#.#.###.####.######.#`,
-    `#...?...........................!#......#`,
+    `###.###.#.####.#.#..#...#.#.#.#.#.#.###.#`,
+    `#.#.....#......#.#..#...#...#.........#.#`,
+    `#.#...#####.####.##.#.#.###.####.######.#`,
+    `#...?............#....#........#!#......#`,
     `#########################################`
 ];
 
@@ -60,7 +60,7 @@ function gameWin() {
         player.style.display = 'none';
     }
 
-    const enemies = document.querySelectorAll('.enemy'); 
+    const enemies = document.querySelectorAll('.enemy');
     enemies.forEach(enemy => {
         enemy.style.display = 'none';
     });
@@ -82,17 +82,18 @@ function gameWin() {
     byeTextScore.textContent = " " + score + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html'; // Set the URL
+  
+    enlaceBoton.href = '../ranquing.php'; // Set the URL
     enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
 
     let botonContinuar = document.createElement("button");
     botonContinuar.textContent = "Continuar";
 
-    enlaceBoton.appendChild(botonContinuar); // Button inside the anchor
+    enlaceBoton.appendChild(botonContinuar);
     byeDivtext.appendChild(h1);
     byeDivtext.appendChild(byeTextP);
     byeDivtext.appendChild(byeTextScore);
-    byeDivtext.appendChild(enlaceBoton); // Append the anchor with the button
+    byeDivtext.appendChild(enlaceBoton);
 
     byeDiv.appendChild(byeDivtext);
 
@@ -111,7 +112,7 @@ function gameOver() {
         player.style.display = 'none';
     }
 
-    const enemies = document.querySelectorAll('.enemy'); 
+    const enemies = document.querySelectorAll('.enemy');
     enemies.forEach(enemy => {
         enemy.style.display = 'none';
     });
@@ -133,7 +134,7 @@ function gameOver() {
     botonContinuar.addEventListener('click', () => {
         location.reload();
     });
-    
+
 
     byeDivtext.appendChild(h1);
     byeDivtext.appendChild(byeTextP);
@@ -154,7 +155,7 @@ function timeIsUp() {
         player.style.display = 'none';
     }
 
-    const enemies = document.querySelectorAll('.enemy'); 
+    const enemies = document.querySelectorAll('.enemy');
     enemies.forEach(enemy => {
         enemy.style.display = 'none';
     });
@@ -176,7 +177,7 @@ function timeIsUp() {
     botonContinuar.addEventListener('click', () => {
         location.reload();
     });
-    
+
 
     byeDivtext.appendChild(h1);
     byeDivtext.appendChild(byeTextP);
@@ -197,13 +198,13 @@ function startCountdownTimer() {
 
             clearInterval(gameInterval);
             timeIsUp();
-            
+
         }
     }, 1000);
 }
 
 function createGameUI() {
-    
+
     const scoreDiv = document.createElement('div');
     scoreDiv.id = 'score';
     scoreDiv.textContent = 'Manetes: 0/5';
@@ -224,35 +225,35 @@ function loadPage() {
     function updateElementSizeAndPosition() {
         const containerWidth = tableContainer.offsetWidth;
         const containerHeight = tableContainer.offsetHeight;
-    
+
         // Set maxTableHeight as a percentage of the container's height (e.g., 50%)
         const maxTableHeight = containerHeight * 0.9; // Adjust 0.5 for the desired percentage
-    
+
         const rows = maze.length;
         const columns = maze[0].length;
-    
+
         // Calculate cell sizes
         const cellWidth = containerWidth / columns;
         const cellHeight = Math.min(containerHeight / rows, maxTableHeight / rows);
-    
+
         // Update the size of each cell
         document.querySelectorAll('td').forEach(cell => {
             cell.style.width = `${cellWidth}px`;
             cell.style.height = `${cellHeight}px`;
         });
-    
+
         const player = document.getElementById('player');
         if (player) {
             player.style.width = `${cellWidth * 0.6}px`;  // Make player 60% of the cell width
             player.style.height = `${cellHeight * 0.8}px`; // Make player 80% of the cell height
         }
-    
+
         document.querySelectorAll('.enemy').forEach(enemy => {
             enemy.style.width = `${cellWidth * 0.8}px`;  // Make enemies % of the cell width
             enemy.style.height = `${cellHeight * 0.6}px`; // Make enemies % of the cell height
         });
     }
-    
+
     createGameUI();
 
     timeRemaining = 240; // Establece segundos de juego
@@ -264,7 +265,7 @@ function loadPage() {
     mover.style.left = '18.7%';
     mover.style.top = '18%';
     mover.setAttribute('id', 'player');
-    mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; 
+    mover.style.backgroundImage = "url('/img/img_natalia/player_down2.png')";
     tableDiv.appendChild(mover);
 
 
@@ -294,22 +295,22 @@ function loadPage() {
             row.appendChild(cell);
             cell.innerHTML = maze[i].charAt(x);
             switch (maze[i].charAt(x)) {
-                case '#': 
-                    cell.classList.add('wall'); 
+                case '#':
+                    cell.classList.add('wall');
                     break;
-                case '.': 
-                    cell.classList.add('freespace'); 
+                case '.':
+                    cell.classList.add('freespace');
                     break;
-                case '_': 
-                    cell.id = 'start'; 
+                case '_':
+                    cell.id = 'start';
                     break;
-                case '!': 
+                case '!':
                     cell.id = 'win';
-                    cell.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
+                    cell.style.backgroundImage = "url('/img/img_natalia/door_off.png')";
                     break;
-                case '?': 
-                    cell.classList.add('key'); 
-                    keyStates.set(cell, false); 
+                case '?':
+                    cell.classList.add('key');
+                    keyStates.set(cell, false);
                     cell.style.backgroundImage = "url('/img/img_natalia/manivela_off.png')";
                     break;
             }
@@ -325,20 +326,21 @@ function loadPage() {
         const enemy = enemyObj.element;
         let enemyPosition = parseFloat(window.getComputedStyle(enemy).left);
         let direction = enemyObj.direction;
-    
-       
+
+
         const updateGraphic = () => {
+
             enemy.style.backgroundImage = direction > 0 
-                ? "url('/img/img_natalia/rat_right.png')" 
-                : "url('/img/img_natalia/rat_left.png')";
+                ? "url('/img/img_natalia/rat_right.gif')" 
+                : "url('/img/img_natalia/rat_left.gif')";
         };
         updateGraphic();
-    
+
         setInterval(() => {
             const nextPosition = enemyPosition + direction * 2;
             let collidesWithWall = false;
             const impassableTiles = document.querySelectorAll('.wall');
-    
+
             for (let tile of impassableTiles) {
                 const tileRect = tile.getBoundingClientRect();
                 const enemyRect = enemy.getBoundingClientRect();
@@ -348,7 +350,7 @@ function loadPage() {
                     break;
                 }
             }
-    
+
             if (collidesWithWall) {
                 direction *= -1;
                 enemyObj.direction = direction;
@@ -357,16 +359,16 @@ function loadPage() {
                 enemyPosition = nextPosition;
                 enemy.style.left = `${enemyPosition}px`;
             }
-    
+
 
             checkCollisionWithEnemies();
         }, 30);
     }
-    
+
 
     enemies.forEach(enemyObj => moveEnemy(enemyObj));
 
-    
+
     window.addEventListener('keydown', (event) => {
         let pos = mover.getBoundingClientRect();
         let newPos = { left: pos.left, top: pos.top };
@@ -374,53 +376,53 @@ function loadPage() {
 
         const updatePlayerGraphic = (direction) => {
             switch (direction) {
-                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.png')"; break;
-                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/player_down.png')"; break;
-                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/player_left.png')"; break;
-                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/player_right.png')"; break;
+                case 'up': mover.style.backgroundImage = "url('/img/img_natalia/player_up.gif')"; break;
+                case 'down': mover.style.backgroundImage = "url('/img/img_natalia/player_down.gif')"; break;
+                case 'left': mover.style.backgroundImage = "url('/img/img_natalia/player_left.gif')"; break;
+                case 'right': mover.style.backgroundImage = "url('/img/img_natalia/player_right.gif')"; break;
             }
         };
 
         switch (event.key) {
-            case 'ArrowUp': 
-                newPos.top -= 5; 
+            case 'ArrowUp':
+                newPos.top -= 5;
                 updatePlayerGraphic('up');
                 break;
-            case 'ArrowDown': 
-                newPos.top += 5; 
+            case 'ArrowDown':
+                newPos.top += 5;
                 updatePlayerGraphic('down');
                 break;
-            case 'ArrowLeft': 
-                newPos.left -= 5; 
+            case 'ArrowLeft':
+                newPos.left -= 5;
                 updatePlayerGraphic('left');
                 break;
-            case 'ArrowRight': 
-                newPos.left += 5; 
+            case 'ArrowRight':
+                newPos.left += 5;
                 updatePlayerGraphic('right');
                 break;
-            case 'w': 
-            case 'W': 
-                newPos.top -= 5; 
+            case 'w':
+            case 'W':
+                newPos.top -= 5;
                 updatePlayerGraphic('up');
                 break;
-            case 's': 
-            case 'S': 
-                newPos.top += 5; 
+            case 's':
+            case 'S':
+                newPos.top += 5;
                 updatePlayerGraphic('down');
                 break;
-            case 'a': 
-            case 'A': 
-                newPos.left -= 5; 
+            case 'a':
+            case 'A':
+                newPos.left -= 5;
                 updatePlayerGraphic('left');
                 break;
-            case 'd': 
-            case 'D': 
-                newPos.left += 5; 
+            case 'd':
+            case 'D':
+                newPos.left += 5;
                 updatePlayerGraphic('right');
                 break;
             case 'x':
             case 'X':
-              
+
                 if (isOnKeyTile && keyTile) {
                     const deactivatedImage = '/img/img_natalia/manivela_off.png';
                     const activatedImage = '/img/img_natalia/manivela_on.png';
@@ -439,9 +441,10 @@ function loadPage() {
 
                     let winTile = document.getElementById('win');
                     if ([...keyStates.values()].every(Boolean)) {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_on.png')"; 
+
+                        winTile.style.backgroundImage = "url('/img/img_natalia/door_on.png')"; 
                     } else {
-                        winTile.style.backgroundImage = "url('/img/img_natalia/win_off.png')";
+                        winTile.style.backgroundImage = "url('/img/img_natalia/door_off.png')";
                     }
 
                 }
@@ -495,7 +498,7 @@ function loadPage() {
 
             if (playerRect.left < enemyRect.right && playerRect.right > enemyRect.left &&
                 playerRect.top < enemyRect.bottom && playerRect.bottom > enemyRect.top) {
-                
+
                 // Collision detected
                 perdre_vida();
                 updateLifeStatus();
@@ -523,28 +526,29 @@ function loadPage() {
         const winTile = document.getElementById("win");
         const winTileRect = winTile.getBoundingClientRect();
     
-        if (winTile.style.backgroundImage.includes("win_on.png") &&
+        if (winTile.style.backgroundImage.includes("door_on.png") &&
+
             playerRect.left < winTileRect.right &&
             playerRect.right > winTileRect.left &&
             playerRect.top < winTileRect.bottom &&
             playerRect.bottom > winTileRect.top) {
-    
+
 
             clearInterval(gameInterval);
             enviar_puntuacio(score);
             gameWin();
 
         }
-    }    
+    }
 
     function enviar_puntuacio(score) {
-    
-        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio='+ score)
+
+        fetch('../php_library/puntuacio.php?id_juego=5&puntuacio=' + score)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }
-               return response.text();
+                return response.text();
             })
             .then(data => {
                 console.log('Respuesta del servidor:', data);
@@ -573,11 +577,11 @@ function loadPage() {
         cor.className = "cor";
         cor.id = num + 1;
         cor.src = '../img/vida.png';
-        
+
         // Add position and spacing for hearts
         cor.style.position = "relative"; // Position relative to lifeContainer
         cor.style.left = `${num * 0}px`; // Adjust '30px' as needed to add space between hearts
-        
+
         // Append to life container
         lifeContainer.appendChild(cor);
         tableContainer.appendChild(lifeContainer); // Ensure lifeContainer is appended only once to tableContainer

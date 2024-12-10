@@ -129,7 +129,9 @@ function eliminar_vides() {
     } else {
         console.log("No queden vides!");
         // Aquí pots cridar la funció `pantalla_perdre` o el que necessitis
-        pantalla_perdre();
+        // pantalla_perdre();
+
+        gameOver();
     }
 
 }
@@ -143,14 +145,6 @@ function eliminar_obstacle(obstacle) {
         // console.log("obstacle tret");
         obstacle.remove();
     }
-}
-
-function pantalla_perdre() {
-    // alert("T'has xocat");
-    // console.log("T'has xocat");
-    velocitat = 0;
-    alert("Has perdut");
-    enviar_puntuacio(puntuacio)
 }
 
 function crear_cor() {
@@ -185,10 +179,18 @@ function afegir_puntuacio() {
 }
 
 function augmentar_velocitat() {
-    
+
     if (puntuacio == 10) {
-        
-        velocitat = 50;
+
+        velocitat = 7;
+    }
+    else if (puntuacio == 50) {
+
+        velocitat = 10;
+    }
+    else if (puntuacio == 100) {
+
+        velocitat = 15;
     }
 }
 
@@ -199,7 +201,7 @@ function iniciar_joc() {
     setInterval(detectar_colisio, 30);
     moure_img_principal();
     crear_personatge();
-    setInterval(crear_obstacle, 1000);
+    setInterval(crear_obstacle, 750);
     intervalId = setInterval(afegir_puntuacio, 5000);
 }
 
@@ -207,7 +209,7 @@ iniciar_joc();
 
 function enviar_puntuacio(puntuacio) {
 
-    fetch('../php_library/puntuacio.php?id_juego=1&puntuacio=' + puntuacio)
+    fetch('../php_library/puntuacio.php?id_juego=2&puntuacio=' + puntuacio)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
@@ -222,4 +224,46 @@ function enviar_puntuacio(puntuacio) {
         });
 }
 
+function gameOver() {
+
+    enviar_puntuacio(puntuacio);
+
+    velocitat = 0;
+    const gameArea = document.getElementById('fons');
+
+    let byeDiv = document.createElement("div");
+    byeDiv.classList.add('tutorial-container');
+
+    let byeDivtext = document.createElement("div");
+    byeDivtext.classList.add('tutorial-container-text');
+
+    let h1 = document.createElement("h1");
+    h1.textContent = "FELICITATS!!";
+
+    let byeTextP = document.createElement("p");
+    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+
+    let byeTextScore = document.createElement("p");
+    byeTextScore.setAttribute('class', 'punts2');
+    byeTextScore.textContent = " " + puntuacio + " punts!"; // Cambia punts por puntuacio
+
+    let enlaceBoton = document.createElement("a");
+    enlaceBoton.href = '../jocs.html';
+
+    let botonContinuar = document.createElement("button");
+    botonContinuar.textContent = "Continuar";
+
+    byeDivtext.appendChild(h1);
+    byeDivtext.appendChild(byeTextP);
+    byeDivtext.appendChild(byeTextScore);
+    enlaceBoton.appendChild(botonContinuar);
+    byeDivtext.appendChild(enlaceBoton); // Añade el enlace al contenedor de texto
+    byeDiv.appendChild(byeDivtext);
+
+    gameArea.appendChild(byeDiv);
+
+
+}
+
 document.addEventListener('keydown', moure_personatge);
+

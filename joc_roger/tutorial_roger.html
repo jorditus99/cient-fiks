@@ -7,40 +7,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/joc_natalia/style.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="/styles/tutorial.css">
 </head>
 <body>
     <div id="background">
-        <img id="game-img" src="/img/img_natalia/sewer.jpg">
+        <div class="fons">
+            <div class="image_container" id="image_container">
+                <img id="img_principal" class="img_principal" src="../img/img_roger/fons_roger.png" alt="img_fons">
+            </div>
+        </div>
 
         <!-- Tutorial content container -->
         <div class="tutorial-container">
 
             <div class="tutorial-container-text">
-                <h1>Les Clavegueres</h1>
+                <h1>Els corrents del Llobregat</h1>
                 <h2>Com jugar</h2>
-                <p>Ara ja podem fer passar l'aigua! Pero, per aconseguir-ho, el Manel Grifoll ha de baixar a les clavegueres per a <strong>activar totes les manetes de pas</strong> per a que l'aigua torni a fluir!</p>
+                <p>Hem d'observar com de brut està el riu Llobregat. Per aquest moit, <strong>hem d'esquivar la brossa i bruticia que hi ha </strong> per poder-la analitzar!</p>
             </div>
 
             <div class="tutorial-icons">
                 <div>
-                    <p><strong>Prem la tecla X</strong> per a interactuar amb les manetes</p>
-                    <img id="icon" src="/img/img_natalia/key.gif">
-                    <img id="icon" src="/img/img_natalia/maneta.gif">
+                    <p><strong>Prem les tecles  </strong> per a esquivar la brossa</p>
+                    <img id="icon" src="/img/img_natalia/x_key.png">
+                    <img id="icon" src="/img/img_natalia/manivela.gif">
                 </div>
                 <div>
-                    <p>Tens només 4 minuts per aconseguir-ho!</p>
-                    <img id="icon" src="/img/img_natalia/clock.gif">
+                    <p>Tens 3 vides en total!</p>
+                    <img id="icon" src="../img/vida.png">
                 </div>
                 <div>
-                    <p><strong>Vigila amb les rates!</strong> No deixis que et mosseguin!</p>
-                    <img id="icon" src="/img/img_natalia/rat_left.gif">
+                    <p><strong>Vigila amb xocar-te amb el obstacles</strong> Si xocas perderàs una vida!</p>
+                    <img id="icon" src="../img/img_roger/petroli.png">
                 </div>
             </div>
         
-            <a href="index.html">
+            <a href="index.php">
                 <button id="one" type="button">Jugar!</button>
             </a>
         </div>

@@ -3,12 +3,12 @@
 function connectionDB()
 {
 
-    $servername = "localhost";
-    $username = "root";
-    $pass = "mysql";
+    $servername = "sql207.byethost13.com";
+    $username = "b13_37391678";
+    $pass = "erfan123";
 
     try {
-        $connection = new PDO("mysql:host=$servername;dbname=cientifiks", $username, $pass);
+        $connection = new PDO("mysql:host=$servername;dbname=b13_37391678_cientifiks", $username, $pass);
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $connection;
     } catch (PDOException $e) {
@@ -57,36 +57,38 @@ function create_user($name, $pass, $id_type)
 
 
 function check_user($nom, $pass)
-{   $connection = connectionDB();
+{
+    $connection = connectionDB();
     $nom = secure_data($nom);
-    $stmt = $connection->prepare('SELECT * FROM usuario WHERE nom_usuario = :nom' );
+    $stmt = $connection->prepare('SELECT * FROM usuario WHERE nom_usuario = :nom');
     $stmt->bindParam(':nom', $nom);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result && password_verify($pass, $result['contrasenya'])) {
-        return $result["id_usuario"]; 
+        return $result["id_usuario"];
     }
-    return -1; 
+    return -1;
 
     $connection = null;
 }
 
-function add_id ($user_type){
-    
+function add_id($user_type)
+{
+
     $connection = connectionDB();
     $user_type = secure_data($user_type);
     $stmt = $connection->prepare('Insert into usuario 
     (id_tipo) 
-    VALUES  (:user_type)'); 
+    VALUES  (:user_type)');
     $stmt->bindParam(':id_tipo', $user_type);
     $stmt->execute();
 
     $connection = null;
-
 }
-    
-function select_usuaris(){
+
+function select_usuaris()
+{
 
     $connection = connectionDB();
     $sentencia_text = "SELECT * FROM usuario";
@@ -100,14 +102,10 @@ function select_usuaris(){
 }
 
 
-function selsect_puntuacio(){
-
-}
+function selsect_puntuacio() {}
 
 
-function afegir_puntuacio(){
-
-}
+function afegir_puntuacio() {}
 
 
 
