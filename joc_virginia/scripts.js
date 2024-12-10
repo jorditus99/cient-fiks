@@ -211,7 +211,6 @@ function checkLives() {
     if (life <= 0) {
         enviar_puntuacio(score);
         endGame();
-        // enviar_puntuacio(score);
     }
 }
 
