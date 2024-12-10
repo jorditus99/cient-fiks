@@ -14,6 +14,7 @@ let score = 0;
 let life = 3;
 let gameInterval;
 let vides = [];
+let gameEnded = false;
 
 // Definir imágenes de objetos con nombres descriptivos
 const imagenes = {
@@ -87,6 +88,8 @@ function startFalling(object) {
             clearInterval(fallInterval); // Detener la caída del objeto
         }
     }, 20);
+
+    object.fallInterval = fallInterval;
 }
 
 // Verificar si el objeto toca la cesta
@@ -163,12 +166,17 @@ function updateLife(imageName) {
 }
 
 function endGame() {
+    console.log("enD GAME");
     clearInterval(gameInterval); // Detener la creación de objetos
     basket.style.display = 'none'; // Ocultar la cesta
     scoreDisplay.style.display = 'none';
     let elements = document.querySelectorAll('.fallingObject');
+    console.log("Falling obj");
     elements.forEach(element => {
-        element.remove();
+        console.log(element);
+        clearInterval(element.fallInterval);
+        gameArea.removeChild(element);
+        // element.remove();
     });
     let byeDiv = document.createElement("div");
     byeDiv.classList.add('tutorial-container');
@@ -188,27 +196,21 @@ function endGame() {
     let botonContinuar = document.createElement("button");
 
 
-
-
-
-    // byeText.classList.add('byeText');
-    // byeTextP.classList.add('byeText');
-
     byeDivtext.appendChild(byeText);
     byeDivtext.appendChild(byeTextP);
     byeDivtext.appendChild(byeTextScore);
     byeDivtext.appendChild(botonContinuar);
     botonContinuar.appendChild(enlaceBoton);
     byeDiv.appendChild(byeDivtext);
-    // byeDiv.appendChild(enlaceBoton);
-    // byeDiv.appendChild(byeTextP);
+
 
     gameArea.appendChild(byeDiv);
 
 }
 
 function checkLives() {
-    if (life <= 0) {
+    if (life <= 0 && !gameEnded) {
+        gameEnded = true;
         enviar_puntuacio(score);
         endGame();
     }
