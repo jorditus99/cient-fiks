@@ -198,15 +198,15 @@ function crearTablero() {
                 console.log("Posiciones de las tuberías: ", posicionesTuberias);
 
                 // Verificar si se ha colocado la tubería en la celda de victoria
-if (esCasillaVictoria && nivelActual === nivel1) {
-    alert("¡Has ganado el nivel 1!");
-    nivelActual = nivel2; // Cambiar al segundo nivel
-    resetearTablero(); // Cargar el nuevo nivel
-} else if (esCasillaVictoria && nivelActual === nivel2) {
-    let puntaje = pararTiempo();
-gameWin(puntaje); // Pasar puntaje calculado a la función gameWin
-enviar_puntuacio(puntaje);
-}
+                if (esCasillaVictoria && nivelActual === nivel1) {
+                    alert("¡Has ganado el nivel 1!");
+                    nivelActual = nivel2; // Cambiar al segundo nivel
+                    resetearTablero(); // Cargar el nuevo nivel
+                } else if (esCasillaVictoria && nivelActual === nivel2) {
+                    let puntaje = pararTiempo();
+                    gameWin(puntaje); // Pasar puntaje calculado a la función gameWin
+                    enviar_puntuacio(puntaje);
+                }
             });
         }
 
@@ -238,7 +238,7 @@ function validarConexion(celdaDestino, tuberiaNueva) {
 
     for (const adyacente of celdasAdyacentes) {
         const celdaVecina = document.querySelector(`div[data-fila="${adyacente.fila}"][data-columna="${adyacente.columna}"]`);
-        
+
         if (celdaVecina && celdaVecina.firstChild) {
             const tuberiaVecina = celdaVecina.firstChild;
             const conexionVecina = tuberiaVecina.getAttribute(`data-${adyacente.direccionCelda}`);
@@ -268,7 +268,7 @@ function hayConexionHaciaObstaculo(celda, tuberiaNueva) {
     return celdasAdyacentes.some(adyacente => {
         const celdaVecina = document.querySelector(`div[data-fila="${adyacente.fila}"][data-columna="${adyacente.columna}"]`);
         return celdaVecina && celdaVecina.firstChild && obstaculos.includes(celdaVecina.firstChild.id) &&
-               tuberiaNueva.getAttribute(`data-${adyacente.direccion}`) === "true";
+            tuberiaNueva.getAttribute(`data-${adyacente.direccion}`) === "true";
     });
 }
 
@@ -302,12 +302,12 @@ iniciarTiempo();
 
 function gameWin(punts, gameInterval) {
 
-    console.log ('nivel 2');
+    console.log('nivel 2');
     const gameArea = document.getElementById('master_container');
 
-    
 
-   
+
+
 
     let byeDiv = document.createElement("div");
     byeDiv.classList.add('tutorial-container');
@@ -326,7 +326,7 @@ function gameWin(punts, gameInterval) {
     byeTextScore.textContent = " " + punts + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html'; // Set the URL
+    enlaceBoton.href = '../joc_natalia/tutorial_natalia.html'; // Set the URL
     enlaceBoton.style.textDecoration = "none"; // Optional: Remove underline for the link
 
     let botonContinuar = document.createElement("button");

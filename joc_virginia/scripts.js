@@ -190,7 +190,7 @@ function endGame() {
     byeTextScore.setAttribute('class', 'punts');
     byeTextScore.textContent = " " + score + " punts!";
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html';
+    enlaceBoton.href = '../joc_jordi/tutorial_jordi.html';
     enlaceBoton.textContent = "Continuar";
     enlaceBoton.classList.add('enlace-continuar')
     let botonContinuar = document.createElement("button");
