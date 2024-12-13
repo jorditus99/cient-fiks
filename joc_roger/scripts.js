@@ -8,6 +8,7 @@ const container_vides = document.getElementById("container_vides");
 let punts = document.getElementById("punts");
 let puntuacio = 0;
 let intervalId;
+let interval_obstacle;
 
 function moure_img_principal() {
     const imatges = document.querySelectorAll(".img_principal");
@@ -176,15 +177,20 @@ function afegir_puntuacio() {
 function augmentar_velocitat() {
 
     if (puntuacio == 10) {
-
+        clearInterval(interval_obstacle);    
+        interval_obstacle = setInterval(crear_obstacle, 1000);
         velocitat = 7;
     }
     else if (puntuacio == 50) {
 
+        clearInterval(interval_obstacle);    
+        interval_obstacle = setInterval(crear_obstacle, 500);
         velocitat = 10;
     }
     else if (puntuacio == 100) {
 
+        clearInterval(interval_obstacle);    
+        interval_obstacle = setInterval(crear_obstacle, 150);
         velocitat = 15;
     }
 }
@@ -196,7 +202,7 @@ function iniciar_joc() {
     setInterval(detectar_colisio, 30);
     moure_img_principal();
     crear_personatge();
-    setInterval(crear_obstacle, 750);
+    interval_obstacle = setInterval(crear_obstacle, 1500);
     intervalId = setInterval(afegir_puntuacio, 5000);
 }
 
