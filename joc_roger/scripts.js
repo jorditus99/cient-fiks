@@ -128,6 +128,7 @@ function eliminar_vides() {
         console.log("Vida eliminada");
     } else {
         console.log("No queden vides!");
+
         gameOver();
     }
 
@@ -140,12 +141,6 @@ function eliminar_obstacle(obstacle) {
     if (positon <= 0) {
         obstacle.remove();
     }
-}
-
-function pantalla_perdre() {
-    velocitat = 0;
-    alert("Has perdut");
-    enviar_puntuacio(puntuacio)
 }
 
 function crear_cor() {
@@ -180,19 +175,19 @@ function afegir_puntuacio() {
 }
 
 function augmentar_velocitat() {
-    
+
     if (puntuacio == 10) {
         clearInterval(interval_obstacle);    
         interval_obstacle = setInterval(crear_obstacle, 1000);
         velocitat = 7;
     }
-    else if(puntuacio == 50 ){
+    else if (puntuacio == 50) {
 
         clearInterval(interval_obstacle);    
         interval_obstacle = setInterval(crear_obstacle, 500);
         velocitat = 10;
     }
-    else if(puntuacio == 100 ){
+    else if (puntuacio == 100) {
 
         clearInterval(interval_obstacle);    
         interval_obstacle = setInterval(crear_obstacle, 150);
@@ -232,6 +227,8 @@ function enviar_puntuacio(puntuacio) {
 
 function gameOver() {
 
+    enviar_puntuacio(puntuacio);
+
     velocitat = 0;
     const gameArea = document.getElementById('fons');
 
@@ -265,6 +262,9 @@ function gameOver() {
     byeDiv.appendChild(byeDivtext);
 
     gameArea.appendChild(byeDiv);
+
+
 }
 
 document.addEventListener('keydown', moure_personatge);
+

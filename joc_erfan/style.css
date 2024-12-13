@@ -167,6 +167,7 @@ button {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    padding: 0;
     display: block;
     line-height: 1.5;
     text-align: center;
@@ -203,6 +204,18 @@ button {
     margin: 0;
     margin-bottom: 4%;
     padding: 0;
+}
+
+.tutorial-container-text p {
+    color: RED;
+
+    margin: 0;
+}
+
+.img_historia {
+
+    margin: 20px;
+
 }
 
 /*------------------------------------------------------------------*/
