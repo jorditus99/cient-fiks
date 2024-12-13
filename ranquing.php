@@ -32,13 +32,13 @@ $ranking = enviar_ranquing();
   </div>
 
 
-  <div class="container">
+  <div class="container quitar">
     <div class="ranking-container">
 
       <div class="ranking">
         <h1 class="ranking-title">RÀNQUING</h1>
 
-        <table border="1">
+        <table>
           <thead>
             <tr>
               <th>Usuari</th>
@@ -49,8 +49,8 @@ $ranking = enviar_ranquing();
             <?php if (!empty($ranking)): ?>
               <?php foreach ($ranking as $fila): ?>
                 <tr>
-                  <td><?php echo htmlspecialchars($fila['usuari']); ?></td>
-                  <td><?php echo htmlspecialchars($fila['puntuacio_total']); ?></td>
+                  <td class="subratllat"><?php echo htmlspecialchars($fila['usuari']); ?></td>
+                  <td class="punts_ranquing subratllat"><?php echo htmlspecialchars($fila['puntuacio_total']); ?></td>
                 </tr>
               <?php endforeach; ?>
             <?php else: ?>

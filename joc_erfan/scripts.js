@@ -335,14 +335,14 @@ function gameOver() {
     h1.textContent = "FELICITATS!!";
 
     let byeTextP = document.createElement("p");
-    byeTextP.textContent = "Has aconseguit activar totes les manetes i...";
+    byeTextP.textContent = "Has aconseguit ";
 
     let byeTextScore = document.createElement("p");
     byeTextScore.setAttribute('class', 'punts2');
-    byeTextScore.textContent = " " + puntuacio + " punts!"; // Cambia punts por puntuacio
+    byeTextScore.textContent = " " + puntuacio + " punts!";
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html';
+    enlaceBoton.href = '../joc_roger/tutorial_roger.html';
 
     let botonContinuar = document.createElement("button");
     botonContinuar.textContent = "Continuar";
@@ -351,7 +351,7 @@ function gameOver() {
     byeDivtext.appendChild(byeTextP);
     byeDivtext.appendChild(byeTextScore);
     enlaceBoton.appendChild(botonContinuar);
-    byeDivtext.appendChild(enlaceBoton); // Añade el enlace al contenedor de texto
+    byeDivtext.appendChild(enlaceBoton);
     byeDiv.appendChild(byeDivtext);
 
     gameArea.appendChild(byeDiv);

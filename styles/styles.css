@@ -447,6 +447,26 @@ td {
     padding: 0.7rem;
 }
 
+.ranking th {
+
+    box-shadow: rgb(255, 217, 19) 0px 7px 0px 0px, rgb(255, 156, 85) 0px 0px 0px 2px;
+
+}
+
+.punts_ranquing {
+
+    font-weight: bold;
+    color: var(--azul);
+
+}
+
+.subratllat {
+    box-shadow: var(--azul) 0px 1px 0px 0px;
+    border-radius: 0px;
+}
+
+
+
 .ranking-container span {
     color: white;
     background-color: var(--naranja);
