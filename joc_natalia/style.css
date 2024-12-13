@@ -49,16 +49,7 @@ html, body {
     color: rgba(255, 255, 255, 0);
     width: 1.2rem;
     height: 1.6rem;
-    background-color: rgb(31, 221, 255);
-    z-index: 2;
-}
-
-#enemy {
-    position: absolute;
-    width: 1.6rem;
-    height: 1.2rem;
-    background-color: rgb(168, 168, 168);
-    color: rgb(168, 168, 168);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 2;
 }
 
@@ -66,7 +57,7 @@ html, body {
     position: absolute;
     width: 1.6rem;
     height: 1.2rem;
-    background-color: rgb(199, 199, 199);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 2;
 }
 
@@ -106,7 +97,7 @@ td {
 
 
 #win {
-    background-color: rgb(163, 255, 183);
+    background-color: rgba(0, 0, 0, 0);
     color:rgba(0, 0, 0, 0);
 }
 
@@ -126,8 +117,8 @@ td {
 }
 
 .key {
-    color: rgba(255, 255, 255, 0);
-    background-color: rgb(255, 158, 247);
+    color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 #score, #timer {

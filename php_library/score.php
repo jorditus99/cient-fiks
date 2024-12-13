@@ -1,11 +1,15 @@
-<?php   
+<?php
 
 
 require_once('library.php');
 
-$connection = connectionDB();
+function enviar_ranquing()
+{
 
-$sentencia_text = "SELECT 
+    $connection = connectionDB();
+
+    $sentencia_text =
+        "SELECT 
     u.nom_usuario AS usuari,
     SUM(max_p.puntuacion_max) AS puntuacio_total
 FROM 
@@ -23,9 +27,16 @@ JOIN (
 ON 
     u.id_usuario = max_p.id_usuario
 GROUP BY 
-    u.id_usuario";
+    u.id_usuario
+ORDER BY
+    puntuacio_total DESC
+    LIMIT 10";
 
-$sentencia = $connection->prepare($sentencia_text);
 
-$resultat = $sentencia->fetchAll();
-$connection = null
+    $sentencia = $connection->prepare($sentencia_text);
+    $sentencia->execute();
+    $resultat = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+    $connection = null;
+    return $resultat;
+}

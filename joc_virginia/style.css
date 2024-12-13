@@ -108,7 +108,7 @@ h1 {
 .tutorial-container-text {
     color: black;
     /* color: var(--naranja); */
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
@@ -119,13 +119,18 @@ h1 {
     /* text-shadow: 3px 3px 5px #00000075; */
 }
 
+.tutorial-icons {
+    margin-top: 5%;
+    font-size: 1rem;
+}
+
 /* Basic styles for the tutorial container */
 .tutorial-container {
     position: absolute;
     border-radius: 1rem;
     top: 50%;
     left: 50%;
-    width: 75%;
+    width: 65%;
     height: 80%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
