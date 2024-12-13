@@ -246,7 +246,7 @@ function gameOver() {
     byeTextScore.textContent = " " + puntuacio + " punts!"; 
 
     let enlaceBoton = document.createElement("a");
-    enlaceBoton.href = '../jocs.html';
+    enlaceBoton.href = '../joc_virginia/tutorial_virginia.html';
 
     let botonContinuar = document.createElement("button");
     botonContinuar.textContent = "Continuar";
