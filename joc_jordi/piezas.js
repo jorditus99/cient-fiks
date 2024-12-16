@@ -150,64 +150,57 @@ function crearTablero() {
                 e.preventDefault();
                 console.log('Drop');
 
-                // Verificar si la celda ya tiene una tubería
-                if (div.hasChildNodes()) {
-                    alert("¡Esta celda ya tiene una tubería! No se puede colocar otra.");
-                    return;
-                }
+             // Verificar si la celda ya tiene una tubería
+    if (div.hasChildNodes()) {
+        alert("¡Esta celda ya tiene una tubería! No se puede colocar otra.");
+        return;
+    }
 
-                // Obtén el elemento arrastrado desde el evento
-                const id = e.dataTransfer.getData('text');
-                const elementoArrastrado = document.getElementById(id).cloneNode(true);
+    // Obtén el elemento arrastrado desde el evento
+    const id = e.dataTransfer.getData('text');
+    const elementoArrastrado = document.getElementById(id).cloneNode(true);
 
-                // Verificar que la tubería no se conecte a un obstáculo
-                if (hayConexionHaciaObstaculo(div, elementoArrastrado)) {
-                    alert("¡No se puede colocar esta tubería aquí porque se conecta a un obstáculo!");
-                    return;
-                }
+    // Verificar si la tubería es recta
+    const esTuberiaRecta = (id === "recta_horizontal" || id === "recta_vertical");
 
-                // Verificar si la celda es la celda de victoria y si el elemento arrastrado es una tubería recta
-                const esCasillaVictoria = div === document.querySelector(`[data-fila="5"][data-columna="5"]`);
-                const esTuberiaRecta = (id === "recta_horizontal" || id === "recta_vertical");
+    // Verificar si la celda es una de las celdas de victoria
+    const fila = parseInt(div.getAttribute('data-fila'));
+    const columna = parseInt(div.getAttribute('data-columna'));
 
-                if (esCasillaVictoria && !esTuberiaRecta) {
-                    alert("¡Solo se puede colocar una tubería recta en la celda de victoria!");
-                    return;
-                }
+    const esCasillaVictoria =
+        (fila === 5 && columna === 5) || // Primera celda de victoria
+        (fila === 4 && columna === 6);  // Segunda celda de victoria
 
-                // Clona los atributos data de la tubería
-                const direcciones = ["izquierda", "derecha", "arriba", "abajo"];
-                direcciones.forEach(direccion => {
-                    elementoArrastrado.setAttribute(`data-${direccion}`, document.getElementById(id).getAttribute(`data-${direccion}`));
-                });
+    if (esCasillaVictoria && !esTuberiaRecta) {
+        alert("¡Solo se puede colocar una tubería recta en las celdas de victoria!");
+        return;
+    }
 
-                // Verificar si hay una tubería en una de las celdas adyacentes
-                const esConexionValida = validarConexion(div, elementoArrastrado);
-                if (!esConexionValida) {
-                    alert("¡Conexión no válida! No se puede colocar aquí.");
-                    return;
-                }
+    // Verificar conexión válida
+    const esConexionValida = validarConexion(div, elementoArrastrado);
+    if (!esConexionValida) {
+        alert("¡Conexión no válida! No se puede colocar aquí.");
+        return;
+    }
 
-                // Si la conexión es válida y la celda está vacía, agrega el elemento arrastrado al div
-                div.appendChild(elementoArrastrado);
+    // Si todo es válido, agrega la tubería
+    div.appendChild(elementoArrastrado);
 
-                // Guardar la posición de la nueva tubería en el array
-                const fila = div.getAttribute('data-fila');
-                const columna = div.getAttribute('data-columna');
-                posicionesTuberias.push({ fila, columna });
-                console.log("Posiciones de las tuberías: ", posicionesTuberias);
+    // Guardar la posición de la nueva tubería en el array
+    posicionesTuberias.push({ fila, columna });
+    console.log("Posiciones de las tuberías: ", posicionesTuberias);
 
-                // Verificar si se ha colocado la tubería en la celda de victoria
-                if (esCasillaVictoria && nivelActual === nivel1) {
-                    alert("¡Has ganado el nivel 1!");
-                    nivelActual = nivel2; // Cambiar al segundo nivel
-                    resetearTablero(); // Cargar el nuevo nivel
-                } else if (esCasillaVictoria && nivelActual === nivel2) {
-                    let puntaje = pararTiempo();
-                    gameWin(puntaje); // Pasar puntaje calculado a la función gameWin
-                    enviar_puntuacio(puntaje);
-                }
-            });
+    // Verificar si se completa el nivel
+    if (esCasillaVictoria && nivelActual === nivel1) {
+        alert("¡Has ganado el nivel 1!");
+        nivelActual = nivel2; // Cambiar al segundo nivel
+        resetearTablero(); // Cargar el nuevo nivel
+    } else if (esCasillaVictoria && nivelActual === nivel2) {
+        let puntaje = pararTiempo();
+        gameWin(puntaje); // Pasar puntaje calculado a la función gameWin
+        enviar_puntuacio(puntaje);
+    }
+});
         }
 
         // Agrega el div al contenedor del tablero
