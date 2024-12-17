@@ -167,9 +167,10 @@ function crearTablero() {
     const fila = parseInt(div.getAttribute('data-fila'));
     const columna = parseInt(div.getAttribute('data-columna'));
 
-    const esCasillaVictoria =
-        (fila === 5 && columna === 5) || // Primera celda de victoria
-        (fila === 4 && columna === 6);  // Segunda celda de victoria
+    // Verificar si la celda es de victoria en el nivel actual
+const esCasillaVictoria = 
+(nivelActual === nivel1 && ((fila === 5 && columna === 5) || (fila === 4 && columna === 6))) ||
+(nivelActual === nivel2 && ((fila === 1 && columna === 8) || (fila === 0 && columna === 7)));
 
     if (esCasillaVictoria && !esTuberiaRecta) {
         alert("¡Solo se puede colocar una tubería recta en las celdas de victoria!");
@@ -246,24 +247,7 @@ function validarConexion(celdaDestino, tuberiaNueva) {
     return false; // Si no hay conexiones válidas
 }
 
-// Función para verificar si hay conexión hacia un obstáculo desde la posición actual
-function hayConexionHaciaObstaculo(celda, tuberiaNueva) {
-    const fila = parseInt(celda.getAttribute('data-fila'));
-    const columna = parseInt(celda.getAttribute('data-columna'));
 
-    const celdasAdyacentes = [
-        { fila: fila - 1, columna, direccion: 'arriba' },
-        { fila: fila + 1, columna, direccion: 'abajo' },
-        { fila, columna: columna - 1, direccion: 'izquierda' },
-        { fila, columna: columna + 1, direccion: 'derecha' }
-    ];
-
-    return celdasAdyacentes.some(adyacente => {
-        const celdaVecina = document.querySelector(`div[data-fila="${adyacente.fila}"][data-columna="${adyacente.columna}"]`);
-        return celdaVecina && celdaVecina.firstChild && obstaculos.includes(celdaVecina.firstChild.id) &&
-            tuberiaNueva.getAttribute(`data-${adyacente.direccion}`) === "true";
-    });
-}
 
 // Función para ajustar el tamaño del tablero
 function ajustarTamañoTablero() {
