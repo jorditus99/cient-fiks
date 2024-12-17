@@ -75,7 +75,7 @@ function crear_obstacle() {
     obstacle.style.position = "absolute";
     obstacle.style.left = "2000px";
     obstacle.style.width = "100px";
-    obstacle.style.border = "1px solid white";
+
 
     obstacle.style.top = posicionsTop[Math.floor(Math.random() * posicionsTop.length)] + "px";
 
