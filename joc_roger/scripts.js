@@ -43,7 +43,6 @@ function crear_personatge() {
     personatge.style.position = "absolute";
     personatge.style.top = posicioTop + "px";
     personatge.style.left = "50px";
-    personatge.style.border = "1px solid white";
     imatge_fons.appendChild(personatge);
 }
 
@@ -122,7 +121,7 @@ function detectar_colisio() {
 }
 
 function eliminar_vides() {
-    if (vides.length > 0) {
+    if (vides.length > 1) {
         const vidaEliminada = vides.pop();
         vidaEliminada.remove(); 
         console.log("Vida eliminada");
